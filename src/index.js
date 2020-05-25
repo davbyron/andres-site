@@ -1,17 +1,58 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import About from './About.js';
+import Languages from './Languages.js';
+import Pubs from './Pubs.js';
+import Unpubs from './Unpubs.js';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 
+// Initial render
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <About />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('panel')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// Retrieve buttons from HTML
+const home_button = document.getElementById('home_button');
+const langs_button = document.getElementById('langs_button');
+const pubs_button = document.getElementById('pubs_button');
+const unpubs_button = document.getElementById('unpubs_button');
+
+// Create event handlers for each button
+home_button.onclick = () => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <About />
+    </React.StrictMode>,
+    document.getElementById('panel')
+  );
+}
+
+langs_button.onclick = () => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <Languages />
+    </React.StrictMode>,
+    document.getElementById('panel')
+  );
+}
+
+pubs_button.onclick = () => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <Pubs />
+    </React.StrictMode>,
+    document.getElementById('panel')
+  );
+}
+
+unpubs_button.onclick = () => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <Unpubs />
+    </React.StrictMode>,
+    document.getElementById('panel')
+  );
+}
