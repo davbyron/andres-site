@@ -11,23 +11,27 @@ header {
 }
 
 li {
-  flex: auto;
-  padding-top: 3vh;
+  /* flex: 2; */
+  /* padding: 3vh 1em 0 1em; */
+  padding: 3vh 1em;
+  /* padding-right: 3vh; */
   font-size: 1em;
   cursor: pointer;
+  width: max-content;
   /* border: 1px dotted red; */
 }
 
 nav {
-  flex: 6;
-  display: inherit;
+  flex: 7;
   /* border: 1px solid red; */
 }
 
 ul {
-  flex: auto;
-  display: inherit;
-  list-style: inside none;
+  display: flex;
+  padding: 0;
+  align-content: center;
+  justify-content: center;
+  list-style: none;
   /* border: 1px solid black; */
 }
 
@@ -44,10 +48,6 @@ ul {
   width: 60vh;
   box-shadow: 1.75em 1.75em 0.5em rgba(0, 0, 0, 0.16);
   border: 5px solid black;
-}
-
-#home_button {
-  padding-left: 10vw;
 }
 
 #panel {
@@ -94,8 +94,9 @@ ul {
 }
 
 .name {
-  flex: 6;
+  flex: 4 19vw;
   font-size: 10vh;
+  /* text-align: left; */
   /* padding-left: 0.3em; */
   /* position: relative; */
   /* margin-left: -0.5em; */
@@ -123,19 +124,8 @@ ul {
     display: block;
   }
 
-  li {
-    display: inline;
-  }
-
-  nav {
-    margin: 0 auto;
-    width: fit-content;
-    /* border: 1px solid blue; */
-  }
-
   ul {
-    position: relative;
-    right: 7.25vw;
+    flex-wrap: wrap;
   }
 
   .content {

@@ -3,9 +3,9 @@ import './About.css';
 
 function About(props) {
   return (
-    <section class="about">
-      <div class="title">about</div>
-      <div class="body">
+    <section className="about">
+      <div className="title">about</div>
+      <div className="body">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet turpis rutrum, porttitor dui et, imperdiet massa. Donec magna dolor, dapibus quis molestie id, pellentesque quis turpis. Sed in tristique ligula. Sed quis magna a eros accumsan posuere vel id lorem. Cras maximus mauris euismod velit congue faucibus. Mauris porttitor lacinia dolor sit amet auctor. Duis risus orci, mattis aliquam dignissim in, finibus sit amet nulla. Curabitur tempus hendrerit consectetur. Etiam dictum volutpat accumsan. Nulla et dictum nibh, at vestibulum leo. Etiam pharetra nisl sit amet ex feugiat, vitae vehicula diam commodo. Sed in velit laoreet, ullamcorper lorem egestas, consectetur ante. Suspendisse efficitur, diam sit amet convallis consectetur, ligula eros mattis quam, a dictum risus diam ut turpis. Nulla facilisi.
           <br/>

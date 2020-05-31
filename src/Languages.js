@@ -45,9 +45,9 @@ function Languages(props) {
   ];
 
   return (
-    <section class="languages">
-      <div class="title">languages</div>
-      <div class="chart">
+    <section className="languages">
+      <div className="title">languages</div>
+      <div className="chart">
         <ResponsiveContainer
           width="100%"
           height="70%">
