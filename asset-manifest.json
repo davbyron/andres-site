@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/andres-site/static/css/main.452420b1.chunk.css",
+    "main.js": "/andres-site/static/js/main.7b69de8b.chunk.js",
+    "main.js.map": "/andres-site/static/js/main.7b69de8b.chunk.js.map",
+    "runtime-main.js": "/andres-site/static/js/runtime-main.bcd6a482.js",
+    "runtime-main.js.map": "/andres-site/static/js/runtime-main.bcd6a482.js.map",
+    "static/js/2.1325c115.chunk.js": "/andres-site/static/js/2.1325c115.chunk.js",
+    "static/js/2.1325c115.chunk.js.map": "/andres-site/static/js/2.1325c115.chunk.js.map",
+    "index.html": "/andres-site/index.html",
+    "precache-manifest.b539cd390e1f18e20a138765d4332812.js": "/andres-site/precache-manifest.b539cd390e1f18e20a138765d4332812.js",
+    "service-worker.js": "/andres-site/service-worker.js",
+    "static/css/main.452420b1.chunk.css.map": "/andres-site/static/css/main.452420b1.chunk.css.map",
+    "static/js/2.1325c115.chunk.js.LICENSE.txt": "/andres-site/static/js/2.1325c115.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bcd6a482.js",
+    "static/js/2.1325c115.chunk.js",
+    "static/css/main.452420b1.chunk.css",
+    "static/js/main.7b69de8b.chunk.js"
+  ]
+}
