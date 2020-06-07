@@ -30,7 +30,7 @@ ul {
   display: flex;
   padding: 0;
   align-content: center;
-  justify-content: center;
+  justify-content: flex-end;
   list-style: none;
   /* border: 1px solid black; */
 }

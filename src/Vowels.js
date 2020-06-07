@@ -1,9 +1,38 @@
-import React, { Component } from 'react';
-import { scroller } from 'react-scroll';
-import { getOffset } from './get_offset.mjs';
-import { vhToPx } from './measurement_adjustments.mjs';
-import { createClickHandler } from './scroll_to_on_click.mjs';
+import React from 'react';
+import { Link, Element } from 'react-scroll';
 import './Vowels.css';
+
+
+// function rotate(counter, pics, id) {
+//   counter++;
+//   if (counter === pics.length) {
+//     counter = 0;
+//   }
+//
+//   document.getElementById(id).src = pics[counter];
+//
+//   setTimeout(rotate(counter, pics, id), 1000);
+// }
+
+// Create dict with locations for all images.
+// To access an image from cache, e.g.: <img src={cache['./lang.png']} />
+const cache = {};
+
+function importAll(r) {
+  r.keys().forEach(key => cache[key] = r(key));
+}
+
+// Only accepts .png files. Can be changed if necessary.
+importAll(require.context('./images/', false, /\.png$/));
+
+console.log(cache);
+
+function choosePic(counter, pics, id) {
+  counter = Math.floor(Math.random() * pics.length);
+  document.getElementById(id).src = pics[counter];
+
+  // rotate(counter, pics, id);
+}
 
 class Vowels extends React.Component {
   constructor(props) {
@@ -15,52 +44,17 @@ class Vowels extends React.Component {
 
   componentDidMount() {
 
-    const rowOne = vhToPx(55)
-    const rowTwo = vhToPx(90);
-    const rowThree = vhToPx(125);
-    const rowFour = vhToPx(160);
-    const rowFive = vhToPx(195);
-    const rowSix = vhToPx(232);
-    const rowSeven = vhToPx(269);
-    const rowEight = vhToPx(300);
+    let displayImage = 0;
+    let chartImages = [cache['./amharic.png'], cache['./arabic_jd.png'], cache['./bahasa.png'], cache['./baluchi.png'],
+                          cache['./cantonese.png'], cache['./english_m.png'], cache['./french.png'], cache['./german_fem.png'],
+                          cache['./italian.png'], cache['./japanese.png'], cache['./kabardian.png'], cache['./kagayanen.png'],
+                          cache['./kazakh.png'], cache['./korean.png'], cache['./luo.png'], cache['./maasai.png'],
+                          cache['./mixtec.png'], cache['./muskogee_creek.png'], cache['./nahuatl.png'], cache['./nambo.png'],
+                          cache['./portuguese_br.png'], cache['./portuguese_eu.png'], cache['./qiang_hongyan.png'], cache['./russian_consonants.png'],
+                          cache['./russian.png'], cache['./spanish.png'], cache['./tanana_athabaskan.png'], cache['./thai.png'],
+                          cache['./vietnamese.png'], cache['./welsh.png']];
 
-    createClickHandler(document.getElementById('li_amharic'), rowOne, 0);
-    createClickHandler(document.getElementById('li_arabic'), rowOne, 0);
-    createClickHandler(document.getElementById('li_bahasa'), rowOne, 0);
-    createClickHandler(document.getElementById('li_baluchi'), rowOne, 0);
-
-    createClickHandler(document.getElementById('li_cantonese'), rowTwo, 0);
-    createClickHandler(document.getElementById('li_english'), rowTwo, 0);
-    createClickHandler(document.getElementById('li_french'), rowTwo, 0);
-    createClickHandler(document.getElementById('li_german'), rowTwo, 0);
-
-    createClickHandler(document.getElementById('li_italian'), rowThree, 0);
-    createClickHandler(document.getElementById('li_japanese'), rowThree, 0);
-    createClickHandler(document.getElementById('li_kabardian'), rowThree, 0);
-    createClickHandler(document.getElementById('li_kagayanen'), rowThree, 0);
-
-    createClickHandler(document.getElementById('li_kazakh'), rowFour, 0);
-    createClickHandler(document.getElementById('li_korean'), rowFour, 0);
-    createClickHandler(document.getElementById('li_luo'), rowFour, 0);
-    createClickHandler(document.getElementById('li_maasai'), rowFour, 0);
-
-    createClickHandler(document.getElementById('li_mixtec'), rowFive, 0);
-    createClickHandler(document.getElementById('li_creek'), rowFive, 0);
-    createClickHandler(document.getElementById('li_nahuatl'), rowFive, 0);
-    createClickHandler(document.getElementById('li_nambo'), rowFive, 0);
-
-    createClickHandler(document.getElementById('li_portuguese_br'), rowSix, 0);
-    createClickHandler(document.getElementById('li_portuguese_eu'), rowSix, 0);
-    createClickHandler(document.getElementById('li_qiang'), rowSix, 0);
-    createClickHandler(document.getElementById('li_russian_cons'), rowSix, 0);
-
-    createClickHandler(document.getElementById('li_russian_vowels'), rowSeven, 0);
-    createClickHandler(document.getElementById('li_spanish'), rowSeven, 0);
-    createClickHandler(document.getElementById('li_tanana_athabaskan'), rowSeven, 0);
-    createClickHandler(document.getElementById('li_thai'), rowSeven, 0);
-
-    createClickHandler(document.getElementById('li_vietnamese'), rowEight, 0);
-    createClickHandler(document.getElementById('li_welsh'), rowEight, 0);
+    choosePic(displayImage, chartImages, 'sample');
   }
 
   handleClick(e) {
@@ -96,252 +90,252 @@ class Vowels extends React.Component {
             <div className="chart_list" id="list">
               <p><b>Available Languages:</b></p>
               <ul className="language_list">
-                <li id="li_amharic">Amharic</li>
-                <li id="li_arabic">Arabic (Jordan)</li>
-                <li id="li_bahasa">Bahasa</li>
-                <li id="li_baluchi">Baluchi</li>
-                <li id="li_cantonese">Cantonese</li>
-                <li id="li_english">English</li>
-                <li id="li_french">French</li>
-                <li id="li_german">German</li>
-                <li id="li_italian">Italian</li>
-                <li id="li_japanese">Japanese</li>
-                <li id="li_kabardian">Kabardian</li>
-                <li id="li_kagayanen">Kagayanen</li>
-                <li id="li_kazakh">Kazakh</li>
-                <li id="li_korean">Korean</li>
-                <li id="li_luo">Luo</li>
-                <li id="li_maasai">Maasai</li>
-                <li id="li_mixtec">Yoloxóchitl Mixtec</li>
-                <li id="li_nahuatl">Nahuatl</li>
-                <li id="li_nambo">Nambo</li>
-                <li id="li_creek">Muskogee Creek</li>
-                <li id="li_portuguese_br">Portuguese (Brazil)</li>
-                <li id="li_portuguese_eu">Portuguese (Portugal)</li>
-                <li id="li_qiang">Qiang (Hongyan)</li>
-                <li id="li_russian_cons">Russian (Consonants)</li>
-                <li id="li_russian_vowels">Russian (Vowels)</li>
-                <li id="li_spanish">Spanish</li>
-                <li id="li_tanana_athabaskan">Tanana Athabaskan</li>
-                <li id="li_thai">Thai</li>
-                <li id="li_vietnamese">Vietnamese</li>
-                <li id="li_welsh">Welsh</li>
+                <li><Link to="amharic" smooth="easeInOutQuint">Amharic</Link></li>
+                <li><Link to="arabic" smooth="easeInOutQuint">Arabic (Jordan)</Link></li>
+                <li><Link to="bahasa" smooth="easeInOutQuint">Bahasa</Link></li>
+                <li><Link to="baluchi" smooth="easeInOutQuint">Baluchi</Link></li>
+                <li><Link to="cantonese" smooth="easeInOutQuint">Cantonese</Link></li>
+                <li><Link to="english" smooth="easeInOutQuint">English</Link></li>
+                <li><Link to="french" smooth="easeInOutQuint">French</Link></li>
+                <li><Link to="german" smooth="easeInOutQuint">German</Link></li>
+                <li><Link to="italian" smooth="easeInOutQuint">Italian</Link></li>
+                <li><Link to="japanese" smooth="easeInOutQuint">Japanese</Link></li>
+                <li><Link to="kabardian" smooth="easeInOutQuint">Kabardian</Link></li>
+                <li><Link to="kagayanen" smooth="easeInOutQuint">Kagayanen</Link></li>
+                <li><Link to="kazakh" smooth="easeInOutQuint">Kazakh</Link></li>
+                <li><Link to="korean" smooth="easeInOutQuint">Korean</Link></li>
+                <li><Link to="luo" smooth="easeInOutQuint">Luo</Link></li>
+                <li><Link to="maasai" smooth="easeInOutQuint">Maasai</Link></li>
+                <li><Link to="mixtec" smooth="easeInOutQuint">Yoloxóchitl Mixtec</Link></li>
+                <li><Link to="nahuatl" smooth="easeInOutQuint">Nahuatl</Link></li>
+                <li><Link to="nambo" smooth="easeInOutQuint">Nambo</Link></li>
+                <li><Link to="creek" smooth="easeInOutQuint">Muskogee Creek</Link></li>
+                <li><Link to="portuguese_br" smooth="easeInOutQuint">Portuguese (Brazil)</Link></li>
+                <li><Link to="portuguese_eu" smooth="easeInOutQuint">Portuguese (Portugal)</Link></li>
+                <li><Link to="qiang_hongyan" smooth="easeInOutQuint">Qiang (Hongyan)</Link></li>
+                <li><Link to="russian_consonants" smooth="easeInOutQuint">Russian (Consonants)</Link></li>
+                <li><Link to="russian" smooth="easeInOutQuint">Russian (Vowels)</Link></li>
+                <li><Link to="spanish" smooth="easeInOutQuint">Spanish</Link></li>
+                <li><Link to="tanana_athabaskan" smooth="easeInOutQuint">Tanana Athabaskan</Link></li>
+                <li><Link to="thai" smooth="easeInOutQuint">Thai</Link></li>
+                <li><Link to="vietnamese" smooth="easeInOutQuint">Vietnamese</Link></li>
+                <li><Link to="welsh" smooth="easeInOutQuint">Welsh</Link></li>
               </ul>
             </div>
           </div>
-          <img src="./images/french.png" alt="French" className="sample"/>
+          <img src={cache['./french.png']} alt="French" className="sample" id="sample"/>
         </div>
         <div className="charts">
-          <div className="tile" id="amharic">
-            <img src="./images/amharic.png" alt="Amharic" className="vowelchart"/>
+          <Element className="tile" name="amharic">
+            <img src={cache["./amharic.png"]} alt="Amharic" className="vowelchart"/>
             <div className="chart_title"><b>Amharic</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="arabic">
-            <img src="./images/arabic_jd.png" alt="Arabic (Jordan)" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="arabic">
+            <img src={cache["./arabic_jd.png"]} alt="Arabic (Jordan)" className="vowelchart"/>
             <div className="chart_title"><b>Arabic (Jordan)</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="bahasa">
-            <img src="./images/bahasa.png" alt="Bahasa" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="bahasa">
+            <img src={cache["./bahasa.png"]} alt="Bahasa" className="vowelchart"/>
             <div className="chart_title"><b>Bahasa</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="baluchi">
-            <img src="./images/baluchi.png" alt="Baluchi" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="baluchi">
+            <img src={cache["./baluchi.png"]} alt="Baluchi" className="vowelchart"/>
             <div className="chart_title"><b>Baluchi</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="cantonese">
-            <img src="./images/cantonese.png" alt="Cantonese" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="cantonese">
+            <img src={cache["./cantonese.png"]} alt="Cantonese" className="vowelchart"/>
             <div className="chart_title"><b>Cantonese</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="english">
-            <img src="./images/english_m.png" alt="English" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="english">
+            <img src={cache["./english_m.png"]} alt="English" className="vowelchart"/>
             <div className="chart_title"><b>English</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="french">
-            <img src="./images/french.png" alt="French" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="french">
+            <img src={cache["./french.png"]} alt="French" className="vowelchart"/>
             <div className="chart_title"><b>French</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="german">
-            <img src="./images/german_fem.png" alt="German" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="german">
+            <img src={cache["./german_fem.png"]} alt="German" className="vowelchart"/>
             <div className="chart_title"><b>German</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="italian">
-            <img src="./images/italian.png" alt="Italian" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="italian">
+            <img src={cache["./italian.png"]} alt="Italian" className="vowelchart"/>
             <div className="chart_title"><b>Italian</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="japanese">
-            <img src="./images/japanese.png" alt="Japanese" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="japanese">
+            <img src={cache["./japanese.png"]} alt="Japanese" className="vowelchart"/>
             <div className="chart_title"><b>Japanese</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="kabardian">
-            <img src="./images/kabardian.png" alt="Kabardian" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="kabardian">
+            <img src={cache["./kabardian.png"]} alt="Kabardian" className="vowelchart"/>
             <div className="chart_title"><b>Kabardian</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="kagayanen">
-            <img src="./images/kagayanen.png" alt="Kagayanen" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="kagayanen">
+            <img src={cache["./kagayanen.png"]} alt="Kagayanen" className="vowelchart"/>
             <div className="chart_title"><b>Kagayanen</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="kazakh">
-            <img src="./images/kazakh.png" alt="Kazakh" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="kazakh">
+            <img src={cache["./kazakh.png"]} alt="Kazakh" className="vowelchart"/>
             <div className="chart_title"><b>Kazakh</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="korean">
-            <img src="./images/korean.png" alt="Korean" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="korean">
+            <img src={cache["./korean.png"]} alt="Korean" className="vowelchart"/>
             <div className="chart_title"><b>Korean</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="luo">
-            <img src="./images/luo.png" alt="Luo" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="luo">
+            <img src={cache["./luo.png"]} alt="Luo" className="vowelchart"/>
             <div className="chart_title"><b>Luo</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="maasai">
-            <img src="./images/maasai.png" alt="Maasai" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="maasai">
+            <img src={cache["./maasai.png"]} alt="Maasai" className="vowelchart"/>
             <div className="chart_title"><b>Maasai</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="mixtec">
-            <img src="./images/mixtec.png" alt="Yoloxóchitl Mixtec" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="mixtec">
+            <img src={cache["./mixtec.png"]} alt="Yoloxóchitl Mixtec" className="vowelchart"/>
             <div className="chart_title"><b>Yoloxóchitl Mixtec</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="creek">
-            <img src="./images/muskogee_creek.png" alt="Muskogee Creek" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="creek">
+            <img src={cache["./muskogee_creek.png"]} alt="Muskogee Creek" className="vowelchart"/>
             <div className="chart_title"><b>Muskogee Creek</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="nahuatl">
-            <img src="./images/nahuatl.png" alt="Nahuatl" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="nahuatl">
+            <img src={cache["./nahuatl.png"]} alt="Nahuatl" className="vowelchart"/>
             <div className="chart_title"><b>Nahuatl</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="nambo">
-            <img src="./images/nambo.png" alt="Nambo" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="nambo">
+            <img src={cache["./nambo.png"]} alt="Nambo" className="vowelchart"/>
             <div className="chart_title"><b>Nambo</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="portuguese_br">
-            <img src="./images/portuguese_br.png" alt="Portuguese (Brazil)" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="portuguese_br">
+            <img src={cache["./portuguese_br.png"]} alt="Portuguese (Brazil)" className="vowelchart"/>
             <div className="chart_title"><b>Portuguese (Brazil)</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="portuguese_eu">
-            <img src="./images/portuguese_eu.png" alt="Portuguese (Portugal)" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="portuguese_eu">
+            <img src={cache["./portuguese_eu.png"]} alt="Portuguese (Portugal)" className="vowelchart"/>
             <div className="chart_title"><b>Portuguese (Portugal)</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="qiang_hongyan">
-            <img src="./images/qiang_hongyan.png" alt="Qiang (Hongyan)" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="qiang_hongyan">
+            <img src={cache["./qiang_hongyan.png"]} alt="Qiang (Hongyan)" className="vowelchart"/>
             <div className="chart_title"><b>Qiang (Hongyan)</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="russian_consonants">
-            <img src="./images/russian_consonants.png" alt="Russian (Consonants)" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="russian_consonants">
+            <img src={cache["./russian_consonants.png"]} alt="Russian (Consonants)" className="vowelchart"/>
             <div className="chart_title"><b>Russian (Consonants)</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="russian">
-            <img src="./images/russian.png" alt="Russian (Vowels)" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="russian">
+            <img src={cache["./russian.png"]} alt="Russian (Vowels)" className="vowelchart"/>
             <div className="chart_title"><b>Russian (Vowels)</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="spanish">
-            <img src="./images/spanish.png" alt="Spanish" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="spanish">
+            <img src={cache["./spanish.png"]} alt="Spanish" className="vowelchart"/>
             <div className="chart_title"><b>Spanish</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="tanana_athabaskan">
-            <img src="./images/tanana_athabaskan.png" alt="Tanana Athabaskan" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="tanana_athabaskan">
+            <img src={cache["./tanana_athabaskan.png"]} alt="Tanana Athabaskan" className="vowelchart"/>
             <div className="chart_title"><b>Tanana Athabaskan</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="thai">
-            <img src="./images/thai.png" alt="Thai" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="thai">
+            <img src={cache["./thai.png"]} alt="Thai" className="vowelchart"/>
             <div className="chart_title"><b>Thai</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="vietnamese">
-            <img src="./images/vietnamese.png" alt="Vietnamese" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="vietnamese">
+            <img src={cache["./vietnamese.png"]} alt="Vietnamese" className="vowelchart"/>
             <div className="chart_title"><b>Vietnamese</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
-          <div className="tile" id="welsh">
-            <img src="./images/welsh.png" alt="Welsh" className="vowelchart"/>
+          </Element>
+          <Element className="tile" name="welsh">
+            <img src={cache["./welsh.png"]} alt="Welsh" className="vowelchart"/>
             <div className="chart_title"><b>Welsh</b></div>
             <div className="chart_info">
               example example example
             </div>
-          </div>
+          </Element>
         </div>
       </section>
     )
