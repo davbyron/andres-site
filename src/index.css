@@ -126,6 +126,7 @@ ul {
 
   ul {
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .content {
