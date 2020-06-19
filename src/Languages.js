@@ -25,6 +25,29 @@ const formatter = (value) => {
   }
 }
 
+const whichColor = (value) => {
+  switch (value) {
+    case 1:
+      return '#713E5A';
+      break;
+    case 2:
+      return '#63A375';
+      break;
+    case 3:
+      return '#EDC79B';
+      break;
+    case 4:
+      return '#D57A66';
+      break;
+    case 5:
+      return '#CA6680';
+      break;
+    default:
+      return 'null';
+      break;
+  }
+}
+
 function Languages(props) {
   const [focusBar, setFocusBar] = useState(null);
 
@@ -78,9 +101,9 @@ function Languages(props) {
               <LabelList
                 dataKey="alt"
                 position="bottom"/>
-                {data.map((entry, index) => (
-                  <Cell fill={focusBar === index ? 'blue' : '#707070'} />
-                ))}
+              {data.map((entry, index) => (
+                <Cell fill={whichColor(entry['level'])} />
+              ))}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
