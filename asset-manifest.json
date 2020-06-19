@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/andres-site/static/css/main.26dd6930.chunk.css",
+    "main.css": "/andres-site/static/css/main.e5ce6189.chunk.css",
     "main.js": "/andres-site/static/js/main.7a3e0032.chunk.js",
     "main.js.map": "/andres-site/static/js/main.7a3e0032.chunk.js.map",
     "runtime-main.js": "/andres-site/static/js/runtime-main.bcd6a482.js",
@@ -8,9 +8,9 @@
     "static/js/2.d63da729.chunk.js": "/andres-site/static/js/2.d63da729.chunk.js",
     "static/js/2.d63da729.chunk.js.map": "/andres-site/static/js/2.d63da729.chunk.js.map",
     "index.html": "/andres-site/index.html",
-    "precache-manifest.9bd0504c86320e7228a0c8acbb4b385e.js": "/andres-site/precache-manifest.9bd0504c86320e7228a0c8acbb4b385e.js",
+    "precache-manifest.5fa580d7ca8d97554b917870310a4061.js": "/andres-site/precache-manifest.5fa580d7ca8d97554b917870310a4061.js",
     "service-worker.js": "/andres-site/service-worker.js",
-    "static/css/main.26dd6930.chunk.css.map": "/andres-site/static/css/main.26dd6930.chunk.css.map",
+    "static/css/main.e5ce6189.chunk.css.map": "/andres-site/static/css/main.e5ce6189.chunk.css.map",
     "static/js/2.d63da729.chunk.js.LICENSE.txt": "/andres-site/static/js/2.d63da729.chunk.js.LICENSE.txt",
     "static/media/amharic.png": "/andres-site/static/media/amharic.1739ac2b.png",
     "static/media/arabic_jd.png": "/andres-site/static/media/arabic_jd.4df71bb7.png",
@@ -54,7 +54,7 @@
   "entrypoints": [
     "static/js/runtime-main.bcd6a482.js",
     "static/js/2.d63da729.chunk.js",
-    "static/css/main.26dd6930.chunk.css",
+    "static/css/main.e5ce6189.chunk.css",
     "static/js/main.7a3e0032.chunk.js"
   ]
 }
