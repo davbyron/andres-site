@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "38fdf089e1f065374d5517c1b9b19e75",
+    "revision": "71114cdd19910e8113340bc29f671e5f",
     "url": "/andres-site/index.html"
   },
   {
-    "revision": "92e1088c9b2d78ba9f93",
-    "url": "/andres-site/static/css/main.7ba3d4b7.chunk.css"
+    "revision": "79de3168ff03a477fc57",
+    "url": "/andres-site/static/css/main.69316731.chunk.css"
   },
   {
-    "revision": "d6da36e8c59c245c0b00",
-    "url": "/andres-site/static/js/2.18aaa48c.chunk.js"
+    "revision": "b4ab74d2ba9bdbb47918",
+    "url": "/andres-site/static/js/2.d63da729.chunk.js"
   },
   {
     "revision": "aa754ba9f73776ab5291549b6092b0f0",
-    "url": "/andres-site/static/js/2.18aaa48c.chunk.js.LICENSE.txt"
+    "url": "/andres-site/static/js/2.d63da729.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "92e1088c9b2d78ba9f93",
-    "url": "/andres-site/static/js/main.3e591f93.chunk.js"
+    "revision": "79de3168ff03a477fc57",
+    "url": "/andres-site/static/js/main.7a3e0032.chunk.js"
   },
   {
     "revision": "5c43aee2cb5157a3d850",
@@ -32,6 +32,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/andres-site/static/media/arabic_jd.4df71bb7.png"
   },
   {
+    "revision": "27d782f7b6c9f646fbdcf6390497d05d",
+    "url": "/andres-site/static/media/arabic_sibilants.27d782f7.pdf"
+  },
+  {
     "revision": "ac5581638d04c4a0acb937ca8a40cad1",
     "url": "/andres-site/static/media/bahasa.ac558163.png"
   },
@@ -40,8 +44,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/andres-site/static/media/baluchi.d67e2579.png"
   },
   {
+    "revision": "4f1074a6ac720daaba5cc15298711009",
+    "url": "/andres-site/static/media/bridgegate.4f1074a6.pdf"
+  },
+  {
     "revision": "610f128e88f244283426186f73b498b9",
     "url": "/andres-site/static/media/cantonese.610f128e.png"
+  },
+  {
+    "revision": "ae5851eb77e89e58334fbbe9bae7d954",
+    "url": "/andres-site/static/media/cv.ae5851eb.pdf"
   },
   {
     "revision": "1ce6af423664846de19d22fe47809e4c",
@@ -52,8 +64,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/andres-site/static/media/french.77b1e2f8.png"
   },
   {
+    "revision": "f050b5322129ad4e9245fbde5aee9cec",
+    "url": "/andres-site/static/media/fribourg.f050b532.pdf"
+  },
+  {
     "revision": "1a4cb1014f93a76c7e327680bd1b9092",
     "url": "/andres-site/static/media/german_fem.1a4cb101.png"
+  },
+  {
+    "revision": "6f797e748734d6ad77642fd02c5be9a7",
+    "url": "/andres-site/static/media/greek.6f797e74.png"
   },
   {
     "revision": "f9faea3cac13faf5bc94a505e847bfd8",
@@ -116,6 +136,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/andres-site/static/media/qiang_hongyan.0b59ded4.png"
   },
   {
+    "revision": "758ae664db73eefbef6d70942377bc65",
+    "url": "/andres-site/static/media/queens.758ae664.pdf"
+  },
+  {
     "revision": "18bd512b46b9cecb413ba15a83667857",
     "url": "/andres-site/static/media/russian.18bd512b.png"
   },
@@ -136,8 +160,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/andres-site/static/media/thai.2af271d5.png"
   },
   {
+    "revision": "d8cfbd1dc95a627e039130425a4b6d3f",
+    "url": "/andres-site/static/media/thesis.d8cfbd1d.pdf"
+  },
+  {
     "revision": "71134197a1a7333686dd0ee53c9eb018",
     "url": "/andres-site/static/media/vietnamese.71134197.png"
+  },
+  {
+    "revision": "bdb8e99e8ede1e2939a5769aa8ec1d3c",
+    "url": "/andres-site/static/media/vowels_bib.bdb8e99e.pdf"
   },
   {
     "revision": "cdace88aabac8d5b625c704969a2a1bb",
