@@ -86,7 +86,16 @@ class Vowels extends React.Component {
           <div className="explanation">
             <p>
               <div id="words">
-                This is where the explanation will go. And if there are multiple lines they will wrap like this. And this. And this. And this. And this. And this. And this. And this. And this. And this. And this.
+                This project is intended as a visualization of how various
+                languages employ the same phonetic space differently.
+                Vowels are plotted with their average F1 values rising
+                downward and F2 rising leftward (a standard phonetic vowel
+                chart). The data is taken from literature cited in the link
+                below. These are not the only correlates which distinguish
+                vowels: other formants (F3 & F4), nasality, length, and tone
+                all can be important. However, F1 and F2 are often the most
+                important factors when choosing symbols to represent vowel
+                phonemes.
                 <br/>
                 (<a href={refs}>Works cited</a>)
               </div>

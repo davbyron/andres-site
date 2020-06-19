@@ -112,6 +112,10 @@ section {
   padding: 0.25em 0;
 }
 
+.chart_info {
+  display: none;
+}
+
 .sample {
   /* display: inline; */
   width: 37.5%;
