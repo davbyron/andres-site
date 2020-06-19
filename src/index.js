@@ -5,6 +5,7 @@ import Languages from './Languages.js';
 import Pubs from './Pubs.js';
 import Unpubs from './Unpubs.js';
 import Vowels from './Vowels.js';
+import pdf from './cv.pdf';
 import './index.css';
 
 // Initial render
@@ -26,7 +27,8 @@ const cv = document.getElementById('cv');
 
 // Create event handlers for each button
 home_button.onclick = () => {
-  document.getElementById('copyright').style.paddingTop = '55em';
+  document.getElementById('copyright').style.display = 'block';
+  document.getElementById('copyright').style.paddingTop = '5vh';
   ReactDOM.render(
     <React.StrictMode>
       <About />
@@ -36,7 +38,8 @@ home_button.onclick = () => {
 }
 
 langs_button.onclick = () => {
-  document.getElementById('copyright').style.paddingTop = '30em';
+  document.getElementById('copyright').style.display = 'block';
+  document.getElementById('copyright').style.paddingTop = '5vh';
   ReactDOM.render(
     <React.StrictMode>
       <Languages />
@@ -46,7 +49,8 @@ langs_button.onclick = () => {
 }
 
 pubs_button.onclick = () => {
-  document.getElementById('copyright').style.paddingTop = '30em';
+  document.getElementById('copyright').style.display = 'block';
+  document.getElementById('copyright').style.paddingTop = '5vh';
   ReactDOM.render(
     <React.StrictMode>
       <Pubs />
@@ -56,7 +60,8 @@ pubs_button.onclick = () => {
 }
 
 unpubs_button.onclick = () => {
-  document.getElementById('copyright').style.paddingTop = '30em';
+  document.getElementById('copyright').style.display = 'block';
+  document.getElementById('copyright').style.paddingTop = '5vh';
   ReactDOM.render(
     <React.StrictMode>
       <Unpubs />
@@ -66,7 +71,7 @@ unpubs_button.onclick = () => {
 }
 
 vowels_button.onclick = () => {
-  document.getElementById('copyright').style.paddingTop = '560vh';
+  document.getElementById('copyright').style.display = 'none';
   ReactDOM.render(
     <React.StrictMode>
       <Vowels />
@@ -75,4 +80,4 @@ vowels_button.onclick = () => {
   );
 }
 
-cv.onclick = () => { window.open('./cv.pdf') };
+cv.onclick = () => { window.open(pdf) };

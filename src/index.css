@@ -36,11 +36,10 @@ ul {
 }
 
 #copyright {
+  padding-top: 5vh;
   font-size: 0.75em;
-  padding-top: 55em;
   width: fit-content;
   margin: 0 auto;
-  /* border: 1px solid black; */
 }
 
 #face {

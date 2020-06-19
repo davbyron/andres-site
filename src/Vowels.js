@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Element } from 'react-scroll';
+import refs from './vowels_bib.pdf';
 import './Vowels.css';
 
 
@@ -25,8 +26,6 @@ function importAll(r) {
 // Only accepts .png files. Can be changed if necessary.
 importAll(require.context('./images/', false, /\.png$/));
 
-console.log(cache);
-
 function choosePic(counter, pics, id) {
   counter = Math.floor(Math.random() * pics.length);
   document.getElementById(id).src = pics[counter];
@@ -43,7 +42,6 @@ class Vowels extends React.Component {
   }
 
   componentDidMount() {
-
     let displayImage = 0;
     let chartImages = [cache['./amharic.png'], cache['./arabic_jd.png'], cache['./bahasa.png'], cache['./baluchi.png'],
                           cache['./cantonese.png'], cache['./english_m.png'], cache['./french.png'], cache['./german_fem.png'],
@@ -55,6 +53,13 @@ class Vowels extends React.Component {
                           cache['./vietnamese.png'], cache['./welsh.png']];
 
     choosePic(displayImage, chartImages, 'sample');
+
+    // let wantedHeight = document.getElementById('sample').scrollHeight;
+    // document.getElementById('copyright').style.paddingTop = document.getElementById('sample').scrollHeight.toString() + 'px';
+  }
+
+  componentWillUnmount() {
+    document.getElementById('copyright').style.visiblity = 'visible';
   }
 
   handleClick(e) {
@@ -83,7 +88,7 @@ class Vowels extends React.Component {
               <div id="words">
                 This is where the explanation will go. And if there are multiple lines they will wrap like this. And this. And this. And this. And this. And this. And this. And this. And this. And this. And this.
                 <br/>
-                (<a href="#">Works cited</a>)
+                (<a href={refs}>Works cited</a>)
               </div>
               <div id="minimize" onClick={this.handleClick}><i className="far fa-minus-square"></i> minimize explanation</div>
             </p>
@@ -98,6 +103,7 @@ class Vowels extends React.Component {
                 <li><Link to="english" smooth="easeInOutQuint">English</Link></li>
                 <li><Link to="french" smooth="easeInOutQuint">French</Link></li>
                 <li><Link to="german" smooth="easeInOutQuint">German</Link></li>
+                <li><Link to="greek" smooth="easeInOutQuint">Greek</Link></li>
                 <li><Link to="italian" smooth="easeInOutQuint">Italian</Link></li>
                 <li><Link to="japanese" smooth="easeInOutQuint">Japanese</Link></li>
                 <li><Link to="kabardian" smooth="easeInOutQuint">Kabardian</Link></li>
@@ -125,7 +131,7 @@ class Vowels extends React.Component {
           </div>
           <img src={cache['./french.png']} alt="French" className="sample" id="sample"/>
         </div>
-        <div className="charts">
+        <div className="charts" id="collage">
           <Element className="tile" name="amharic">
             <img src={cache["./amharic.png"]} alt="Amharic" className="vowelchart"/>
             <div className="chart_title"><b>Amharic</b></div>
@@ -178,6 +184,13 @@ class Vowels extends React.Component {
           <Element className="tile" name="german">
             <img src={cache["./german_fem.png"]} alt="German" className="vowelchart"/>
             <div className="chart_title"><b>German</b></div>
+            <div className="chart_info">
+              example example example
+            </div>
+          </Element>
+          <Element className="tile" name="greek">
+            <img src={cache["./greek.png"]} alt="Greek" className="vowelchart"/>
+            <div className="chart_title"><b>Greek</b></div>
             <div className="chart_info">
               example example example
             </div>
@@ -336,6 +349,9 @@ class Vowels extends React.Component {
               example example example
             </div>
           </Element>
+        </div>
+        <div id="copy">
+          <p>&copy; 2020 David Byron</p>
         </div>
       </section>
     )

@@ -1,6 +1,17 @@
 import React from 'react';
 import './Pubs.css';
 
+// Create dict with locations for all files.
+// To access an image from cache, e.g.: <a href={cache['./thesis.pdf']}></a>
+const cache = {};
+
+function importAll(r) {
+  r.keys().forEach(key => cache[key] = r(key));
+}
+
+// Only accepts .png files. Can be changed if necessary.
+importAll(require.context('./pubs/', false, /\.pdf$/));
+
 function Pubs(props) {
   return (
     <section className="publications">
@@ -24,7 +35,7 @@ function Pubs(props) {
           <div className="year">2019</div>
           <div className="authors"><b>Andre Schwab</b></div>
           <div className="info">
-            <em>Dialectal Priming Effects in Political Call Surveys: The Case of Dexter, Maine.</em> M.A. Thesis. NYU.
+            <em><a href={cache['./thesis.pdf']}>Dialectal Priming Effects in Political Call Surveys: The Case of Dexter, Maine.</a></em> M.A. Thesis. NYU.
           </div>
         </div>
       </div>

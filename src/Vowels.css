@@ -2,6 +2,17 @@ section {
   color: #707070;
 }
 
+#copy {
+  position: absolute;
+  top: 700vh;
+  width: 88vw;
+  margin: 0 auto;
+  right: 0;
+  font-size: 0.75em;
+  text-align: center;
+  color: black;
+}
+
 #list {
   display: none; /* CHANGE TO `BLOCK` IN JS */
   position: absolute;
@@ -86,7 +97,7 @@ section {
 
 .charts::after {
   content: "";
-  flex: 2;
+  flex: 1; /* Set to number of "blank tiles" on last row of charts */
 }
 
 .chart_list p {
@@ -116,4 +127,62 @@ section {
 .tile {
   flex: 1;
   padding-top: 10vh;
+}
+
+@media only screen and (display-mode: fullscreen) {
+  #copy {
+    top: 650vh;
+  }
+}
+
+@media only screen and (max-width: 1336px) {
+  #copy {
+    top: 690vh;
+  }
+
+  .charts {
+    top: 90vh;
+  }
+}
+
+@media only screen and (max-width: 1130px) {
+  #copy {
+    top: 650vh;
+  }
+
+  .charts {
+    top: 115vh;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  #copy {
+    top: 590vh;
+  }
+
+  .charts {
+    top: 90vh;
+  }
+}
+
+@media only screen and (max-width: 880px) {
+  #copy {
+    top: 550vh;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  #copy {
+    top: 525vh;
+  }
+}
+
+@media only screen and (max-width: 605px) {
+  #copy {
+    top: 500vh;
+  }
+
+  .charts {
+    top: 120vh;
+  }
 }
