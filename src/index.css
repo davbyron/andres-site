@@ -93,13 +93,19 @@ ul {
 }
 
 .name {
-  flex: 4 19vw;
+  flex: 3 19vw;
   font-size: 10vh;
   /* text-align: left; */
   /* padding-left: 0.3em; */
   /* position: relative; */
   /* margin-left: -0.5em; */
   /* border: 1px solid blue; */
+}
+
+@media only screen and (display-mode: fullscreen) {
+  .name {
+    flex: 4 19vw;
+  }
 }
 
 @media only screen and (max-width: 1200px) {
