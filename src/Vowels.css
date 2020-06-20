@@ -101,10 +101,12 @@ section {
 }
 
 .chart_list p {
+  position: relative;
+  top: 2em;
   width: max-content;
-  height: max-content;
+  height: 3em;
   margin: 0 auto;
-  padding-top: 1em;
+  /* padding-top: 2em; */
   /* border: 1px solid green; */
 }
 
@@ -136,6 +138,11 @@ section {
 @media only screen and (display-mode: fullscreen) {
   #copy {
     top: 650vh;
+  }
+
+  .chart_list p {
+    top: 1em;
+    height: 2em;
   }
 }
 
@@ -187,6 +194,6 @@ section {
   }
 
   .charts {
-    top: 120vh;
+    top: 135vh;
   }
 }
