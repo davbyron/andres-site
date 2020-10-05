@@ -15,7 +15,7 @@ importAll(require.context('./pubs/', false, /\.pdf$/));
 function Pubs(props) {
   return (
     <section className="publications">
-      <div className="title">Publications</div>
+      <div className="title">publications</div>
       <div className="body">
         <div className="pub" id="profiling">
           <div className="year">2021</div>
