@@ -15,7 +15,7 @@ importAll(require.context('./unpubs/', false, /\.pdf$/));
 function Unpubs(props) {
   return (
     <section className="unpublications">
-      <div className="title">unpublications</div>
+      <div className="title">unpublished</div>
       <div className="body">
       <div className="unpub" id="bridgegate">
         <div className="year">2020</div>
