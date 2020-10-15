@@ -2,17 +2,6 @@ section {
   color: #707070;
 }
 
-#copy {
-  position: absolute;
-  top: 700vh;
-  width: 88vw;
-  margin: 0 auto;
-  right: 0;
-  font-size: 0.75em;
-  text-align: center;
-  color: black;
-}
-
 #list {
   display: none; /* CHANGE TO `BLOCK` IN JS */
   position: absolute;
@@ -34,24 +23,17 @@ section {
   transition: 2s ease-in-out;
 }
 
-.details {
-  /* border: 1px solid orange; */
-}
-
 .explanation {
   display: inline-block;
   width: 60%;
 }
 
 .explanation p {
-  /* position: absolute; */
   padding: 0 1em;
-  /* top: 10.3vh; */
   height: 45vh;
   width: 90%;
   text-align: justify;
   line-height: 1.5em;
-  /* border: 1px solid rgba(112, 112, 112, 0.5); */
 }
 
 .fa-minus-square {
@@ -60,9 +42,6 @@ section {
 
 .language_list {
   display: block;
-  /* height: 51vh;
-  overflow: scroll; */
-  /* border: 1px solid blue; */
 }
 
 .language_list a {
@@ -73,11 +52,9 @@ section {
   display: inline-block;
   margin: 0 auto;
   padding: 0.65em;
-  /* border: 1px solid red; */
 }
 
 .language_list li:hover {
-  /* padding-top: 0.3em; */
   position: relative;
   bottom: 0.2em;
   text-shadow: #dbdbdb 0 0.2em 0.2em;
@@ -93,6 +70,7 @@ section {
   top: 70vh;
   right: 0;
   width: 88vw;
+  padding-bottom: 10vh;
 }
 
 .charts::after {
@@ -106,8 +84,6 @@ section {
   width: max-content;
   height: 3em;
   margin: 0 auto;
-  /* padding-top: 2em; */
-  /* border: 1px solid green; */
 }
 
 .chart_title {
@@ -119,7 +95,6 @@ section {
 }
 
 .sample {
-  /* display: inline; */
   width: 37.5%;
   vertical-align: top;
   position: relative;

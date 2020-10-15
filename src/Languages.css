@@ -3,8 +3,6 @@
   position: relative;
   top: 7vh;
   left: -3vw;
-  /* overflow: hidden; */
-  /* margin-top: 1.5em; */
 }
 
 .title {
@@ -12,5 +10,4 @@
   font-size: 3em;
   color: #707070;
   z-index: 1;
-  /* margin-bottom: 1.5em; */
 }

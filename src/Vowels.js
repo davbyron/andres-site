@@ -58,9 +58,9 @@ class Vowels extends React.Component {
     // document.getElementById('copyright').style.paddingTop = document.getElementById('sample').scrollHeight.toString() + 'px';
   }
 
-  componentWillUnmount() {
-    document.getElementById('copyright').style.visiblity = 'visible';
-  }
+  // componentWillUnmount() {
+  //   document.getElementById('copyright').style.visiblity = 'visible';
+  // }
 
   handleClick(e) {
     if (this.state.isVisible) {
@@ -358,9 +358,6 @@ class Vowels extends React.Component {
               example example example
             </div>
           </Element>
-        </div>
-        <div id="copy">
-          <p>&copy; 2020 David Byron</p>
         </div>
       </section>
     )
