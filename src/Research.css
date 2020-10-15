@@ -11,17 +11,17 @@ em {
   flex: 5;
 }
 
-.pub {
-  display: flex;
-  flex-direction: row;
-  margin: 1.5em 0;
-  text-align: left;
-}
-
 .title {
   font-family: 'Helvetica Neue', sans-serif;
   font-size: 3em;
   color: #707070;
+}
+
+.topic {
+  display: flex;
+  flex-direction: row;
+  margin: 1.5em 0;
+  text-align: left;
 }
 
 .year {
