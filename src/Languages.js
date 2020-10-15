@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, LabelList, Cell } from 'recharts';
 import './Languages.css';
 
-const formatter = (value) => {
+const levelFormatter = (value) => {
   switch(value) {
     case 1:
       return 'Fieldwork';
@@ -48,23 +48,39 @@ const whichColor = (value) => {
   }
 }
 
+// The following is adapted from: https://recharts.org/en-US/examples/CustomizedLabelLineChart
+class CustomizedAxisTick extends React.Component {
+  render() {
+    const {
+      x, y, stroke, payload,
+    } = this.props;
+
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text x={0} y={5} textAnchor="end" fill="#666" transform="rotate(-35)">{payload.value}</text>
+      </g>
+    );
+  }
+}
+
 function Languages(props) {
   const [focusBar, setFocusBar] = useState(null);
 
   const data = [
-    { name: 'Arabic (MSA, Palestinian)', alt: 'AR', level: 3 },
-    { name: 'Arpitan (Cuenco)', alt: 'FRP', level: 2 },
-    { name: 'English (US)', alt: 'EN', level: 5},
-    { name: 'French (Swiss)', alt: 'FR', level: 5},
-    { name: 'German', alt: 'GER', level: 4 },
-    { name: 'Indonesian (Jakarta)', alt: 'IND', level: 1 },
-    { name: 'isiXhosa', alt: 'XH', level: 3},
-    { name: 'Khoekhoe', alt: 'KH', level: 1 },
-    { name: 'Limba', alt: 'LIA', level: 1 },
-    { name: 'Senslerdeutsch', alt: 'GSW', level: 2 },
-    { name: 'Setswana', alt: 'TN', level: 1 },
-    { name: 'Singlish', alt: 'SIN', level: 1 },
-    { name: 'Spanish', alt: 'ES', level: 2 }
+    { name: 'Arabic (MSA, Palestinian)', alt: 'Arabic', level: 3 },
+    { name: 'Arpitan (Cuenco)', alt: 'Arpitan', level: 2 },
+    { name: 'English (US)', alt: 'English', level: 5},
+    { name: 'French (Swiss)', alt: 'French', level: 5},
+    { name: 'German', alt: 'German', level: 4 },
+    { name: 'Indonesian (Jakarta)', alt: 'Indonesian', level: 1 },
+    { name: 'isiXhosa', alt: 'isiXhosa', level: 3},
+    { name: 'Khoekhoe', alt: 'Khoekhoe', level: 1 },
+    { name: 'Limba', alt: 'Limba', level: 1 },
+    { name: 'Senslerdeutsch', alt: 'Senslerdeutsch', level: 2 },
+    { name: 'Setswana', alt: 'Setswana', level: 1 },
+    { name: 'Singlish', alt: 'Singlish', level: 1 },
+    { name: 'Spanish', alt: 'Spanish', level: 2 },
+    { name: 'Tshivenda', alt: 'Tshivenda', level: 1 }
   ];
 
   return (
@@ -76,6 +92,7 @@ function Languages(props) {
           height="70%">
           <BarChart
             data={data}
+            margin={{ bottom: 85 }}
             onMouseMove={state => {
               if (state.isTooltipActive) {
                 setFocusBar(state.activeTooltipIndex);
@@ -83,24 +100,24 @@ function Languages(props) {
                 setFocusBar(null);
               }
             }}>
-            <Tooltip formatter={(value, name, props) => { return formatter(value) }}/>
+            <Tooltip formatter={(value, name, props) => { return levelFormatter(value) }} />
             <XAxis
+              type="category"
               dataKey="name"
-              tick={false}
-              tickLine={false}/>
+              interval={0}
+              tick={<CustomizedAxisTick />}
+              tickLine={false}
+              />
             <YAxis
               type="number"
               dataKey="level"
               domain={[0,5]}
               ticks={[1, 2, 3, 4, 5]}
-              tickFormatter={formatter}
+              tickFormatter={levelFormatter}
               width={150} />
             <Bar
               dataKey="level"
               isAnimationActive={false}>
-              <LabelList
-                dataKey="alt"
-                position="bottom"/>
               {data.map((entry, index) => (
                 <Cell fill={whichColor(entry['level'])} />
               ))}
