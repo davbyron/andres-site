@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "175f68252a76564c06b4b36b32a02bb6",
+    "revision": "720234e2215eb32d458fd22e496bd8cc",
     "url": "/index.html"
   },
   {
-    "revision": "14a2953834766ece1ebd",
-    "url": "/static/css/main.ffedc427.chunk.css"
+    "revision": "5a21cf577678170e86c0",
+    "url": "/static/css/main.299c9fc1.chunk.css"
   },
   {
     "revision": "0b5672f893d58f8aa9cb",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/2.d956dd63.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "14a2953834766ece1ebd",
-    "url": "/static/js/main.aa1ab182.chunk.js"
+    "revision": "5a21cf577678170e86c0",
+    "url": "/static/js/main.828f80a8.chunk.js"
   },
   {
     "revision": "065c21c5c878839f8c06",
@@ -52,8 +52,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/cantonese.610f128e.png"
   },
   {
-    "revision": "ae5851eb77e89e58334fbbe9bae7d954",
-    "url": "/static/media/cv.ae5851eb.pdf"
+    "revision": "d0992cc3eda72d49cb7a8efcb7eb7b28",
+    "url": "/static/media/cv.d0992cc3.pdf"
   },
   {
     "revision": "1ce6af423664846de19d22fe47809e4c",
