@@ -2,6 +2,11 @@
   "homepage": "https://www.andreschwab.com",
   "name": "andres_site",
   "version": "0.1.0",
+  "author": {
+    "name": "David Byron",
+    "email": "davbyron@icloud.com",
+    "url": "https://davidbyron.info"
+  },
   "description": "Andre Schwab",
   "private": false,
   "repository": "github: davbyron/andres-site",
