@@ -10,17 +10,27 @@
   "description": "Andre Schwab",
   "private": false,
   "repository": "github: davbyron/andres-site",
-  "keywords": ["andre", "schwab", "bu", "boston", "nyu", "new york", "university", "phd", "linguistics"],
+  "keywords": [
+    "andre",
+    "schwab",
+    "bu",
+    "boston",
+    "nyu",
+    "new york",
+    "university",
+    "phd",
+    "linguistics"
+  ],
   "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "gh-pages": "^3.1.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.3",
-    "react-scroll": "^1.7.16",
+    "gh-pages": "^3.2.3",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-scripts": "^3.4.4",
+    "react-scroll": "^1.8.2",
     "recharts": "^1.8.5"
   },
   "scripts": {
