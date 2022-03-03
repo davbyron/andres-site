@@ -23,15 +23,16 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "eslint-config-react-app": "^7.0.0",
     "gh-pages": "^3.2.3",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-scripts": "^3.4.4",
-    "react-scroll": "^1.8.2",
-    "recharts": "^1.8.5"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^5.0.0",
+    "react-scroll": "^1.8.4",
+    "recharts": "^2.1.9"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -40,9 +41,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
