@@ -82,7 +82,8 @@ function Languages(props) {
     { name: 'Senslerdeutsch', alt: 'Senslerdeutsch', level: 2 },
     { name: 'Setswana', alt: 'Setswana', level: 1 },
     { name: 'Spanish', alt: 'Spanish', level: 2 },
-    { name: 'Tshivenda', alt: 'Tshivenda', level: 1 }
+    { name: 'Tshivenda', alt: 'Tshivenda', level: 1 },
+    { name: 'Yoruba', alt: 'Yoruba', level: 1 }
   ];
 
   return (
