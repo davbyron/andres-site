@@ -17,11 +17,18 @@ function Research(props) {
     <section className="research">
       <div className="title">research</div>
       <div className="body">
-        <div className="topic" id="profiling">
-          <div className="year">2021</div>
-          <div className="authors">Gregory Guy & <b>Andre Schwab</b></div>
+        <div className="topic" id="qp2">
+          <div className="year">2022</div>
+          <div className="authors"><b>Andre Schwab</b></div>
           <div className="info">
-            <em>The politics of dialect profiling.</em> International Society of Applied Linguistics 12.
+            <em><a href={cache['./qp2.pdf']}>Teaching Possession Splits to Anglophones: An Investigation</a></em> M.A. Qualifying Paper. Boston University.
+          </div>
+        </div>
+        <div className="topic" id="qp1">
+          <div className="year">2021</div>
+          <div className="authors"><b>Andre Schwab</b></div>
+          <div className="info">
+            <em><a href={cache['./qp1.pdf']}>Love Is Possessive: An Alternative Way Of Encoding Endearment</a></em> M.A. Qualifying Paper. Boston University.
           </div>
         </div>
         <div className="topic" id="isiXhosa_kinship">
@@ -35,7 +42,7 @@ function Research(props) {
           <div className="year">2019</div>
           <div className="authors"><b>Andre Schwab</b></div>
           <div className="info">
-            <em><a href={cache['./thesis.pdf']}>Dialectal Priming Effects in Political Call Surveys: The Case of Dexter, Maine.</a></em> M.A. Thesis. NYU.
+            <em><a href={cache['./thesis.pdf']}>Dialectal Priming Effects in Political Call Surveys: The Case of Dexter, Maine.</a></em> M.A. Thesis. New York University.
           </div>
         </div>
       </div>
