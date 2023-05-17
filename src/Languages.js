@@ -72,13 +72,15 @@ function Languages(props) {
     { name: 'English (US)', alt: 'English', level: 5},
     { name: 'French (Swiss)', alt: 'French', level: 5},
     { name: 'German', alt: 'German', level: 4 },
+    { name: 'Hawaiian', alt: 'Hawaiian', level: 1 },
     { name: 'Indonesian (Jakarta)', alt: 'Indonesian', level: 1 },
-    { name: 'isiXhosa', alt: 'isiXhosa', level: 3},
+    { name: 'isiXhosa', alt: 'isiXhosa', level: 4},
     { name: 'Khoekhoe', alt: 'Khoekhoe', level: 1 },
+    { name: 'Kinande', alt: 'Kinande', level: 1 },
     { name: 'Limba', alt: 'Limba', level: 1 },
+    { name: 'Northern Pomo', alt: 'Northern Pomo', level: 2 },
     { name: 'Senslerdeutsch', alt: 'Senslerdeutsch', level: 2 },
     { name: 'Setswana', alt: 'Setswana', level: 1 },
-    { name: 'Singlish', alt: 'Singlish', level: 1 },
     { name: 'Spanish', alt: 'Spanish', level: 2 },
     { name: 'Tshivenda', alt: 'Tshivenda', level: 1 }
   ];
