@@ -9,50 +9,50 @@ function importAll(r) {
   r.keys().forEach(key => cache[key] = r(key));
 }
 
-// Only accepts .png files. Can be changed if necessary.
+// Only accepts .pdf files. Can be changed if necessary.
 importAll(require.context('./unpubs/', false, /\.pdf$/));
 
-function Unpubs(props) {
+function Unpubs() {
   return (
     <section className="unpublications">
-      <div className="title">unpublished</div>
-      <div className="body">
-        <div className="unpub" id="bridgegate">
+      <h2>unpublished</h2>
+      <ul id="bibliography">
+        <li className="unpub" id="bridgegate">
           <div className="year">2020</div>
           <div className="authors"><b>Andre Schwab</b></div>
           <div className="info">
-            <em><a href={cache['./bridgegate.pdf']}>Chris Christie and Bridgegate.</a></em>
+            <cite><a href={cache['./bridgegate.pdf']}>Chris Christie and Bridgegate.</a></cite>
           </div>
-        </div>
-        <div className="unpub" id="queens">
+        </li>
+        <li className="unpub" id="queens">
           <div className="year">2020</div>
           <div className="authors"><b>Andre Schwab</b></div>
           <div className="info">
-            <em><a href={cache['./queens.pdf']}>Drag Queens and Complex Positioning.</a></em>
+            <cite><a href={cache['./queens.pdf']}>Drag Queens and Complex Positioning.</a></cite>
           </div>
-        </div>
-        <div className="unpub" id="arabic_sibilants">
+        </li>
+        <li className="unpub" id="arabic_sibilants">
           <div className="year">2019</div>
           <div className="authors">Teddy Manning, Kevin Samejon, Miriam Yifach, & <b>Andre Schwab</b></div>
           <div className="info">
-            <em><a href={cache['./arabic_sibilants.pdf']}>The Interaction of Sibilants and IP Boundaries in Egyptian Arabic.</a></em>
+            <cite><a href={cache['./arabic_sibilants.pdf']}>The Interaction of Sibilants and IP Boundaries in Egyptian Arabic.</a></cite>
           </div>
-        </div>
-        <div className="unpub" id="fribourg">
+        </li>
+        <li className="unpub" id="fribourg">
           <div className="year">2019</div>
           <div className="authors"><b>Andre Schwab</b></div>
           <div className="info">
-            <em><a href={cache['./fribourg.pdf']}>Linguistic tension in the Fribourg area of Switzerland.</a></em>
+            <cite><a href={cache['./fribourg.pdf']}>Linguistic tension in the Fribourg area of Switzerland.</a></cite>
           </div>
-        </div>
-        <div className="unpub" id="gui">
+        </li>
+        <li className="unpub" id="gui">
           <div className="year">2018</div>
           <div className="authors"><b>Andre Schwab</b></div>
           <div className="info">
-            <em><a href="https://sites.google.com/site/thekhoisanlanguages/central-khoisan/gui">Grammatical Sketch of G|ui.</a></em>
+            <cite><a href="https://sites.google.com/site/thekhoisanlanguages/central-khoisan/gui">Grammatical Sketch of G|ui.</a></cite>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </section>
   )
 }

@@ -88,7 +88,7 @@ function Languages(props) {
 
   return (
     <section className="languages">
-      <div className="title">languages</div>
+      <h2>languages</h2>
       <div className="chart">
         <ResponsiveContainer
           width="100%"
