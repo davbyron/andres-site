@@ -86,9 +86,17 @@ class CustomizedXAxisTick extends React.Component {
 function Languages(props) {
   const [focusBar, setFocusBar] = useState(null);
 
-  const screenOrientation = window.screen.orientation.type;
-  console.log(screenOrientation)
-  console.log(screenOrientation.startsWith('landscape'))
+  let screenOrientation;
+  try {
+    screenOrientation = window.screen.orientation.type;
+  } catch (err) {
+    console.log(err)
+    if (window.screen.availHeight > window.screen.availWidth) {
+      screenOrientation = 'portrait';
+    } else {
+      screenOrientation = 'landscape';
+    }
+  }
 
   const data = [
     { name: 'Arabic (MSA, Palestinian)', alt: 'Arabic', level: 3 },
