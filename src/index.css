@@ -63,12 +63,12 @@ b {
 }
 
 #panel {
-  flex: 10;
   margin-left: 5vw;
   margin-right: 5vw;
   height: 61vh;
   position: relative;
-  top: -0.79em;
+  flex: 1;
+  min-width: 0;
 }
 
 .button:hover {
@@ -84,7 +84,6 @@ b {
 
 .content {
   display: flex;
-  flex-direction: row;
   align-items: center;
   height: 80vh;
 }
@@ -96,7 +95,7 @@ b {
 }
 
 .face-container {
-  flex: 6;
+  /* flex: 6; */
   padding-left: 4.5vw;
 }
 

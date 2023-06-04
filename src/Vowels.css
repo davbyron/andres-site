@@ -4,9 +4,8 @@ section {
 
 #list {
   display: none; /* CHANGE TO `BLOCK` IN JS */
-  position: absolute;
-  top: 16vh;
-  width: inherit;
+  position: relative;
+  top: 0;
 }
 
 #minimize {
@@ -17,20 +16,22 @@ section {
   text-align: center;
   cursor: pointer;
   border: 1px solid rgba(112, 112, 112, 0.5);
+  z-index: 2;
 }
 
-#words {
-  transition: 2s ease-in-out;
+.details {
+  width: 100%;
+  height: fit-content;
 }
 
 .explanation {
   display: inline-block;
   width: 60%;
+  height: 100%;
 }
 
 .explanation p {
   padding: 0 1em;
-  height: 45vh;
   width: 90%;
   text-align: justify;
   line-height: 1.5em;
@@ -62,10 +63,9 @@ section {
 }
 
 .charts {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 30px;
   position: absolute;
   top: 70vh;
   right: 0;
@@ -87,6 +87,7 @@ section {
 }
 
 .chart_title {
+  text-align: center;
   padding: 0.25em 0;
 }
 
@@ -102,19 +103,17 @@ section {
 }
 
 .vowelchart {
-  width: 20vw;
+  display: block;
+  margin: auto;
+  width: 90%;
 }
 
 .tile {
-  flex: 1;
-  padding-top: 10vh;
+  height: auto;
+  margin: auto;
 }
 
 @media only screen and (display-mode: fullscreen) {
-  #copy {
-    top: 650vh;
-  }
-
   .chart_list p {
     top: 1em;
     height: 2em;
@@ -122,53 +121,42 @@ section {
 }
 
 @media only screen and (max-width: 1336px) {
-  #copy {
-    top: 690vh;
-  }
-
   .charts {
     top: 90vh;
   }
 }
 
 @media only screen and (max-width: 1130px) {
-  #copy {
-    top: 650vh;
-  }
-
   .charts {
     top: 115vh;
   }
 }
 
 @media only screen and (max-width: 1000px) {
-  #copy {
-    top: 590vh;
-  }
-
   .charts {
-    top: 90vh;
-  }
-}
-
-@media only screen and (max-width: 880px) {
-  #copy {
-    top: 550vh;
-  }
-}
-
-@media only screen and (max-width: 750px) {
-  #copy {
-    top: 525vh;
+    top: 100vh;
   }
 }
 
 @media only screen and (max-width: 605px) {
-  #copy {
-    top: 500vh;
+  .charts {
+    top: 120vh;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .explanation {
+    width: 100%;
   }
 
+  .sample {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 400px) {
   .charts {
-    top: 135vh;
+    grid-template-columns: 1fr;
   }
 }
