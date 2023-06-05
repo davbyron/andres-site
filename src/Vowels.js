@@ -3,18 +3,6 @@ import { Link, Element } from 'react-scroll';
 import refs from './vowels_bib.pdf';
 import './Vowels.css';
 
-
-// function rotate(counter, pics, id) {
-//   counter++;
-//   if (counter === pics.length) {
-//     counter = 0;
-//   }
-//
-//   document.getElementById(id).src = pics[counter];
-//
-//   setTimeout(rotate(counter, pics, id), 1000);
-// }
-
 // Create dict with locations for all images.
 // To access an image from cache, e.g.: <img src={cache['./lang.png']} />
 const cache = {};
@@ -29,8 +17,6 @@ importAll(require.context('./images/', false, /\.png$/));
 function choosePic(counter, pics, id) {
   counter = Math.floor(Math.random() * pics.length);
   document.getElementById(id).src = pics[counter];
-
-  // rotate(counter, pics, id);
 }
 
 class Vowels extends React.Component {
@@ -53,14 +39,7 @@ class Vowels extends React.Component {
                           cache['./vietnamese.png'], cache['./welsh.png']];
 
     choosePic(displayImage, chartImages, 'sample');
-
-    // let wantedHeight = document.getElementById('sample').scrollHeight;
-    // document.getElementById('copyright').style.paddingTop = document.getElementById('sample').scrollHeight.toString() + 'px';
   }
-
-  // componentWillUnmount() {
-  //   document.getElementById('copyright').style.visiblity = 'visible';
-  // }
 
   handleClick(e) {
     if (this.state.isVisible) {
@@ -81,7 +60,7 @@ class Vowels extends React.Component {
   render() {
     return (
       <section className="vowels">
-        <div className="title">vowelchArt</div>
+        <h2>vowelchArt</h2>
         <div className="details">
           <div className="explanation">
             <p>

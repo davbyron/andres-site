@@ -9,36 +9,92 @@ function importAll(r) {
   r.keys().forEach(key => cache[key] = r(key));
 }
 
-// Only accepts .png files. Can be changed if necessary.
+// Only accepts .pdf files. Can be changed if necessary.
 importAll(require.context('./pubs/', false, /\.pdf$/));
 
-function Research(props) {
+function Research() {
   return (
     <section className="research">
-      <div className="title">research</div>
-      <div className="body">
-        <div className="topic" id="profiling">
-          <div className="year">2021</div>
-          <div className="authors">Gregory Guy & <b>Andre Schwab</b></div>
+      <h2>research</h2>
+      <ul id="bibliography">
+        <li className="topic" id="npomo_teaching_kinship">
+          <div className="year">2023</div>
+          <div className="authors">Jonathan Barnes, <b>Andre Schwab</b>, & Okrah Oppong</div>
           <div className="info">
-            <em>The politics of dialect profiling.</em> International Society of Applied Linguistics 12.
+            <cite>Phrase-level prosody of Akan-Twi in spoken and whistled modalities.</cite> Phonetics and Phonology in Europe (PaPE).
           </div>
-        </div>
-        <div className="topic" id="isiXhosa_kinship">
+        </li>
+        <li className="topic" id="npomo_teaching_kinship">
+          <div className="year">2023</div>
+          <div className="authors"><b>Andre Schwab</b> & Zoliswa Mali</div>
+          <div className="info">
+            <cite>Indigenous Knowledge Systems: the Case of IsiXhosa Intonjane and Ulwaluko Rites.</cite> 26th Annual Conference of the African Language Teachers Association (ALTA).
+          </div>
+        </li>
+        <li className="topic" id="npomo_teaching_kinship">
+          <div className="year">2023</div>
+          <div className="authors"><b>Andre Schwab</b>, Buffie Schmidt, & Cathy O'Connor</div>
+          <div className="info">
+            <cite>Teaching Kinship in Northern Pomo.</cite> 8th International Conference on Language Documentation and Conservation.
+          </div>
+        </li>
+        <li className="topic" id="npomo_high_school_language_class">
+          <div className="year">2023</div>
+          <div className="authors">Cathy O'Connor, Buffie Schmidt, <b>Andre Schwab</b>, & Brady Dailey</div>
+          <div className="info">
+            <cite>Creating a High School Language Class in a Dormant Indigenous Language: Challenges and Opportunities.</cite> 8th International Conference on Language Documentation and Conservation.
+          </div>
+        </li>
+        <li className="topic" id="authentic_teaching_materials">
+          <div className="year">2022</div>
+          <div className="authors"><b>Andre Schwab</b> & Zoliswa Mali</div>
+          <div className="info">
+            <cite>Using authentic materials and experiences as access points to some Indigenous Knowledge Systems and historic cultural information: sharing student experiences.</cite> Northeast Regional Consortium for Programs in African Languages (NERCPAL).
+          </div>
+        </li>
+        <li className="topic" id="isiXhosa_teaching_materials">
+          <div className="year">2022</div>
+          <div className="authors"><b>Andre Schwab</b>, Allison Smith, & Zoliswa Mali</div>
+          <div className="info">
+            <cite>Ukubaluleka kokusetyenziswa kwezixhobo zokwenene ekufundiseni ulwimi: sizekelisa ngesiXhosa. (The importance of using authentic teaching materials: examples in isiXhosa).</cite> Annual Conference on African Linguistics 51-52.
+          </div>
+        </li>
+        <li className="topic" id="qp2">
+          <div className="year">2022</div>
+          <div className="authors"><b>Andre Schwab</b></div>
+          <div className="info">
+            <cite><a href={cache['./qp2.pdf']}>Teaching Possession Splits to Anglophones: An Investigation.</a></cite> M.A. Qualifying Paper. Boston University.
+          </div>
+        </li>
+        <li className="topic" id="qp1">
           <div className="year">2021</div>
           <div className="authors"><b>Andre Schwab</b></div>
           <div className="info">
-            <em>Inalienable kinship relations in colloquial isiXhosa: towards a syntactic analysis.</em> Annual Conference on African Linguistics 51-52.
+            <cite><a href={cache['./qp1.pdf']}>Love Is Possessive: An Alternative Way Of Encoding Endearment.</a></cite> M.A. Qualifying Paper. Boston University.
           </div>
-        </div>
-        <div className="topic" id="thesis">
+        </li>
+        <li className="topic" id="isiXhosa_kinship">
+          <div className="year">2021</div>
+          <div className="authors"><b>Andre Schwab</b></div>
+          <div className="info">
+            <cite>Inalienable kinship relations in colloquial isiXhosa: towards a syntactic analysis.</cite> Annual Conference on African Linguistics 51-52.
+          </div>
+        </li>
+        <li className="topic" id="alienability_southern_bantu">
+          <div className="year">2021</div>
+          <div className="authors"><b>Andre Schwab</b></div>
+          <div className="info">
+            <cite>Alienability Distinctions in Southern Bantu.</cite> 10th World Congress of African Linguistics (WOCAL).
+          </div>
+        </li>
+        <li className="topic" id="thesis">
           <div className="year">2019</div>
           <div className="authors"><b>Andre Schwab</b></div>
           <div className="info">
-            <em><a href={cache['./thesis.pdf']}>Dialectal Priming Effects in Political Call Surveys: The Case of Dexter, Maine.</a></em> M.A. Thesis. NYU.
+            <cite><a href={cache['./thesis.pdf']}>Dialectal Priming Effects in Political Call Surveys: The Case of Dexter, Maine.</a></cite> M.A. Thesis. New York University.
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </section>
   )
 }

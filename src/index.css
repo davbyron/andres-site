@@ -6,15 +6,30 @@ header {
   display: flex;
   flex-direction: row;
   margin-top: 5vh;
+  padding-left: 3.5vw;
   text-align: center;
   color: #707070;
 }
 
-li {
-  padding: 3vh 1em;
-  font-size: 1em;
-  cursor: pointer;
-  width: max-content;
+section {
+  padding-bottom: 100px;
+}
+
+h1 {
+  margin: 0;
+  width: auto;
+  font-size: 10vh;
+  font-weight: 400;
+}
+
+h2 {
+  margin: 0;
+  padding-bottom: 0.25em;
+  font-weight: 400;
+  font-size: 3em;
+  color: #707070;
+  background-color: white;
+  box-shadow: 0 0.4em 0.75em -0.6em #707070;
 }
 
 nav {
@@ -29,6 +44,17 @@ ul {
   list-style: none;
 }
 
+li {
+  padding: 3vh 1em;
+  font-size: 1em;
+  cursor: pointer;
+  width: max-content;
+}
+
+b {
+  font-weight: 700;
+}
+
 #face {
   height: 60vh;
   width: 60vh;
@@ -37,12 +63,12 @@ ul {
 }
 
 #panel {
-  flex: 10;
   margin-left: 5vw;
   margin-right: 5vw;
   height: 61vh;
   position: relative;
-  top: -0.79em;
+  flex: 1;
+  min-width: 0;
 }
 
 .button:hover {
@@ -58,7 +84,6 @@ ul {
 
 .content {
   display: flex;
-  flex-direction: row;
   align-items: center;
   height: 80vh;
 }
@@ -66,18 +91,22 @@ ul {
 .cv {
   flex: 2;
   padding-top: 3vh;
-  /* opacity: 60%; */
   cursor: pointer;
 }
 
-.image {
-  flex: 6;
+.face-container {
+  /* flex: 6; */
   padding-left: 4.5vw;
 }
 
-.name {
-  flex: 3 19vw;
-  font-size: 10vh;
+#bibliography {
+  flex-direction: column;
+}
+
+#bibliography li {
+  margin: 0;
+  width: auto;
+  cursor: default;
 }
 
 @media only screen and (display-mode: fullscreen) {
@@ -113,7 +142,7 @@ ul {
     margin-top: 7.5vh;
   }
 
-  .image {
+  .face-container {
     display: none;
   }
 }

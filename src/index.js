@@ -27,8 +27,6 @@ const cv = document.getElementById('cv');
 
 // Create event handlers for each button
 home_button.onclick = () => {
-  // document.getElementById('copyright').style.display = 'block';
-  // document.getElementById('copyright').style.paddingTop = '5vh';
   ReactDOM.render(
     <React.StrictMode>
       <About />
@@ -38,8 +36,6 @@ home_button.onclick = () => {
 }
 
 langs_button.onclick = () => {
-  // document.getElementById('copyright').style.display = 'block';
-  // document.getElementById('copyright').style.paddingTop = '5vh';
   ReactDOM.render(
     <React.StrictMode>
       <Languages />
@@ -49,8 +45,6 @@ langs_button.onclick = () => {
 }
 
 research_button.onclick = () => {
-  // document.getElementById('copyright').style.display = 'block';
-  // document.getElementById('copyright').style.paddingTop = '5vh';
   ReactDOM.render(
     <React.StrictMode>
       <Research />
@@ -60,8 +54,6 @@ research_button.onclick = () => {
 }
 
 unpubs_button.onclick = () => {
-  // document.getElementById('copyright').style.display = 'block';
-  // document.getElementById('copyright').style.paddingTop = '5vh';
   ReactDOM.render(
     <React.StrictMode>
       <Unpubs />
@@ -71,7 +63,6 @@ unpubs_button.onclick = () => {
 }
 
 vowels_button.onclick = () => {
-  // document.getElementById('copyright').style.display = 'none';
   ReactDOM.render(
     <React.StrictMode>
       <Vowels />

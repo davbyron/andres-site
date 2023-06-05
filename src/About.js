@@ -4,7 +4,7 @@ import './About.css';
 function About(props) {
   return (
     <section className="about">
-      <div className="title">about</div>
+      <h2>about</h2>
       <div className="body">
         <p>
           I'm a student at Boston University (BU) in the Graduate School of
