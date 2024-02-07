@@ -62,12 +62,16 @@ section {
   transition: 2ms;
 }
 
+.vowels {
+  position: relative;
+}
+
 .charts {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 30px;
   position: absolute;
-  top: 70vh;
+  top: 110%;
   right: 0;
   width: 88vw;
   padding-bottom: 10vh;
@@ -120,27 +124,8 @@ section {
   }
 }
 
-@media only screen and (max-width: 1336px) {
-  .charts {
-    top: 90vh;
-  }
-}
-
-@media only screen and (max-width: 1130px) {
-  .charts {
-    top: 115vh;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .charts {
-    top: 100vh;
-  }
-}
-
 @media only screen and (max-width: 605px) {
   .charts {
-    top: 120vh;
     grid-template-columns: 1fr 1fr;
   }
 }
