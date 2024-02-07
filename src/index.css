@@ -1,24 +1,20 @@
 body {
   font-family: 'Helvetica Neue', sans-serif;
+  margin: 0 5vw;
 }
 
 header {
   display: flex;
-  flex-direction: row;
   margin-top: 5vh;
-  padding-left: 3.5vw;
+  align-items: center;
   text-align: center;
   color: #707070;
-}
-
-section {
-  padding-bottom: 100px;
 }
 
 h1 {
   margin: 0;
   width: auto;
-  font-size: 10vh;
+  font-size: 5.5rem;
   font-weight: 400;
 }
 
@@ -32,8 +28,11 @@ h2 {
   box-shadow: 0 0.4em 0.75em -0.6em #707070;
 }
 
-nav {
-  flex: 7;
+.nav-cv-container {
+  display: flex;
+  gap: 5rem;
+  align-items: center;
+  margin-left: auto;
 }
 
 ul {
@@ -56,15 +55,13 @@ b {
 }
 
 #face {
-  height: 60vh;
-  width: 60vh;
+  height: min(60vh, 60vw);
+  width: min(60vh, 60vw);
   box-shadow: 1.75em 1.75em 0.5em rgba(0, 0, 0, 0.16);
   border: 5px solid black;
 }
 
 #panel {
-  margin-left: 5vw;
-  margin-right: 5vw;
   height: 61vh;
   position: relative;
   flex: 1;
@@ -84,19 +81,13 @@ b {
 
 .content {
   display: flex;
+  gap: 5vw;
   align-items: center;
   height: 80vh;
 }
 
 .cv {
-  flex: 2;
-  padding-top: 3vh;
   cursor: pointer;
-}
-
-.face-container {
-  /* flex: 6; */
-  padding-left: 4.5vw;
 }
 
 #bibliography {
@@ -110,9 +101,9 @@ b {
 }
 
 @media only screen and (display-mode: fullscreen) {
-  .name {
+  /* .name {
     flex: 4 19vw;
-  }
+  } */
 }
 
 @media only screen and (max-width: 1200px) {
@@ -135,6 +126,11 @@ b {
   ul {
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .nav-cv-container {
+    flex-direction: column;
+    gap: 0;
   }
 
   .content {
