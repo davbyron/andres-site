@@ -7,6 +7,14 @@
   flex: 5;
 }
 
+cite {
+  font-style: normal;
+}
+
+.info:last-child {
+  font-style: italic;
+}
+
 .topic {
   display: flex;
   flex-direction: row;
