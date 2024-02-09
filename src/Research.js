@@ -17,18 +17,39 @@ function Research() {
     <section className="research">
       <h2>research</h2>
       <ul id="bibliography">
-        <li className="topic" id="npomo_teaching_kinship">
+        <li className="topic" id="kinande">
+          <div className="year">2024</div>
+          <div className="authors"><b>Andre Schwab</b></div>
+          <div className="info">
+            <cite><a href={cache['./nels_54_poster.pdf']}>Spoken, whistled, drummed, and fluted Kinande: An asymmetry for encoding pitch and rhythm.</a></cite> 54th Annual Meeting of the North East Linguistics Society (NELS 54).
+          </div>
+        </li>
+        <li className="topic" id="indonesian_particle_order">
+          <div className="year">2024</div>
+          <div className="authors"><b>Andre Schwab</b></div>
+          <div className="info">
+            <cite><a href={cache['./lsa_poster.pdf']}>A Syntactic Explanation of Preverbal Partical Order Variation in Indonesian Corrective Speech Acts.</a></cite>  2024 Annual LSA meeting.
+          </div>
+        </li>
+        <li className="topic" id="truncation_affectation_pain_sBantu">
+          <div className="year">2023</div>
+          <div className="authors"><b>Andre Schwab</b></div>
+          <div className="info">
+            <cite><a href={cache['./truncation_affection_pain_southern_bantu.pdf']}>Truncation, Affection, and Pain in Southern Bantu.</a></cite> Linguistique et Langue Africaine, 9(1).
+          </div>
+        </li>
+        <li className="topic" id="prosody_akan-twi">
           <div className="year">2023</div>
           <div className="authors">Jonathan Barnes, <b>Andre Schwab</b>, & Okrah Oppong</div>
           <div className="info">
-            <cite>Phrase-level prosody of Akan-Twi in spoken and whistled modalities.</cite> Phonetics and Phonology in Europe (PaPE).
+            <cite><a href={cache['./pape2023.pdf']}>Phrase-level prosody of Akan-Twi in spoken and whistled modalities.</a></cite> Phonetics and Phonology in Europe (PaPE).
           </div>
         </li>
-        <li className="topic" id="npomo_teaching_kinship">
+        <li className="topic" id="indigenous_knowledge_systems">
           <div className="year">2023</div>
           <div className="authors"><b>Andre Schwab</b> & Zoliswa Mali</div>
           <div className="info">
-            <cite>Indigenous Knowledge Systems: the Case of IsiXhosa Intonjane and Ulwaluko Rites.</cite> 26th Annual Conference of the African Language Teachers Association (ALTA).
+            <cite><a href={cache['./alta_2023_ngesingesi.pdf']}>Indigenous Knowledge Systems: the Case of IsiXhosa Intonjane and Ulwaluko Rites.</a></cite> 26th Annual Conference of the African Language Teachers Association (ALTA).
           </div>
         </li>
         <li className="topic" id="npomo_teaching_kinship">
