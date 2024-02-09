@@ -19,35 +19,35 @@ function Unpubs() {
       <ul id="bibliography">
         <li className="unpub" id="bridgegate">
           <div className="year">2020</div>
-          <div className="authors"><b>Andre Schwab</b></div>
+          <div className="authors"><b>André Batchelder-Schwab</b></div>
           <div className="info">
             <cite><a href={cache['./bridgegate.pdf']}>Chris Christie and Bridgegate.</a></cite>
           </div>
         </li>
         <li className="unpub" id="queens">
           <div className="year">2020</div>
-          <div className="authors"><b>Andre Schwab</b></div>
+          <div className="authors"><b>André Batchelder-Schwab</b></div>
           <div className="info">
             <cite><a href={cache['./queens.pdf']}>Drag Queens and Complex Positioning.</a></cite>
           </div>
         </li>
         <li className="unpub" id="arabic_sibilants">
           <div className="year">2019</div>
-          <div className="authors">Teddy Manning, Kevin Samejon, Miriam Yifach, & <b>Andre Schwab</b></div>
+          <div className="authors">Teddy Manning, Kevin Samejon, Miriam Yifach, & <b>André Batchelder-Schwab</b></div>
           <div className="info">
             <cite><a href={cache['./arabic_sibilants.pdf']}>The Interaction of Sibilants and IP Boundaries in Egyptian Arabic.</a></cite>
           </div>
         </li>
         <li className="unpub" id="fribourg">
           <div className="year">2019</div>
-          <div className="authors"><b>Andre Schwab</b></div>
+          <div className="authors"><b>André Batchelder-Schwab</b></div>
           <div className="info">
             <cite><a href={cache['./fribourg.pdf']}>Linguistic tension in the Fribourg area of Switzerland.</a></cite>
           </div>
         </li>
         <li className="unpub" id="gui">
           <div className="year">2018</div>
-          <div className="authors"><b>Andre Schwab</b></div>
+          <div className="authors"><b>André Batchelder-Schwab</b></div>
           <div className="info">
             <cite><a href="https://sites.google.com/site/thekhoisanlanguages/central-khoisan/gui">Grammatical Sketch of G|ui.</a></cite>
           </div>
