@@ -17,6 +17,13 @@ function Research() {
     <section className="research">
       <h2>research</h2>
       <ul id="bibliography">
+        <li className="topic" id="tshila">
+          <div className="year">2024</div>
+          <div className="authors"><b>André Batchelder-Schwab</b> & Chris Collins</div>
+          <div className="info">
+            <cite><a href={cache['./acal_2024_classification_of_tshila.pdf']}>The Classification of Tshila.</a></cite> Annual Congress of African linguistics 55.
+          </div>
+        </li>
         <li className="topic" id="kinande">
           <div className="year">2024</div>
           <div className="authors"><b>André Batchelder-Schwab</b></div>
