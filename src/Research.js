@@ -21,7 +21,7 @@ function Research() {
           <div className="year">2024</div>
           <div className="authors"><b>André Batchelder-Schwab</b> & Chris Collins</div>
           <div className="info">
-            <cite><a href={cache['./acal_2024_classification_of_tshila.pdf']}>The Classification of Tshila.</a></cite> Annual Congress of African linguistics 55.
+            <cite><a href={cache['./acal_2024_classification_of_tshila.pdf']}>The Classification of Tshila.</a></cite> Annual Congress of African Linguistics 55.
           </div>
         </li>
         <li className="topic" id="kinande">
