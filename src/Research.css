@@ -15,6 +15,10 @@ cite {
   font-style: italic;
 }
 
+.no-italic {
+  font-style: normal;
+}
+
 .topic {
   display: flex;
   flex-direction: row;

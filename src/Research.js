@@ -21,7 +21,7 @@ function Research() {
           <div className="year">2024</div>
           <div className="authors"><b>André Batchelder-Schwab</b> & Zoliswa Mali</div>
           <div className="info">
-            <cite><a href={cache['./initiation_rites_of_isixhosa.pdf']}>Initiation Rites of the IsiXhosa Culture are Education Systems.</a></cite> Journal of the African Language Teachers Association 11. 147-163.
+            <cite><a href={cache['./initiation_rites_of_isixhosa.pdf']}>Initiation Rites of the IsiXhosa Culture are Education Systems.</a></cite> Journal of the African Language Teachers Association <span className='no-italic'>11. 147-163.</span>
           </div>
         </li>
         <li className="topic" id="tshila">
