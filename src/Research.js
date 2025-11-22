@@ -17,6 +17,13 @@ function Research() {
     <section className="research">
       <h2>research</h2>
       <ul id="bibliography">
+        <li className="topic" id="stress-in-greek">
+          <div className="year">2025</div>
+          <div className="authors"><b>André Batchelder-Schwab</b>, Vasieios Michos, & Jonathan Barnes</div>
+          <div className="info">
+            <cite><a href={cache['./batchelderschwab25_interspeech.pdf']}>Stress in Spoken and Whistled Greek.</a></cite> Interspeech 2025. <span className='no-italic'>389-393.</span>
+          </div>
+        </li>
         <li className="topic" id="initiation rites">
           <div className="year">2024</div>
           <div className="authors"><b>André Batchelder-Schwab</b> & Zoliswa Mali</div>

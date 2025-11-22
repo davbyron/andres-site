@@ -17,6 +17,13 @@ function Unpubs() {
     <section className="unpublications">
       <h2>unpublished</h2>
       <ul id="bibliography">
+        <li className="unpub" id="classification-of-tshila">
+          <div className="year">2025</div>
+          <div className="authors"><b>André Batchelder-Schwab</b> & Chris Collins</div>
+          <div className="info">
+            <cite><a href={cache['./classification_of_tshila.pdf']}>Classification of Tshila.</a></cite>
+          </div>
+        </li>
         <li className="unpub" id="bridgegate">
           <div className="year">2020</div>
           <div className="authors"><b>André Batchelder-Schwab</b></div>
