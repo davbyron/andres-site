@@ -100,8 +100,9 @@ function Languages(props) {
 
   const data = [
     { name: 'Arabic (MSA, Palestinian)', alt: 'Arabic', level: 3 },
-    { name: 'Arpitan (Cuenco)', alt: 'Arpitan', level: 2 },
+    { name: 'Akan-Twi', alt: 'Akan-Twi', level: 1 },
     { name: 'English (US)', alt: 'English', level: 5},
+    { name: 'Francoprovençal', alt: 'Francoprovençal', level: 2 },
     { name: 'French (Swiss)', alt: 'French', level: 5},
     { name: 'German', alt: 'German', level: 4 },
     { name: 'Hawaiian', alt: 'Hawaiian', level: 1 },
@@ -110,11 +111,12 @@ function Languages(props) {
     { name: 'Khoekhoe', alt: 'Khoekhoe', level: 1 },
     { name: 'Kinande', alt: 'Kinande', level: 1 },
     { name: 'Limba', alt: 'Limba', level: 1 },
-    { name: 'Northern Pomo', alt: 'Northern Pomo', level: 2 },
-    { name: 'Senslerdeutsch', alt: 'Senslerdeutsch', level: 2 },
-    { name: 'Setswana', alt: 'Setswana', level: 1 },
+    { name: 'Northern Pomo', alt: 'Northern Pomo', level: 1 },
+    { name: 'Setswana', alt: 'Setswana', level: 2 },
     { name: 'Spanish', alt: 'Spanish', level: 2 },
-    { name: 'Tshivenda', alt: 'Tshivenda', level: 1 },
+    { name: 'Tshila (Khoe)', alt: 'Tshila', level: 1 },
+    { name: 'TshiVenḓa', alt: 'Tshivenda', level: 1 },
+    { name: 'Tunen', alt: 'Tunen', level: 1 },
     { name: 'Yoruba', alt: 'Yoruba', level: 1 }
   ];
 
