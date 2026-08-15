@@ -1,7 +1,15 @@
+import { Metadata } from 'next';
 import Link from "next/link";
 import Image from "next/image";
 
 import "./globals.css";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | André Batchelder-Schwab",
+    default: "André Batchelder-Schwab",
+  }
+};
 
 export default function RootLayout({
   children,
