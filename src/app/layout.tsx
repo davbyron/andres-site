@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="h-dvh px-5 py-10 lg:px-10 lg:py-10 xl:px-24 xl:py-10 flex flex-col gap-10 font-helvetica-neue text-gray">
+      <body className="h-dvh px-5 py-10 lg:px-10 lg:py-10 xl:px-24 xl:py-10 flex flex-col gap-10 lg:gap-20 font-helvetica-neue text-gray bg-white">
         <header className="flex flex-col lg:flex-row items-center justify-between gap-5 lg:gap-24">
           <h1 className="text-4xl lg:text-6xl 2xl:text-[5.25rem] font-normal text-center">André Batchelder&#8209;Schwab</h1>
           <nav>
@@ -44,21 +44,18 @@ export default function RootLayout({
             <Image height={50} width={50} src="/cv.svg"  alt="CV" />
           </Link>
         </header>
-        <main className="w-full flex border">
+        <main className="w-full flex">
           <div className="hidden lg:block w-1/3 max-w-150 shrink-0">
             <Image
               src="/myface.jpg"
               alt="A photo of Andre Schwab"
               width={1000}
               height={1000}
-              className="w-full h-auto border-4 border-black"
+              className="w-full h-auto border-6 border-black"
               sizes="(min-width: 1024px) 33vw, 0px"
             />
           </div>
-          <div className="flex-1 flex flex-col px-12 py-5">
-            <h1 className="text-5xl p-3 shadow-[0_0.4em_0.75em_-0.6em_#707070]">
-              Title
-            </h1>
+          <div className="flex-1 flex flex-col px-4 lg:px-12 py-5">
             <div>
               {children}
             </div>
