@@ -17,6 +17,13 @@ function Research() {
     <section className="research">
       <h2>research</h2>
       <ul id="bibliography">
+        <li className="topic" id="dissertation">
+          <div className="year">2026</div>
+          <div className="authors"><b>André Batchelder-Schwab</b></div>
+          <div className="info">
+            <cite><a href={cache['./dissertation.pdf']}>Topics in African Whistled Languages.</a></cite> <span className='no-italic'>PhD Dissertation, Boston University.</span>
+          </div>
+        </li>
         <li className="topic" id="stress-in-greek">
           <div className="year">2025</div>
           <div className="authors"><b>André Batchelder-Schwab</b>, Vasieios Michos, & Jonathan Barnes</div>
