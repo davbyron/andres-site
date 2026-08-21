@@ -1,0 +1,13 @@
+// use prisma-next
+
+model Research {
+  id          Int      @id @default(autoincrement())
+  authors     String[]
+  pageNumbers String?
+  publication String
+  title       String
+  url         String?
+  year        Int
+  createdAt   DateTime @default(now())
+  updatedAt   temporal.updatedAt()
+}

@@ -1,6 +1,7 @@
 {
   "homepage": "https://www.andreschwab.com",
   "name": "andres_site",
+  "type": "module",
   "version": "0.1.0",
   "author": {
     "name": "David Byron",
@@ -23,7 +24,9 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@prisma/orm-postgres": "^8.0.0-rc.4",
     "@tailwindcss/postcss": "^4.3.3",
+    "dotenv": "^17.4.2",
     "next": "^16.3.0",
     "postcss": "^8.5.25",
     "react": "^19.2.8",
@@ -34,7 +37,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "contract:emit": "prisma-cli contract emit"
   },
   "browserslist": {
     "production": [
@@ -49,6 +53,8 @@
     ]
   },
   "devDependencies": {
+    "@prisma/cli": "^8.0.0-rc.7",
+    "@prisma/cli-engine": "^0.2.0",
     "@types/node": "^26.1.2",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
