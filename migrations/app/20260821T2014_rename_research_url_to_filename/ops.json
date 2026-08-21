@@ -1,0 +1,86 @@
+[
+  {
+    "id": "dropColumn.research.url",
+    "label": "Drop column \"url\" from \"research\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "url",
+        "table": "research"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"url\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "research",
+          "url"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop column \"url\"",
+        "sql": "ALTER TABLE \"public\".\"research\" DROP COLUMN \"url\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"url\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "research",
+          "url"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "column.public.research.filename",
+    "label": "Add column \"filename\" to \"research\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "filename",
+        "table": "research"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"filename\" is missing",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "research",
+          "filename"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add column \"filename\"",
+        "sql": "ALTER TABLE \"public\".\"research\" ADD COLUMN \"filename\" text"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"filename\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "research",
+          "filename"
+        ]
+      }
+    ]
+  }
+]

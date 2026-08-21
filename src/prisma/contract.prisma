@@ -2,12 +2,13 @@
 
 model Research {
   id          Int      @id @default(autoincrement())
-  authors     String[]
-  pageNumbers String?
-  publication String
-  title       String
-  url         String?
   year        Int
+  authors     String[]
+  title       String
+  publication String
+  pageNumbers String?
+  filename    String?
+
   createdAt   DateTime @default(now())
   updatedAt   temporal.updatedAt()
 }

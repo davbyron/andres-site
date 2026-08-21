@@ -30,6 +30,13 @@
                   "kind": "scalar"
                 }
               },
+              "filename": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
               "id": {
                 "nullable": false,
                 "type": {
@@ -65,13 +72,6 @@
                   "kind": "scalar"
                 }
               },
-              "url": {
-                "nullable": true,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
               "year": {
                 "nullable": false,
                 "type": {
@@ -89,6 +89,9 @@
                 "createdAt": {
                   "column": "createdAt"
                 },
+                "filename": {
+                  "column": "filename"
+                },
                 "id": {
                   "column": "id"
                 },
@@ -103,9 +106,6 @@
                 },
                 "updatedAt": {
                   "column": "updatedAt"
-                },
-                "url": {
-                  "column": "url"
                 },
                 "year": {
                   "column": "year"
@@ -148,6 +148,11 @@
                   "nativeType": "timestamptz",
                   "nullable": false
                 },
+                "filename": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
                 "id": {
                   "codecId": "pg/int4@1",
                   "default": {
@@ -177,11 +182,6 @@
                   "nativeType": "timestamptz",
                   "nullable": false
                 },
-                "url": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
-                  "nullable": true
-                },
                 "year": {
                   "codecId": "pg/int4@1",
                   "nativeType": "int4",
@@ -203,7 +203,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "eb1ced143a4ed7b58e292606ea0071087bbc57541b9a1665070729dc79eed665"
+    "storageHash": "861ecbead5975b8bc551ade77889a8733d2569581ac576a3bbdaf1e86cca11db"
   },
   "execution": {
     "executionHash": "fe0a648c8243a1ca83cc43a5796229f0957241a44eaf968946bcee1fa6997b53",
