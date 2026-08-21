@@ -32,8 +32,8 @@ export default async function ResearchPage() {
               <div className="col-span-2 text-center">{researchItem.year}</div>
               <div className="col-span-3">{formatAuthors(researchItem.authors)}</div>
               <div className="col-span-7">
-                {researchItem.url ? (
-                  <Link href={researchItem.url} target="_blank" className="text-blue-700 visited:text-purple-700 hover:brightness-200 active:brightness-75">
+                {researchItem.filename ? (
+                  <Link href={`/research/${researchItem.filename}`} target="_blank" className="text-blue-700 visited:text-purple-700 hover:brightness-200 active:brightness-75">
                     {researchItem.title}.
                   </Link>
                 ) : (
