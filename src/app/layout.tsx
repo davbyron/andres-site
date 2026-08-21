@@ -55,7 +55,7 @@ export default function RootLayout({
               sizes="(min-width: 1024px) 33vw, 0px"
             />
           </div>
-          <div className="flex-1 flex flex-col px-4 lg:px-12 py-5">
+          <div className="flex-1 flex flex-col px-4 lg:px-12 pt-5 pb-12">
             <div>
               {children}
             </div>
