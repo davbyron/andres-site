@@ -3,6 +3,11 @@ import Link from "next/link";
 import { db } from "@/prisma/db";
 import { PageTitle } from "@/components";
 
+/**
+ * Formats a list of authors into a string with proper separators and bolds André's name.
+ * @param authors List of authors to string together
+ * @returns A ReactNode containing the formatted authors
+ */
 function formatAuthors(authors: readonly string[]): ReactNode {
   return authors.map((author, index) => {
     const name =
@@ -10,9 +15,11 @@ function formatAuthors(authors: readonly string[]): ReactNode {
         ? <b>{author}</b>
         : author;
 
+    const separator = index === 0 ? null : index === authors.length - 1 ? ", & " : ", ";
+
     return (
       <Fragment key={`${author}-${index}`}>
-        {index === 0 ? null : index === authors.length - 1 ? ", & " : ", "}
+        {separator}
         {name}
       </Fragment>
     );
