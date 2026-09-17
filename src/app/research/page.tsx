@@ -1,30 +1,7 @@
-import { Fragment, ReactNode } from "react";
 import Link from "next/link";
 import { db } from "@/prisma/db";
 import { PageTitle } from "@/components";
-
-/**
- * Formats a list of authors into a string with proper separators and bolds André's name.
- * @param authors List of authors to string together
- * @returns A ReactNode containing the formatted authors
- */
-function formatAuthors(authors: readonly string[]): ReactNode {
-  return authors.map((author, index) => {
-    const name =
-      author === "André Batchelder-Schwab"
-        ? <b>{author}</b>
-        : author;
-
-    const separator = index === 0 ? null : index === authors.length - 1 ? ", & " : ", ";
-
-    return (
-      <Fragment key={`${author}-${index}`}>
-        {separator}
-        {name}
-      </Fragment>
-    );
-  });
-}
+import { formatAuthors } from "@/utils";
 
 export default async function ResearchPage() {
   const research = await db.orm.public.Research.orderBy(((r) => r.year.desc())).all();
