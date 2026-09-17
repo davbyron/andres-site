@@ -2,6 +2,9 @@ import { Metadata } from 'next';
 import Link from "next/link";
 import Image from "next/image";
 
+// Temporal is built into Node.js 26.8.2 and later, but Homebrew leaves it out, so we need to install the package and import it here.
+import "temporal-polyfill/full/global";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
