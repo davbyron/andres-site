@@ -43,3 +43,5 @@ prisma-next.md
 # Local AI/agent configuration
 .agents/
 .claude/
+.cursor/
+.devin/
