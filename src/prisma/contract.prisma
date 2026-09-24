@@ -1,5 +1,25 @@
 // use prisma-8
 
+model LanguageLevel {
+  id          Int      @id @default(autoincrement())
+  name        String
+  color       String
+  languages   Language[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   temporal.updatedAt()
+}
+
+model Language {
+  id          Int      @id @default(autoincrement())
+  name        String
+  levelId     Int
+  level       LanguageLevel @relation(fields: [levelId], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   temporal.updatedAt()
+}
+
 model Research {
   id          Int      @id @default(autoincrement())
   year        Int

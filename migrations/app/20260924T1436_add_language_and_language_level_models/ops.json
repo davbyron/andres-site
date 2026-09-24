@@ -1,0 +1,161 @@
+[
+  {
+    "id": "table.language",
+    "label": "Create table \"language\"",
+    "summary": "Creates table \"language\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "language"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"language\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"language\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"language\"",
+        "sql": "CREATE TABLE \"public\".\"language\" (\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"id\" SERIAL NOT NULL,\n  \"levelId\" int4 NOT NULL,\n  \"name\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"language\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"language\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.languageLevel",
+    "label": "Create table \"languageLevel\"",
+    "summary": "Creates table \"languageLevel\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "languageLevel"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"languageLevel\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"languageLevel\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"languageLevel\"",
+        "sql": "CREATE TABLE \"public\".\"languageLevel\" (\n  \"color\" text NOT NULL,\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"id\" SERIAL NOT NULL,\n  \"name\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"languageLevel\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"languageLevel\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.language.language_levelId_idx_622a0732",
+    "label": "Create index \"language_levelId_idx_622a0732\" on \"language\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "index",
+        "name": "language_levelId_idx_622a0732",
+        "table": "language"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"language_levelId_idx_622a0732\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"language_levelId_idx_622a0732\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"language_levelId_idx_622a0732\"",
+        "sql": "CREATE INDEX \"language_levelId_idx_622a0732\" ON \"public\".\"language\" (\"levelId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"language_levelId_idx_622a0732\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"language_levelId_idx_622a0732\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.language.language_levelId_fkey",
+    "label": "Add foreign key \"language_levelId_fkey\" on \"language\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "foreignKey",
+        "name": "language_levelId_fkey",
+        "table": "language"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"language_levelId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "language_levelId_fkey",
+          "public",
+          "\"public\".\"language\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"language_levelId_fkey\"",
+        "sql": "ALTER TABLE \"public\".\"language\"\nADD CONSTRAINT \"language_levelId_fkey\"\nFOREIGN KEY (\"levelId\")\nREFERENCES \"public\".\"languageLevel\" (\"id\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"language_levelId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "language_levelId_fkey",
+          "public",
+          "\"public\".\"language\""
+        ]
+      }
+    ]
+  }
+]
