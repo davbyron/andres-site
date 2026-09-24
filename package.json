@@ -39,7 +39,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "contract:emit": "prisma-cli contract emit"
+    "contract:emit": "npx prisma contract emit",
+    "migration:plan": "read -p 'Enter migration plan name: ' plan_name && npx prisma migration plan --name \"$plan_name\"",
+    "migration:status": "npx prisma migration status",
+    "migration:migrate": "npx prisma db migrate --advance-ref db"
   },
   "browserslist": {
     "production": [
