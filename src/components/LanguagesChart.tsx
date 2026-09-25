@@ -1,18 +1,12 @@
 "use client";
 
+import type { LanguagesChartProps } from "@/types/props";
 import { useMemo } from "react";
-import type { Models } from "@/prisma/contract.d";
-import type { Shape } from "@prisma/orm-postgres/family-contract/types";
 import { defineChart, barY, bandX, whenFocused } from "@tanstack/charts";
 import { scaleBand } from "@tanstack/charts/scales/band";
 import { scaleLinear } from "@tanstack/charts/scales/linear";
 import { tooltip } from "@tanstack/charts/tooltip";
 import { Chart as TooltipChart } from "@tanstack/charts/react/tooltip";
-
-interface LanguagesChartProps {
-  languageLevels: Shape<Models.public_LanguageLevel>[];
-  languages: Shape<Models.public_Language, { "+": "level" }>[];
-}
 
 export function LanguagesChart(props: LanguagesChartProps) {
   const { languageLevels, languages } = props;

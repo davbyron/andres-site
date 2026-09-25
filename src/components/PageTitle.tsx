@@ -1,6 +1,4 @@
-interface PageTitleProps {
-  title: string;
-}
+import type { PageTitleProps } from "@/types/props";
 
 export function PageTitle(props: PageTitleProps) {
   const { title } = props;
