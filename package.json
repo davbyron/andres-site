@@ -40,10 +40,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "contract:emit": "npx prisma contract emit",
-    "migration:plan": "read -p 'Enter migration plan name: ' plan_name && npx prisma migration plan --name \"$plan_name\"",
-    "migration:status": "npx prisma migration status",
-    "migration:migrate": "npx prisma db migrate --advance-ref db"
+    "contract:emit": "prisma contract emit",
+    "migration:plan": "read -p 'Enter migration plan name: ' plan_name && prisma migration plan --name \"$plan_name\"",
+    "migration:status": "prisma migration status",
+    "migration:migrate": "prisma db migrate --advance-ref db"
   },
   "browserslist": {
     "production": [
@@ -63,6 +63,7 @@
     "@types/node": "^26.1.2",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
+    "prisma": "^8.0.0-rc.11",
     "tsx": "^4.23.12",
     "typescript": "^7.0.2"
   }
