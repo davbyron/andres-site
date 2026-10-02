@@ -9,3 +9,7 @@ export interface LanguagesChartProps {
 export interface PageTitleProps {
   title: string;
 }
+
+export interface VowelChartButtonProps {
+  chartName: string;
+}
