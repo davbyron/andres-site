@@ -56,7 +56,11 @@ export default async function VowelChartPage() {
       </div>
       <div className="absolute inset-x-0 top-full py-48 grid grid-cols-4 gap-15">
         {serializedVowelCharts.map((chart) => (
-          <div key={chart.name} id={chart.name} className="flex flex-col gap-2">
+          <div
+            key={chart.name}
+            id={chart.name}
+            className="flex flex-col gap-2"
+          >
             <div className="relative aspect-5/7">
               <Image
                 src={`/images/${chart.filename}`}
