@@ -19,6 +19,10 @@
     "unpublished": {
       "model": "Unpublished",
       "namespace": "public"
+    },
+    "vowelChart": {
+      "model": "VowelChart",
+      "namespace": "public"
     }
   },
   "domain": {
@@ -363,6 +367,67 @@
               "namespaceId": "public",
               "table": "unpublished"
             }
+          },
+          "VowelChart": {
+            "fields": {
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "filename": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "fields": {
+                "createdAt": {
+                  "column": "createdAt"
+                },
+                "filename": {
+                  "column": "filename"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "name": {
+                  "column": "name"
+                },
+                "updatedAt": {
+                  "column": "updatedAt"
+                }
+              },
+              "namespaceId": "public",
+              "table": "vowelChart"
+            }
           }
         }
       }
@@ -624,6 +689,51 @@
                 ]
               },
               "uniques": []
+            },
+            "vowelChart": {
+              "columns": {
+                "createdAt": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                },
+                "filename": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "updatedAt": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "nativeType": "timestamptz",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
             }
           }
         },
@@ -631,10 +741,10 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "63d08c7f27d0a7b65aff1286405481d10a08a41a9d6a7720472fbbb48e74dab1"
+    "storageHash": "723aadccdc6a4d507b988f6a1bdd859784e98dea2fc501715bd97cb1b7a66edb"
   },
   "execution": {
-    "executionHash": "4daf2de1bba1d8c52e04ce013d3825626dd7be16d542a170aa343e33a3fdb332",
+    "executionHash": "44cfa5e6286117e4abbdff01a699b0f684eb6ea677179b6b56b07855660c8930",
     "mutations": {
       "defaults": [
         {
@@ -695,6 +805,21 @@
             "column": "updatedAt",
             "namespace": "public",
             "table": "unpublished"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "instantNow",
+            "kind": "generator"
+          },
+          "onUpdate": {
+            "id": "instantNow",
+            "kind": "generator"
+          },
+          "ref": {
+            "column": "updatedAt",
+            "namespace": "public",
+            "table": "vowelChart"
           }
         }
       ]

@@ -43,3 +43,13 @@ model Unpublished {
   createdAt   DateTime @default(now())
   updatedAt   temporal.updatedAt()
 }
+
+model VowelChart {
+  id        Int      @id @default(autoincrement())
+  name      String
+  filename  String
+
+  createdAt   DateTime @default(now())
+  updatedAt   temporal.updatedAt()
+}
+
