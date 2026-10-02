@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth scroll-pt-12">
       <body className="h-dvh px-5 py-10 lg:px-10 lg:py-10 xl:px-24 xl:py-10 flex flex-col gap-10 lg:gap-20 font-helvetica-neue text-gray bg-white">
         <header className="flex flex-col lg:flex-row items-center justify-between gap-5 lg:gap-24">
           <h1 className="text-4xl lg:text-6xl 2xl:text-[5.25rem] font-normal text-center">André Batchelder&#8209;Schwab</h1>
@@ -38,7 +38,7 @@ export default function RootLayout({
               <Link href="/unpublished" className="group" id="unpubs_button">
                 <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 duration-200">unpublished</p>
               </Link>
-              <Link href="/vowelchArt" className="group" id="vowels_button">
+              <Link href="/vowelchart" className="group" id="vowels_button">
                 <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 duration-200">vowelchArt</p>
               </Link>
             </ul>
@@ -47,7 +47,7 @@ export default function RootLayout({
             <Image height={50} width={50} src="/cv.svg"  alt="CV" />
           </Link>
         </header>
-        <main className="w-full flex">
+        <main className="relative w-full flex">
           <div className="hidden lg:block w-1/3 max-w-150 shrink-0">
             <Image
               src="/myface.jpg"
@@ -59,9 +59,7 @@ export default function RootLayout({
             />
           </div>
           <div className="flex-1 flex flex-col px-4 lg:px-12 pt-5 pb-12">
-            <div>
-              {children}
-            </div>
+            {children}
           </div>
         </main>
       </body>
