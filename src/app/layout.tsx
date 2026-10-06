@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from "next/link";
 import Image from "next/image";
+import { Nav } from '@/components';
 
 // Temporal is built into Node.js 26.8.2 and later, but Homebrew leaves it out, so we need to install the package and import it here.
 import "temporal-polyfill/full/global";
@@ -24,25 +25,7 @@ export default function RootLayout({
       <body className="h-dvh px-5 py-10 lg:px-10 lg:py-10 xl:px-24 xl:py-10 flex flex-col gap-10 lg:gap-20 font-helvetica-neue text-gray bg-white">
         <header className="flex flex-col lg:flex-row items-center justify-between gap-5 lg:gap-24">
           <h1 className="text-4xl lg:text-6xl 2xl:text-[5.25rem] font-normal text-center">André Batchelder&#8209;Schwab</h1>
-          <nav>
-            <ul className="flex flex-wrap justify-center gap-8">
-              <Link href="/" className="group" id="home_button">
-                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 group-active:translate-y-0 group-active:text-shadow-xs/10 duration-200">home</p>
-              </Link>
-              <Link href="/languages" className="group" id="langs_button">
-                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 group-active:translate-y-0 group-active:text-shadow-xs/10 duration-200">languages</p>
-              </Link>
-              <Link href="/research" className="group" id="research_button">
-                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 group-active:translate-y-0 group-active:text-shadow-xs/10 duration-200">research</p>
-              </Link>
-              <Link href="/unpublished" className="group" id="unpubs_button">
-                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 group-active:translate-y-0 group-active:text-shadow-xs/10 duration-200">unpublished</p>
-              </Link>
-              <Link href="/vowelchart" className="group" id="vowels_button">
-                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 group-active:translate-y-0 group-active:text-shadow-xs/10 duration-200">vowelchArt</p>
-              </Link>
-            </ul>
-          </nav>
+          <Nav />
           <Link href="/cv.pdf" target="_blank" className="min-w-12 hover:brightness-150 duration-200">
             <Image height={50} width={50} src="/cv.svg"  alt="CV" />
           </Link>
