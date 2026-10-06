@@ -27,19 +27,19 @@ export default function RootLayout({
           <nav>
             <ul className="flex flex-wrap justify-center gap-8">
               <Link href="/" className="group" id="home_button">
-                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 duration-200">home</p>
+                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 group-active:translate-y-0 group-active:text-shadow-xs/10 duration-200">home</p>
               </Link>
               <Link href="/languages" className="group" id="langs_button">
-                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 duration-200">languages</p>
+                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 group-active:translate-y-0 group-active:text-shadow-xs/10 duration-200">languages</p>
               </Link>
               <Link href="/research" className="group" id="research_button">
-                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 duration-200">research</p>
+                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 group-active:translate-y-0 group-active:text-shadow-xs/10 duration-200">research</p>
               </Link>
               <Link href="/unpublished" className="group" id="unpubs_button">
-                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 duration-200">unpublished</p>
+                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 group-active:translate-y-0 group-active:text-shadow-xs/10 duration-200">unpublished</p>
               </Link>
               <Link href="/vowelchart" className="group" id="vowels_button">
-                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 duration-200">vowelchArt</p>
+                <p className="group-hover:-translate-y-1 group-hover:text-shadow-lg/10 group-active:translate-y-0 group-active:text-shadow-xs/10 duration-200">vowelchArt</p>
               </Link>
             </ul>
           </nav>
