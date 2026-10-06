@@ -22,8 +22,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth scroll-pt-12">
-      <body className="h-dvh px-5 py-10 lg:px-10 lg:py-10 xl:px-24 xl:py-10 flex flex-col gap-10 lg:gap-20 font-helvetica-neue text-gray bg-white">
-        <header className="flex flex-col lg:flex-row items-center justify-between gap-5 lg:gap-24">
+      <body className="h-dvh px-5 py-10 lg:px-10 lg:py-10 xl:px-24 xl:py-10 flex flex-col lg:gap-20 font-helvetica-neue text-gray bg-white">
+        <header className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-24">
           <h1 className="text-4xl lg:text-6xl 2xl:text-[5.25rem] font-normal text-center">André Batchelder&#8209;Schwab</h1>
           <Nav />
           <Link href="/cv.pdf" target="_blank" className="min-w-12 hover:brightness-150 duration-200">
@@ -41,7 +41,7 @@ export default function RootLayout({
               sizes="(min-width: 1024px) 33vw, 0px"
             />
           </div>
-          <div className="flex-1 flex flex-col px-4 lg:px-12 pt-5 pb-12">
+          <div className="flex-1 flex flex-col px-2 lg:px-12 pt-5 pb-12">
             {children}
           </div>
         </main>
