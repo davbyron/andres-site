@@ -26,8 +26,14 @@ export default function RootLayout({
         <header className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-24">
           <h1 className="text-4xl lg:text-6xl 2xl:text-[5.25rem] font-normal text-center">André Batchelder&#8209;Schwab</h1>
           <Nav />
-          <Link href="/cv.pdf" target="_blank" className="min-w-12 hover:brightness-150 duration-200">
-            <Image height={50} width={50} src="/cv.svg"  alt="CV" />
+          <Link href="/cv.pdf" target="_blank" className="hover:brightness-150 duration-200">
+            <Image
+              height={50}
+              width={50}
+              src="/cv.svg"
+              alt="CV icon"
+              className="h-auto w-10 lg:w-12"
+            />
           </Link>
         </header>
         <main className="relative w-full flex">
