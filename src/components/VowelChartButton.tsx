@@ -48,7 +48,7 @@ export function VowelChartButton(props: VowelChartButtonProps) {
       onClick={scrollToVowelChart}
       className="
         bg-[#ddd] px-4 py-2 flex items-center justify-center
-        text-center text-sm
+        text-center text-sm cursor-pointer
         hover:brightness-110 active:brightness-90
       "
     >
