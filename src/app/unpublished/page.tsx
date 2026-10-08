@@ -18,7 +18,7 @@ export default async function UnpublishedPage() {
               <div className="col-span-5 lg:col-span-7">
                 {unpublishedItem.filename ? (
                   <Link
-                    href={`/research/${unpublishedItem.filename}`}
+                    href={`/unpublished/${unpublishedItem.filename}`}
                     target="_blank"
                     className="text-blue-700 visited:text-purple-700 hover:brightness-200 active:brightness-75"
                   >
