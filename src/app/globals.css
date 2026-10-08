@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --breakpoint-3xl: 120rem;
+
   --color-gray: #707070;
 
   --font-helvetica-neue: "Helvetica Neue", sans-serif;
