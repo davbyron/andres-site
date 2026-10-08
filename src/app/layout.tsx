@@ -22,7 +22,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth scroll-pt-12">
-      <body className="h-dvh max-w-500 mx-auto px-5 py-10 lg:px-10 lg:py-10 xl:px-24 xl:py-10 flex flex-col lg:gap-20 font-helvetica-neue text-gray bg-white">
+      <body
+        className="
+          h-dvh max-w-500 mx-auto px-5 py-10 flex flex-col font-helvetica-neue text-gray bg-white
+          lg:px-10 lg:py-10 lg:gap-20
+          xl:px-24
+        "
+      >
         <header className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-24">
           <h1 className="text-4xl lg:text-6xl 2xl:text-[5.25rem] font-normal text-center">André Batchelder&#8209;Schwab</h1>
           <Nav />
