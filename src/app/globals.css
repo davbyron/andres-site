@@ -7,3 +7,9 @@
 
   --font-helvetica-neue: "Helvetica Neue", sans-serif;
 }
+
+/* Ensure all tick mark lines (both X and Y axes) have an opacity of 1. */
+/* @tanstack/charts@1.0.0 doesn't allow us to do this with defineChart(), so must be overridden here. */
+line[data-ts-key*="tick-rule"] {
+  stroke-opacity: 1 !important;
+}

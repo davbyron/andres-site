@@ -52,8 +52,13 @@ export function LanguagesChart(props: LanguagesChartProps) {
               scale: () => scaleBand(),
               nice: false,
               axis: {
+                line: { strokeOpacity: 1 },
                 ticks: { size: 0 },
-                tickLabels: { fontSize: 13, fontWeight: 400 },
+                tickLabels: {
+                  opacity: 1,
+                  fontSize: 12,
+                  fontWeight: 400
+                },
               },
             },
             x: {
@@ -61,15 +66,18 @@ export function LanguagesChart(props: LanguagesChartProps) {
               domain: [0, maxLevel],
               side: "top",
               axis: {
+                line: { strokeOpacity: 1 },
                 ticks: {
+                  padding: 0,
                   values: tickValues,
                   format: (level: number) => levelMap[level] ?? "",
                 },
                 tickLabels: {
+                  opacity: 1,
                   rotate: 45,
                   anchor: "end",
                   thin: false,
-                  fontSize: 11,
+                  fontSize: 12,
                   fontWeight: 400
                 },
               },
@@ -106,8 +114,10 @@ export function LanguagesChart(props: LanguagesChartProps) {
             scale: () => scaleBand(),
             nice: false,
             axis: {
+              line: { strokeOpacity: 1 },
               ticks: { size: 0 },
               tickLabels: {
+                opacity: 1,
                 rotate: -45,
                 thin: false,
                 fontSize: 14,
@@ -119,11 +129,16 @@ export function LanguagesChart(props: LanguagesChartProps) {
             scale: scaleLinear,
             domain: [0, maxLevel],
             axis: {
+              line: { strokeOpacity: 1 },
               ticks: {
                 values: tickValues,
                 format: (level: number) => levelMap[level] ?? "",
               },
-              tickLabels: { fontSize: 14, fontWeight: 400 },
+              tickLabels: {
+                opacity: 1,
+                fontSize: 14,
+                fontWeight: 400
+              },
             },
           },
         },
