@@ -13,7 +13,7 @@ export default async function VowelChartPage() {
   return (
     <section className="min-h-full flex flex-col gap-10">
       <PageTitle title="vowelchArt" />
-      <div className="flex-1 flex gap-5">
+      <div className="flex-1 flex gap-5 z-20">
         <div className="px-4 flex flex-col gap-5 text-justify">
           <div>
             <p>
@@ -35,14 +35,21 @@ export default async function VowelChartPage() {
           </div>
           <div className="flex flex-col gap-2">
             <p>Scroll down or select a language to explore its vowel system:</p>
-            <div className="grid grid-cols-6 auto-rows-fr gap-2">
+            <div
+              className="
+                grid grid-cols-3 auto-rows-fr gap-2
+                md:grid-cols-5
+                xl:grid-cols-6
+                2xl:grid-cols-5
+              "
+            >
               {serializedVowelCharts.map((chart) => (
                 <VowelChartButton key={chart.name} chartName={chart.name} />
               ))}
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="hidden 2xl:flex flex-col gap-2">
           <p className="italic text-xs text-center">Example:</p>
           <div className="relative aspect-5/7 w-full h-full max-h-110">
             <Image
@@ -54,7 +61,15 @@ export default async function VowelChartPage() {
           <p className="w-full text-center font-bold">{randomVowelChart.name}</p>
         </div>
       </div>
-      <div className="absolute inset-x-0 top-full py-48 grid grid-cols-4 gap-15">
+
+      <div
+        className="
+          absolute inset-x-0 top-full py-64 px-6 grid grid-cols-1 gap-10 z-10
+          md:py-48 md:grid-cols-3
+          xl:px-0 xl:grid-cols-4 xl:gap-15
+          3xl:py-120
+        "
+      >
         {serializedVowelCharts.map((chart) => (
           <div
             key={chart.name}
