@@ -49,7 +49,7 @@ export default function RootLayout({
               alt="A photo of Andre Schwab"
               width={1000}
               height={1000}
-              className="w-full h-auto border-6 border-black"
+              className="w-full h-auto border-6 border-black shadow-[1.75em_1.75em_0.5em_rgba(0,0,0,0.16)]"
               sizes="(min-width: 1024px) 33vw, 0px"
             />
           </div>
