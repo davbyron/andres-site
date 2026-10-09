@@ -169,7 +169,7 @@ export function LanguagesChart(props: LanguagesChartProps) {
       ) : (
         <TooltipChart
           definition={desktopLanguagesChart}
-          height={450}
+          height={400}
           ariaLabel="Language proficiency chart"
           renderTooltipBody={({ primaryPoint }) => (
             <p className="w-fit flex flex-col gap-1">
