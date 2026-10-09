@@ -20,11 +20,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const year = Temporal.Now.plainDateISO().year;
+
   return (
     <html lang="en" className="scroll-smooth scroll-pt-12">
       <body
         className="
-          h-dvh max-w-500 mx-auto px-5 py-10 flex flex-col font-helvetica-neue text-gray bg-white
+          min-h-dvh max-w-500 mx-auto px-5 py-10 flex flex-col font-helvetica-neue text-gray bg-white
           lg:px-10 lg:py-10 lg:gap-20
           xl:px-24
         "
@@ -57,6 +59,9 @@ export default function RootLayout({
             {children}
           </div>
         </main>
+        <footer>
+          <p className="w-full my-5 text-center text-xs">&copy; {year} André Batchelder-Schwab</p>
+        </footer>
       </body>
     </html>
   );
