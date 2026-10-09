@@ -59,10 +59,11 @@ export default async function VowelChartPage() {
 
       <div
         className="
-          absolute inset-x-0 top-full py-64 px-6 grid grid-cols-1 gap-10 z-10
-          md:py-48 md:grid-cols-3
+          relative pt-64 px-4 grid grid-cols-1 gap-10 z-10
+          md:pt-48 md:grid-cols-3
+          lg:w-[calc(150%+9rem)] lg:right-[calc(50%+6rem)]
           xl:px-0 xl:grid-cols-4 xl:gap-15
-          3xl:py-120
+          3xl:pt-120
         "
       >
         {vowelCharts.map((chart) => (
