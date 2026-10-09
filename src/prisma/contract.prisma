@@ -1,5 +1,12 @@
 // use prisma-8
 
+enum PageTextKey {
+  @@type("pg/text@1")
+
+  ABOUT_PAGE = "About Page"
+  VOWEL_CHART_PAGE = "Vowel Chart Page"
+}
+
 model LanguageLevel {
   id          Int      @id @default(autoincrement())
   name        String
@@ -22,6 +29,17 @@ model Language {
   updatedAt   temporal.updatedAt()
 
   @@map("language")
+}
+
+model PageText {
+  id              Int      @id @default(autoincrement())
+  key             PageTextKey
+  value           String
+
+  createdAt       DateTime @default(now())
+  updatedAt       temporal.updatedAt()
+
+  @@map("pageText")
 }
 
 model Research {

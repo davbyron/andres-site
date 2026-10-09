@@ -18,7 +18,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'aadba106420a63646bdb276a0b3fba1888701c0ceca1f92aa5d0d401a5157260'>;
+  StorageHashBase<'36ea3b28a2668ebb6a1b6303b1f865a913704a0732ae198d1e4e7fc99d743292'>;
 export type ExecutionHash =
   ExecutionHashBase<'e6853ff499513089a5c36f4c21c6ffb8e1488938e5dfb4d66a6c8dec4918ffa7'>;
 export type ProfileHash =
@@ -251,7 +251,7 @@ export type FieldOutputTypes = {
     readonly PageText: {
       readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
       readonly id: CodecTypes['pg/int4@1']['output'];
-      readonly key: 'About Page' | 'Vowel Chart Page';
+      readonly key: CodecTypes['pg/text@1']['output'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
       readonly value: CodecTypes['pg/text@1']['output'];
     };
@@ -303,7 +303,7 @@ export type FieldInputTypes = {
     readonly PageText: {
       readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
       readonly id: CodecTypes['pg/int4@1']['input'];
-      readonly key: 'About Page' | 'Vowel Chart Page';
+      readonly key: CodecTypes['pg/text@1']['input'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
       readonly value: CodecTypes['pg/text@1']['input'];
     };
@@ -355,7 +355,7 @@ export type StorageColumnTypes = {
     readonly pageText: {
       readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
       readonly id: CodecTypes['pg/int4@1']['output'];
-      readonly key: 'About Page' | 'Vowel Chart Page';
+      readonly key: CodecTypes['pg/text@1']['output'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
       readonly value: CodecTypes['pg/text@1']['output'];
     };
@@ -407,7 +407,7 @@ export type StorageColumnInputTypes = {
     readonly pageText: {
       readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
       readonly id: CodecTypes['pg/int4@1']['input'];
-      readonly key: 'About Page' | 'Vowel Chart Page';
+      readonly key: CodecTypes['pg/text@1']['input'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
       readonly value: CodecTypes['pg/text@1']['input'];
     };
@@ -463,7 +463,7 @@ export namespace Models {
   export type public_PageText = {
     createdAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
     id: CodecTypes['pg/int4@1']['output'];
-    key: 'About Page' | 'Vowel Chart Page';
+    key: CodecTypes['pg/text@1']['output'];
     updatedAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
     value: CodecTypes['pg/text@1']['output'];
     readonly [RelationKeys]?: never;

@@ -12,6 +12,10 @@
       "model": "LanguageLevel",
       "namespace": "public"
     },
+    "pageText": {
+      "model": "PageText",
+      "namespace": "public"
+    },
     "research": {
       "model": "Research",
       "namespace": "public"
@@ -28,6 +32,21 @@
   "domain": {
     "namespaces": {
       "public": {
+        "enum": {
+          "PageTextKey": {
+            "codecId": "pg/text@1",
+            "members": [
+              {
+                "name": "ABOUT_PAGE",
+                "value": "About Page"
+              },
+              {
+                "name": "VOWEL_CHART_PAGE",
+                "value": "Vowel Chart Page"
+              }
+            ]
+          }
+        },
         "models": {
           "Language": {
             "fields": {
@@ -182,6 +201,73 @@
               },
               "namespaceId": "public",
               "table": "languageLevel"
+            }
+          },
+          "PageText": {
+            "fields": {
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "key": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                },
+                "valueSet": {
+                  "entityKind": "enum",
+                  "entityName": "PageTextKey",
+                  "namespaceId": "public",
+                  "plane": "domain"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              },
+              "value": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "fields": {
+                "createdAt": {
+                  "column": "createdAt"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "key": {
+                  "column": "key"
+                },
+                "updatedAt": {
+                  "column": "updatedAt"
+                },
+                "value": {
+                  "column": "value"
+                }
+              },
+              "namespaceId": "public",
+              "table": "pageText"
             }
           },
           "Research": {
@@ -561,6 +647,64 @@
               },
               "uniques": []
             },
+            "pageText": {
+              "checks": [
+                {
+                  "expression": "\"key\" IN ('About Page', 'Vowel Chart Page')",
+                  "name": "pageText_key_check_207d044d",
+                  "prefix": "pageText_key_check"
+                }
+              ],
+              "columns": {
+                "createdAt": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "dataType": "pg/timestamptz",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nullable": false
+                },
+                "key": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false,
+                  "valueSet": {
+                    "entityKind": "valueSet",
+                    "entityName": "PageTextKey",
+                    "namespaceId": "public",
+                    "plane": "storage"
+                  }
+                },
+                "updatedAt": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "dataType": "pg/timestamptz",
+                  "nullable": false
+                },
+                "value": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
             "research": {
               "checks": [
                 {
@@ -746,16 +890,25 @@
               },
               "uniques": []
             }
+          },
+          "valueSet": {
+            "PageTextKey": {
+              "kind": "valueSet",
+              "values": [
+                "About Page",
+                "Vowel Chart Page"
+              ]
+            }
           }
         },
         "id": "public",
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "1654671a8c8a4d9bd39dc8c29e6536fd3131159aede6c574dd0e6f01e5f55e07"
+    "storageHash": "aadba106420a63646bdb276a0b3fba1888701c0ceca1f92aa5d0d401a5157260"
   },
   "execution": {
-    "executionHash": "e2d0b61dcd033e71951a29725355a6d64a36124b166b0153c8d10fe72b5f6df2",
+    "executionHash": "e6853ff499513089a5c36f4c21c6ffb8e1488938e5dfb4d66a6c8dec4918ffa7",
     "mutations": {
       "defaults": [
         {
@@ -784,6 +937,21 @@
           },
           "ref": {
             "entry": "languageLevel",
+            "field": "updatedAt",
+            "namespace": "public"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "instantNow",
+            "kind": "generator"
+          },
+          "onUpdate": {
+            "id": "instantNow",
+            "kind": "generator"
+          },
+          "ref": {
+            "entry": "pageText",
             "field": "updatedAt",
             "namespace": "public"
           }
