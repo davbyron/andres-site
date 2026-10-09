@@ -27,10 +27,9 @@ export function LanguagesChart(props: LanguagesChartProps) {
     return { levelMap: map, tickValues: ticks, maxLevel: max };
   }, [languageLevels]);
 
-  const languagesChart = useMemo(() => {
-    if (isMobile) {
-      // Mobile-friendly version of chart with languages on the Y axis
-      return defineChart(
+  const mobileLanguagesChart = useMemo(
+    () =>
+      defineChart(
         {
           marks: [
             whenFocused(
@@ -88,81 +87,98 @@ export function LanguagesChart(props: LanguagesChartProps) {
         {
           tooltip: { use: tooltip, anchor: "pointer" },
         }
-      );
-    }
+      ),
+    [languages, levelMap, maxLevel, tickValues]
+  );
 
-    // Desktop version of chart with languages on the X axis
-    return defineChart(
-      {
-        marks: [
-          whenFocused(
-            bandX(languages, {
+  const desktopLanguagesChart = useMemo(
+    () =>
+      defineChart(
+        {
+          marks: [
+            whenFocused(
+              bandX(languages, {
+                x: "name",
+                fill: "#eee",
+              }),
+              { match: "x" }
+            ),
+            barY(languages, {
               x: "name",
-              fill: "#eee",
+              y: (language) => language.level.id,
+              fill: (language) => language.level.color,
+              inset: 4,
             }),
-            { match: "x" }
-          ),
-          barY(languages, {
-            x: "name",
-            y: (language) => language.level.id,
-            fill: (language) => language.level.color,
-            inset: 4,
-          }),
-        ],
-        scales: {
-          x: {
-            scale: () => scaleBand(),
-            nice: false,
-            axis: {
-              line: { strokeOpacity: 1 },
-              ticks: { size: 0 },
-              tickLabels: {
-                opacity: 1,
-                rotate: -45,
-                thin: false,
-                fontSize: 14,
-                fontWeight: 400,
+          ],
+          scales: {
+            x: {
+              scale: () => scaleBand(),
+              nice: false,
+              axis: {
+                line: { strokeOpacity: 1 },
+                ticks: { size: 0 },
+                tickLabels: {
+                  opacity: 1,
+                  rotate: -45,
+                  thin: false,
+                  fontSize: 14,
+                  fontWeight: 400,
+                },
+              },
+            },
+            y: {
+              scale: scaleLinear,
+              domain: [0, maxLevel],
+              axis: {
+                line: { strokeOpacity: 1 },
+                ticks: {
+                  values: tickValues,
+                  format: (level: number) => levelMap[level] ?? "",
+                },
+                tickLabels: {
+                  opacity: 1,
+                  fontSize: 14,
+                  fontWeight: 400
+                },
               },
             },
           },
-          y: {
-            scale: scaleLinear,
-            domain: [0, maxLevel],
-            axis: {
-              line: { strokeOpacity: 1 },
-              ticks: {
-                values: tickValues,
-                format: (level: number) => levelMap[level] ?? "",
-              },
-              tickLabels: {
-                opacity: 1,
-                fontSize: 14,
-                fontWeight: 400
-              },
-            },
-          },
+          focusRing: false,
         },
-        focusRing: false,
-      },
-      {
-        tooltip: { use: tooltip, anchor: "pointer" },
-      }
-    );
-  }, [isMobile, languages, levelMap, maxLevel, tickValues]);
+        {
+          tooltip: { use: tooltip, anchor: "pointer" },
+        }
+      ),
+    [languages, levelMap, maxLevel, tickValues]
+  );
 
   return (
     <div className="w-full">
-      <TooltipChart
-        definition={languagesChart}
-        height={isMobile ? Math.max(350, languages.length * 40) : 450}
-        ariaLabel="Language proficiency chart"
-        renderTooltipBody={({ primaryPoint }) => (
-          <p className="w-fit flex flex-col gap-1">
-            <span className="text-gray">{primaryPoint.datum.name}</span>
-            <span className="pl-5">level: {primaryPoint.datum.level.name}</span>
-          </p>
-        )}
-      />
+      {isMobile ? (
+        <TooltipChart
+          definition={mobileLanguagesChart}
+          height={Math.max(350, languages.length * 40)}
+          ariaLabel="Language proficiency chart"
+          renderTooltipBody={({ primaryPoint }) => (
+            <p className="w-fit flex flex-col gap-1">
+              <span className="text-gray">{primaryPoint.datum.name}</span>
+              <span className="pl-5">level: {primaryPoint.datum.level.name}</span>
+            </p>
+          )}
+        />
+      ) : (
+        <TooltipChart
+          definition={desktopLanguagesChart}
+          height={450}
+          ariaLabel="Language proficiency chart"
+          renderTooltipBody={({ primaryPoint }) => (
+            <p className="w-fit flex flex-col gap-1">
+              <span className="text-gray">{primaryPoint.datum.name}</span>
+              <span className="pl-5">level: {primaryPoint.datum.level.name}</span>
+            </p>
+          )}
+        />
+      )}
     </div>
   );
 }
