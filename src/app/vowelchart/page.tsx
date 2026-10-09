@@ -5,10 +5,9 @@ import { PageTitle, VowelChartButton } from "@/components";
 
 export default async function VowelChartPage() {
   const vowelCharts = await db.orm.public.VowelChart.orderBy(((v) => v.name.asc())).all();
-  const serializedVowelCharts = JSON.parse(JSON.stringify(vowelCharts));
 
   // Get random vowel chart for example image next to description
-  const randomVowelChart = serializedVowelCharts[Math.floor(Math.random() * serializedVowelCharts.length)];
+  const randomVowelChart = vowelCharts[Math.floor(Math.random() * vowelCharts.length)];
   
   return (
     <section className="min-h-full flex flex-col gap-10">
@@ -43,7 +42,7 @@ export default async function VowelChartPage() {
                 2xl:grid-cols-5
               "
             >
-              {serializedVowelCharts.map((chart) => (
+              {vowelCharts.map((chart) => (
                 <VowelChartButton key={chart.name} chartName={chart.name} />
               ))}
             </div>
@@ -70,7 +69,7 @@ export default async function VowelChartPage() {
           3xl:py-120
         "
       >
-        {serializedVowelCharts.map((chart) => (
+        {vowelCharts.map((chart) => (
           <div
             key={chart.name}
             id={chart.name}
