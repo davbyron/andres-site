@@ -4,6 +4,7 @@ import { db } from "@/prisma/db";
 import { PageTitle, VowelChartButton } from "@/components";
 
 export default async function VowelChartPage() {
+  const vowelChartPageText = await db.orm.public.PageText.where({ key: "Vowel Chart Page" }).first();
   const vowelCharts = await db.orm.public.VowelChart.orderBy(((v) => v.name.asc())).all();
 
   // Get random vowel chart for example image next to description
@@ -16,18 +17,13 @@ export default async function VowelChartPage() {
         <div className="px-4 flex flex-col gap-5 text-justify">
           <div>
             <p>
-              This project is intended as a visualization of how various languages employ
-              the same phonetic space differently. Vowels are plotted with their average
-              F1 values rising downward and F2 rising leftward (a standard phonetic vowel
-              chart). The data is taken from literature cited in the link below. These are
-              not the only correlates which distinguish vowels: other formants (F3 & F4),
-              nasality, length, and tone all can be important. However, F1 and F2 are often
-              the most important factors when choosing symbols to represent vowel
-              phonemes. (
+              {vowelChartPageText.value} (
                 <Link
                   href="/vowels_bib.pdf"
                   target="_blank"
-                  className="text-blue-700">Works cited
+                  className="text-blue-700"
+                >
+                    Works cited
                 </Link>
               )
             </p>
