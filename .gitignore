@@ -45,3 +45,4 @@ prisma-next.md
 .claude/
 .cursor/
 .devin/
+.prisma/
