@@ -1,24 +1,41 @@
 import Link from "next/link";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { db } from "@/prisma/db";
 import { PageTitle } from "@/components";
-import { formatAuthors } from "@/utils";
+import { formatAuthors, s3Client, BUCKET_NAME } from "@/utils";
 
 export default async function ResearchPage() {
   const research = await db.orm.public.Research.orderBy(((r) => r.year.desc())).all();
+
+  // Get signed URLs for each research item's document if it has a filename
+  const resolvedResearch = await Promise.all(
+    research.map(async (researchItem) => {
+      if (researchItem.filename) {
+        const getObjectCommand = new GetObjectCommand({
+          Bucket: BUCKET_NAME,
+          Key: `research/${researchItem.filename}`,
+        });
+        const signedUrl = await getSignedUrl(s3Client, getObjectCommand, { expiresIn: 3600 });
+        return { ...researchItem, href: signedUrl };
+      }
+      return { ...researchItem, href: undefined };
+    })
+  );
 
   return (
     <section className="flex flex-col gap-10">
       <PageTitle title="research" />
       <ol className="px-4 flex flex-col gap-8 lg:gap-10">
-        {research.map((researchItem) => {
+        {resolvedResearch.map((researchItem) => {
           return (
             <li key={researchItem.id} className="grid grid-cols-12 gap-5 lg:gap-10">
               <div className="col-span-2 text-center">{researchItem.year}</div>
               <div className="col-span-5 lg:col-span-3">{formatAuthors(researchItem.authors)}</div>
               <div className="col-span-5 lg:col-span-7">
-                {researchItem.filename ? (
+                {researchItem.href ? (
                   <Link
-                    href={`/research/${researchItem.filename}`}
+                    href={researchItem.href}
                     target="_blank"
                     className="text-blue-700 visited:text-purple-700 hover:brightness-200 active:brightness-75"
                   >
