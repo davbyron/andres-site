@@ -30,6 +30,13 @@ export default async function VowelChartPage() {
   // Get random vowel chart for example image next to description
   const randomVowelChart = resolvedVowelCharts[Math.floor(Math.random() * resolvedVowelCharts.length)];
 
+  // Get vowel chart bibliography signed URL
+  const getVowelChartBibCommand = new GetObjectCommand({
+    Bucket: BUCKET_NAME,
+    Key: `vowels_bib.pdf`,
+  });
+  const vowelChartBibSignedUrl = await getSignedUrl(s3Client, getVowelChartBibCommand);
+
   return (
     <section className="min-h-full flex flex-col gap-10">
       <PageTitle title="vowelchArt" />
@@ -39,7 +46,7 @@ export default async function VowelChartPage() {
             <p>
               {vowelChartPageText.value} (
                 <Link
-                  href="/vowels_bib.pdf"
+                  href={vowelChartBibSignedUrl}
                   target="_blank"
                   className="text-blue-700"
                 >
