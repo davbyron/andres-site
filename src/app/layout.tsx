@@ -59,8 +59,8 @@ export default function RootLayout({
             {children}
           </div>
         </main>
-        <footer>
-          <p className="w-full my-5 text-center text-xs">&copy; {year} André Batchelder-Schwab</p>
+        <footer className="w-full mt-auto text-center text-xs">
+          <p>&copy; {year} André Batchelder-Schwab</p>
         </footer>
       </body>
     </html>
