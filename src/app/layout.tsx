@@ -1,7 +1,10 @@
 import { Metadata } from 'next';
 import Link from "next/link";
 import Image from "next/image";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { Nav } from '@/components';
+import { s3Client, BUCKET_NAME } from "@/utils";
 
 // Temporal is built into Node.js 26.8.2 and later, but Homebrew leaves it out, so we need to install the package and import it here.
 import "temporal-polyfill/full/global";
@@ -15,12 +18,19 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const year = Temporal.Now.plainDateISO().year;
+
+  // Get CV signed URL
+  const getCvCommand = new GetObjectCommand({
+    Bucket: BUCKET_NAME,
+    Key: `cv.pdf`,
+  });
+  const cvSignedUrl = await getSignedUrl(s3Client, getCvCommand, { expiresIn: 3600 });
 
   return (
     <html lang="en" className="scroll-smooth scroll-pt-12">
@@ -34,7 +44,7 @@ export default function RootLayout({
         <header className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-24">
           <h1 className="text-4xl lg:text-6xl 2xl:text-[5.25rem] font-normal text-center">André Batchelder&#8209;Schwab</h1>
           <Nav />
-          <Link href="/cv.pdf" target="_blank" className="hover:brightness-150 duration-200">
+          <Link href={cvSignedUrl} target="_blank" className="hover:brightness-150 duration-200">
             <Image
               height={50}
               width={50}
