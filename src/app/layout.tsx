@@ -28,9 +28,16 @@ export default async function RootLayout({
   // Get CV signed URL
   const getCvCommand = new GetObjectCommand({
     Bucket: BUCKET_NAME,
-    Key: `cv.pdf`,
+    Key: "cv.pdf",
   });
   const cvSignedUrl = await getSignedUrl(s3Client, getCvCommand, { expiresIn: 3600 });
+
+  // Get signed URL for profile photo
+  const getProfilePhotoCommand = new GetObjectCommand({
+    Bucket: BUCKET_NAME,
+    Key: "images/andre-schwab.jpg",
+  });
+  const profilePhotoSignedUrl = await getSignedUrl(s3Client, getProfilePhotoCommand, { expiresIn: 3600 });
 
   return (
     <html lang="en" className="scroll-smooth scroll-pt-12">
@@ -57,7 +64,7 @@ export default async function RootLayout({
         <main className="relative w-full flex">
           <div className="hidden lg:block w-1/3 max-w-150 shrink-0">
             <Image
-              src="/myface.jpg"
+              src={profilePhotoSignedUrl}
               alt="A photo of Andre Schwab"
               width={1000}
               height={1000}

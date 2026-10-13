@@ -33,7 +33,7 @@ export default async function VowelChartPage() {
   // Get vowel chart bibliography signed URL
   const getVowelChartBibCommand = new GetObjectCommand({
     Bucket: BUCKET_NAME,
-    Key: `vowels_bib.pdf`,
+    Key: "vowels_bib.pdf",
   });
   const vowelChartBibSignedUrl = await getSignedUrl(s3Client, getVowelChartBibCommand);
 
