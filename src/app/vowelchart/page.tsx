@@ -1,15 +1,35 @@
 import Link from "next/link";
 import Image from "next/image";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { db } from "@/prisma/db";
+import { s3Client, BUCKET_NAME } from "@/utils";
 import { PageTitle, VowelChartButton } from "@/components";
 
 export default async function VowelChartPage() {
+  // Get description text for vowel chart page
   const vowelChartPageText = await db.orm.public.PageText.where({ key: "Vowel Chart Page" }).first();
+
+  // Get vowel charts and signed URLs for each chart
   const vowelCharts = await db.orm.public.VowelChart.orderBy(((v) => v.name.asc())).all();
+  const vowelChartsWithSignedUrls: Promise<{ name: string; src: string; }>[] = vowelCharts.map(async (chart) => {
+    const getObjectCommand = new GetObjectCommand({
+      Bucket: BUCKET_NAME,
+      Key: `images/vowel-charts/${chart.filename}`,
+    });
+
+    const signedUrl = await getSignedUrl(s3Client, getObjectCommand);
+
+    return {
+      name: chart.name,
+      src: signedUrl,
+    };
+  });
+  const resolvedVowelCharts = await Promise.all(vowelChartsWithSignedUrls);
 
   // Get random vowel chart for example image next to description
-  const randomVowelChart = vowelCharts[Math.floor(Math.random() * vowelCharts.length)];
-  
+  const randomVowelChart = resolvedVowelCharts[Math.floor(Math.random() * resolvedVowelCharts.length)];
+
   return (
     <section className="min-h-full flex flex-col gap-10">
       <PageTitle title="vowelchArt" />
@@ -38,7 +58,7 @@ export default async function VowelChartPage() {
                 2xl:grid-cols-5
               "
             >
-              {vowelCharts.map((chart) => (
+              {resolvedVowelCharts.map((chart) => (
                 <VowelChartButton key={chart.name} chartName={chart.name} />
               ))}
             </div>
@@ -48,7 +68,7 @@ export default async function VowelChartPage() {
           <p className="italic text-xs text-center">Example:</p>
           <div className="relative aspect-5/7 w-full h-full max-h-110">
             <Image
-              src={`/images/${randomVowelChart.filename}`}
+              src={randomVowelChart.src}
               alt={`${randomVowelChart.name} vowel chart`}
               fill
             />
@@ -66,7 +86,7 @@ export default async function VowelChartPage() {
           3xl:pt-120
         "
       >
-        {vowelCharts.map((chart) => (
+        {resolvedVowelCharts.map((chart) => (
           <div
             key={chart.name}
             id={chart.name}
@@ -74,7 +94,7 @@ export default async function VowelChartPage() {
           >
             <div className="relative aspect-5/7">
               <Image
-                src={`/images/${chart.filename}`}
+                src={chart.src}
                 alt={`${chart.name} vowel chart`}
                 fill
               />
