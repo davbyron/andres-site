@@ -7,6 +7,27 @@ enum PageTextKey {
   VOWEL_CHART_PAGE = "Vowel Chart Page"
 }
 
+model Account {
+	id                      String @id
+	user                    User @relation(fields: [userId], references: [id])
+	userId                  String
+	accountId               String
+	providerId              String
+	accessToken             String?
+	refreshToken            String?
+	accessTokenExpiresAt    Timestamptz(3)?
+	refreshTokenExpiresAt   Timestamptz(3)?
+	scope                   String?
+	idToken                 String?
+	password                String?
+
+	createdAt   DateTime @default(now())
+	updatedAt   temporal.updatedAt()
+
+	@@index([userId], map: "account_userId_idx")
+	@@map("account")
+}
+
 model LanguageLevel {
   id          Int      @id @default(autoincrement())
   name        String
@@ -57,6 +78,22 @@ model Research {
   @@map("research")
 }
 
+model Session {
+	id          String @id
+	user        User @relation(fields: [userId], references: [id])
+	userId      String
+	token       String @unique
+	expiresAt   Timestamptz(3)
+	ipAddress   String?
+	userAgent   String?
+
+	createdAt   DateTime @default(now())
+	updatedAt   temporal.updatedAt()
+
+	@@index([userId], map: "session_userId_idx")
+	@@map("session")
+}
+
 model Unpublished {
   id       Int      @id @default(autoincrement())
   year     Int
@@ -68,6 +105,32 @@ model Unpublished {
   updatedAt   temporal.updatedAt()
 
   @@map("unpublished")
+}
+
+model User {
+  id              String @id
+  name            String
+  email           String @unique
+  emailVerified   Boolean @default(false)
+  image           String?
+
+  createdAt       DateTime @default(now())
+  updatedAt       temporal.updatedAt()
+
+  @@map("user")
+}
+
+model Verification {
+	id          String @id
+	identifier  String
+	value       String
+	expiresAt   Timestamptz(3)
+
+	createdAt   DateTime @default(now())
+	updatedAt   temporal.updatedAt()
+
+	@@index([identifier], map: "verification_identifier_idx")
+	@@map("verification")
 }
 
 model VowelChart {
