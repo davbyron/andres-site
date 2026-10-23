@@ -34,8 +34,11 @@
     "dotenv": "^17.4.2",
     "next": "^16.3.0",
     "postcss": "^8.5.25",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-email": "6.11.3",
+    "react-hook-form": "^7.90.0",
+    "resend": "^6.34.1",
     "tailwindcss": "^4.3.3",
     "temporal-polyfill": "^1.0.5"
   },
@@ -64,6 +67,7 @@
   "devDependencies": {
     "@prisma/cli": "8.0.0-rc.22",
     "@prisma/cli-engine": "0.7.0",
+    "@react-email/ui": "6.11.3",
     "@types/node": "^26.1.2",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
