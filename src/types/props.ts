@@ -10,6 +10,15 @@ export interface PageTitleProps {
   title: string;
 }
 
+export interface EmailTemplateBaseProps {
+  previewText: string;
+  children: React.ReactNode;
+}
+
+export interface EmailTemplateProps {
+  url: string;
+}
+
 export interface VowelChartButtonProps {
   chartName: string;
 }
