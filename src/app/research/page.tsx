@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { db } from "@/prisma/db";
 import { PageTitle } from "@/components";
-import { formatAuthors, s3Client, BUCKET_NAME } from "@/utils";
+import { s3Client, BUCKET_NAME } from "@/utils";
+import { ResearchItem } from "@/components/ResearchItem";
 
 export default async function ResearchPage() {
   const research = await db.orm.public.Research.orderBy(((r) => r.year.desc())).all();
@@ -29,27 +29,7 @@ export default async function ResearchPage() {
       <ol className="px-4 flex flex-col gap-8 lg:gap-10">
         {resolvedResearch.map((researchItem) => {
           return (
-            <li key={researchItem.id} className="grid grid-cols-12 gap-5 lg:gap-10">
-              <div className="col-span-2 text-center">{researchItem.year}</div>
-              <div className="col-span-5 lg:col-span-3">{formatAuthors(researchItem.authors)}</div>
-              <div className="col-span-5 lg:col-span-7">
-                {researchItem.href ? (
-                  <Link
-                    href={researchItem.href}
-                    target="_blank"
-                    className="text-blue-700 visited:text-purple-700 hover:brightness-200 active:brightness-75"
-                  >
-                    {researchItem.title}.
-                  </Link>
-                ) : (
-                  <span>
-                    {researchItem.title}.
-                  </span>
-                )}
-                <span className="italic"> {researchItem.publication}.</span>
-                {researchItem.pageNumbers && <span> {researchItem.pageNumbers}.</span>}
-              </div>
-            </li>
+            <ResearchItem key={researchItem.id} researchItem={researchItem} />
           )
         })}
       </ol>
