@@ -2,13 +2,15 @@
 
 import { SettingsFormInputs, SettingsFormProps } from "@/types";
 import { useRouter } from "next/navigation";
-import { useForm, useFieldArray } from "react-hook-form";
+import { Controller, useForm, useFieldArray } from "react-hook-form";
 import { authClient } from "@/utils/auth-client";
+import { ResearchItemPreview } from "./ResearchItemPreview";
 
 export function SettingsForm(props: SettingsFormProps) {
   const {
     aboutText: defaultAboutText,
-    languageLevels: defaultLanguageLevels
+    languageLevels: defaultLanguageLevels,
+    research: defaultResearch,
   } = props;
 
   const router = useRouter();
@@ -21,6 +23,15 @@ export function SettingsForm(props: SettingsFormProps) {
   } = useForm<SettingsFormInputs>({
     defaultValues: {
       aboutText: defaultAboutText,
+      research: defaultResearch.map((researchItem) => ({
+        id: researchItem.id,
+        year: researchItem.year,
+        authors: [...researchItem.authors],
+        title: researchItem.title,
+        publication: researchItem.publication,
+        pageNumbers: researchItem.pageNumbers ?? "",
+        filename: researchItem.filename ?? "",
+      })),
       languageLevels: defaultLanguageLevels.map((languageLevel) => ({
         id: languageLevel.id,
         name: languageLevel.name,
@@ -33,12 +44,18 @@ export function SettingsForm(props: SettingsFormProps) {
     }
   });
 
-  const { fields: languageLevels, append, remove, update } = useFieldArray(
-    {
-      control,
-      name: "languageLevels",
-    }
-  );
+  const {
+    fields: languageLevels,
+    append: appendLanguageLevel,
+    remove: removeLanguageLevel,
+    update: updateLanguageLevel
+  } = useFieldArray({ control, name: "languageLevels" });
+
+  const {
+    fields: research,
+    append: appendResearch,
+    remove: removeResearch,
+  } = useFieldArray({ control, name: "research" });
 
   async function signOut() {
     await authClient.signOut({
@@ -58,7 +75,7 @@ export function SettingsForm(props: SettingsFormProps) {
     <div className="w-full px-4 flex flex-col gap-5">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-2"
+        className="flex flex-col gap-10"
       >
         <div className="flex flex-col gap-2">
           <h2>about</h2>
@@ -103,10 +120,10 @@ export function SettingsForm(props: SettingsFormProps) {
 
                   <button
                     type="button"
-                    onClick={() => remove(languageLevelIndex)}
+                    onClick={() => removeLanguageLevel(languageLevelIndex)}
                     className="hidden group-hover:block bg-red-700 px-2 py-1 text-white text-xs cursor-pointer hover:brightness-110 active:brightness-90"
                   >
-                    Remove
+                    remove
                   </button>
                 </div>
 
@@ -134,14 +151,14 @@ export function SettingsForm(props: SettingsFormProps) {
                         <button
                           type="button"
                           onClick={() => {
-                            update(languageLevelIndex, {
+                            updateLanguageLevel(languageLevelIndex, {
                               ...languageLevel,
                               languages: languageLevel.languages.filter((_, i) => i !== languageIndex)
                             });
                           }}
                           className="hidden group-hover:block bg-red-700 px-2 py-1 text-white text-xs cursor-pointer hover:brightness-110 active:brightness-90"
                         >
-                          Remove
+                          remove
                         </button>
                       </div>
                     );
@@ -151,7 +168,7 @@ export function SettingsForm(props: SettingsFormProps) {
                     type="button"
                     className="bg-[#ddd] w-fit mt-2 px-2 py-1 cursor-pointer hover:brightness-110 active:brightness-90"
                     onClick={() => {
-                      update(languageLevelIndex, {
+                      updateLanguageLevel(languageLevelIndex, {
                         ...languageLevel,
                         languages: [
                           ...languageLevel.languages,
@@ -160,7 +177,7 @@ export function SettingsForm(props: SettingsFormProps) {
                       });
                     }}
                   >
-                    + Add Language
+                    + add language
                   </button>
                 </div>
               </div>
@@ -168,13 +185,115 @@ export function SettingsForm(props: SettingsFormProps) {
           })}
           <button
             type="button"
-            onClick={() => append({ name: "New Language Level", color: "#000000", languages: [] })}
+            onClick={() => appendLanguageLevel({ name: "New Language Level", color: "#000000", languages: [] })}
             className="bg-[#ddd] w-fit px-2 py-1 cursor-pointer hover:brightness-110 active:brightness-90"
           >
             + Add Language Level
           </button>
         </div>
 
+        <div className="flex flex-col gap-2">
+          <h2>research</h2>
+          <div className="flex flex-col gap-10">
+            {research.map((researchItem, researchItemIndex) => (
+              <div key={`researchItem-${researchItem.id}-${researchItemIndex}`} className="group p-3 flex flex-col gap-2 border">
+                <button
+                  type="button"
+                  onClick={() => removeResearch(researchItemIndex)}
+                  className="self-end bg-red-700 px-2 py-1 w-fit text-white text-xs cursor-pointer hover:brightness-110 active:brightness-90"
+                >
+                  remove
+                </button>
+                <div className="flex items-center justify-between gap-10">
+                  <label htmlFor={`research.${researchItemIndex}.title`} className="w-full flex flex-col">
+                    title
+                    <input
+                      {...register(`research.${researchItemIndex}.title`)}
+                      id={`research.${researchItemIndex}.title`}
+                      type="text"
+                      className="px-2 py-1 border w-full"
+                    />
+                  </label>
+                </div>
+                <label htmlFor={`research.${researchItemIndex}.year`} className="flex flex-col">
+                  year
+                  <input
+                    {...register(`research.${researchItemIndex}.year`, { valueAsNumber: true })}
+                    id={`research.${researchItemIndex}.year`}
+                    type="number"
+                    step="1"
+                    className="px-2 py-1 border w-full"
+                  />
+                </label>
+                <label htmlFor={`research.${researchItemIndex}.authors`} className="flex flex-col">
+                  authors (one per line, in order)
+                  <Controller
+                    control={control}
+                    name={`research.${researchItemIndex}.authors`}
+                    render={({ field }) => (
+                      <textarea
+                        {...field}
+                        id={`research.${researchItemIndex}.authors`}
+                        value={field.value.join("\n")}
+                        onChange={(event) => field.onChange(event.target.value.split("\n"))}
+                        className="field-sizing-content px-2 py-1 border w-full"
+                      />
+                    )}
+                  />
+                </label>
+                <label htmlFor={`research.${researchItemIndex}.publication`} className="flex flex-col">
+                  publication
+                  <input
+                    {...register(`research.${researchItemIndex}.publication`)}
+                    id={`research.${researchItemIndex}.publication`}
+                    type="text"
+                    className="px-2 py-1 border w-full"
+                  />
+                </label>
+                <label htmlFor={`research.${researchItemIndex}.pageNumbers`} className="flex flex-col">
+                  page numbers (optional)
+                  <input
+                    {...register(`research.${researchItemIndex}.pageNumbers`)}
+                    id={`research.${researchItemIndex}.pageNumbers`}
+                    type="text"
+                    className="px-2 py-1 border w-full"
+                  />
+                </label>
+                <label htmlFor={`research.${researchItemIndex}.file`} className="flex flex-col">
+                  file (optional)
+                  <input
+                    {...register(`research.${researchItemIndex}.file`)}
+                    id={`research.${researchItemIndex}.file`}
+                    type="file"
+                    className="w-full file:bg-[#ddd] file:border-0 file:mr-2 file:px-2 file:py-1 file:cursor-pointer file:hover:brightness-110 file:active:brightness-90"
+                  />
+                  {researchItem.filename && (
+                    <span className="text-xs opacity-75">existing file: {researchItem.filename}</span>
+                  )}
+                </label>
+                <hr className="my-5" />
+                <ResearchItemPreview
+                  control={control}
+                  index={researchItemIndex}
+                />
+              </div>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => appendResearch({
+              year: new Date().getFullYear(),
+              authors: [],
+              title: "",
+              publication: "",
+              pageNumbers: "",
+              filename: "",
+            })}
+            className="bg-[#ddd] w-fit px-2 py-1 cursor-pointer hover:brightness-110 active:brightness-90"
+          >
+            + add research
+          </button>
+        </div>
       </form>
       <hr className="border-dashed border-gray/50" />
       <h2>change password</h2>

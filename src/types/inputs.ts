@@ -1,5 +1,15 @@
 export interface SettingsFormInputs {
   aboutText: string;
+  research: {
+    id?: number;
+    year: number;
+    authors: string[];
+    title: string;
+    publication: string;
+    pageNumbers: string;
+    filename: string;
+    file?: FileList;
+  }[];
   languageLevels: {
     id?: number;
     name: string;

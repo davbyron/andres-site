@@ -1,5 +1,7 @@
 import type { Models } from "@/prisma/contract.d";
 import type { Shape } from "@prisma/orm-postgres/family-contract/types";
+import type { Control } from "react-hook-form";
+import type { SettingsFormInputs } from "./inputs";
 
 export interface LanguagesChartProps {
   languageLevels: Shape<Models.public_LanguageLevel>[];
@@ -22,6 +24,18 @@ export interface EmailTemplateProps {
 export interface SettingsFormProps {
   aboutText: string;
   languageLevels: Shape<Models.public_LanguageLevel, { "+": "languages" }>[];
+  research: Shape<Models.public_Research>[];
+}
+
+export interface ResearchItemProps {
+  researchItem: Pick<Shape<Models.public_Research>, "year" | "authors" | "title" | "publication" | "pageNumbers"> & {
+    href?: string;
+  };
+}
+
+export interface ResearchItemPreviewProps {
+  control: Control<SettingsFormInputs>;
+  index: number;
 }
 
 export interface VowelChartButtonProps {
