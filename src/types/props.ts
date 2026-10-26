@@ -19,6 +19,11 @@ export interface EmailTemplateProps {
   url: string;
 }
 
+export interface SettingsFormProps {
+  aboutText: string;
+  languageLevels: Shape<Models.public_LanguageLevel, { "+": "languages" }>[];
+}
+
 export interface VowelChartButtonProps {
   chartName: string;
 }
