@@ -25,6 +25,7 @@ export interface SettingsFormProps {
   aboutText: string;
   languageLevels: Shape<Models.public_LanguageLevel, { "+": "languages" }>[];
   research: Shape<Models.public_Research>[];
+  unpublished: Shape<Models.public_Unpublished>[];
 }
 
 export interface ResearchItemProps {
@@ -34,6 +35,17 @@ export interface ResearchItemProps {
 }
 
 export interface ResearchItemPreviewProps {
+  control: Control<SettingsFormInputs>;
+  index: number;
+}
+
+export interface UnpublishedItemProps {
+  unpublishedItem: Pick<Shape<Models.public_Unpublished>, "year" | "authors" | "title"> & {
+    href?: string;
+  };
+}
+
+export interface UnpublishedItemPreviewProps {
   control: Control<SettingsFormInputs>;
   index: number;
 }

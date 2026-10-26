@@ -5,12 +5,14 @@ import { useRouter } from "next/navigation";
 import { Controller, useForm, useFieldArray } from "react-hook-form";
 import { authClient } from "@/utils/auth-client";
 import { ResearchItemPreview } from "./ResearchItemPreview";
+import { UnpublishedItemPreview } from "./UnpublishedItemPreview";
 
 export function SettingsForm(props: SettingsFormProps) {
   const {
     aboutText: defaultAboutText,
     languageLevels: defaultLanguageLevels,
     research: defaultResearch,
+    unpublished: defaultUnpublished,
   } = props;
 
   const router = useRouter();
@@ -31,6 +33,13 @@ export function SettingsForm(props: SettingsFormProps) {
         publication: researchItem.publication,
         pageNumbers: researchItem.pageNumbers ?? "",
         filename: researchItem.filename ?? "",
+      })),
+      unpublished: defaultUnpublished.map((item) => ({
+        id: item.id,
+        year: item.year,
+        authors: [...item.authors],
+        title: item.title,
+        filename: item.filename ?? "",
       })),
       languageLevels: defaultLanguageLevels.map((languageLevel) => ({
         id: languageLevel.id,
@@ -56,6 +65,12 @@ export function SettingsForm(props: SettingsFormProps) {
     append: appendResearch,
     remove: removeResearch,
   } = useFieldArray({ control, name: "research" });
+
+  const {
+    fields: unpublished,
+    append: appendUnpublished,
+    remove: removeUnpublished,
+  } = useFieldArray({ control, name: "unpublished" });
 
   async function signOut() {
     await authClient.signOut({
@@ -292,6 +307,89 @@ export function SettingsForm(props: SettingsFormProps) {
             className="bg-[#ddd] w-fit px-2 py-1 cursor-pointer hover:brightness-110 active:brightness-90"
           >
             + add research
+          </button>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <h2>unpublished</h2>
+          <div className="flex flex-col gap-10">
+            {unpublished.map((unpublishedItem, unpublishedItemIndex) => (
+              <div key={`unpublishedItem-${unpublishedItem.id}-${unpublishedItemIndex}`} className="group p-3 flex flex-col gap-2 border">
+                <button
+                  type="button"
+                  onClick={() => removeUnpublished(unpublishedItemIndex)}
+                  className="self-end bg-red-700 px-2 py-1 w-fit text-white text-xs cursor-pointer hover:brightness-110 active:brightness-90"
+                >
+                  remove
+                </button>
+                <div className="flex items-center justify-between gap-10">
+                  <label htmlFor={`unpublished.${unpublishedItemIndex}.title`} className="w-full flex flex-col">
+                    title
+                    <input
+                      {...register(`unpublished.${unpublishedItemIndex}.title`)}
+                      id={`unpublished.${unpublishedItemIndex}.title`}
+                      type="text"
+                      className="px-2 py-1 border w-full"
+                    />
+                  </label>
+                </div>
+                <label htmlFor={`unpublished.${unpublishedItemIndex}.year`} className="flex flex-col">
+                  year
+                  <input
+                    {...register(`unpublished.${unpublishedItemIndex}.year`, { valueAsNumber: true })}
+                    id={`unpublished.${unpublishedItemIndex}.year`}
+                    type="number"
+                    step="1"
+                    className="px-2 py-1 border w-full"
+                  />
+                </label>
+                <label htmlFor={`unpublished.${unpublishedItemIndex}.authors`} className="flex flex-col">
+                  authors (one per line, in order)
+                  <Controller
+                    control={control}
+                    name={`unpublished.${unpublishedItemIndex}.authors`}
+                    render={({ field }) => (
+                      <textarea
+                        {...field}
+                        id={`unpublished.${unpublishedItemIndex}.authors`}
+                        value={field.value.join("\n")}
+                        onChange={(event) => field.onChange(event.target.value.split("\n"))}
+                        className="field-sizing-content px-2 py-1 border w-full"
+                      />
+                    )}
+                  />
+                </label>
+                <label htmlFor={`unpublished.${unpublishedItemIndex}.file`} className="flex flex-col">
+                  file (optional)
+                  <input
+                    {...register(`unpublished.${unpublishedItemIndex}.file`)}
+                    id={`unpublished.${unpublishedItemIndex}.file`}
+                    type="file"
+                    className="w-full file:bg-[#ddd] file:border-0 file:mr-2 file:px-2 file:py-1 file:cursor-pointer file:hover:brightness-110 file:active:brightness-90"
+                  />
+                  {unpublishedItem.filename && (
+                    <span className="text-xs opacity-75">existing file: {unpublishedItem.filename}</span>
+                  )}
+                </label>
+                <hr className="my-5" />
+                <UnpublishedItemPreview
+                  control={control}
+                  index={unpublishedItemIndex}
+                />
+              </div>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => appendUnpublished({
+              year: new Date().getFullYear(),
+              authors: [],
+              title: "",
+              filename: "",
+            })}
+            className="bg-[#ddd] w-fit px-2 py-1 cursor-pointer hover:brightness-110 active:brightness-90"
+          >
+            + add unpublished
           </button>
         </div>
       </form>

@@ -1,5 +1,13 @@
 export interface SettingsFormInputs {
   aboutText: string;
+  unpublished: {
+    id?: number;
+    year: number;
+    authors: string[];
+    title: string;
+    filename: string;
+    file?: FileList;
+  }[];
   research: {
     id?: number;
     year: number;
