@@ -4,10 +4,12 @@ import { SettingsFormInputs, SettingsFormProps } from "@/types";
 import { useRouter } from "next/navigation";
 import { Controller, useForm, useFieldArray } from "react-hook-form";
 import { authClient } from "@/utils/auth-client";
-import { ResearchItemPreview } from "./ResearchItemPreview";
-import { UnpublishedItemPreview } from "./UnpublishedItemPreview";
-import { VowelChartPreview } from "./VowelChartPreview";
-import { ResetPasswordForm } from "./ResetPasswordForm";
+import {
+  ResearchItemPreview,
+  ResetPasswordForm,
+  UnpublishedItemPreview,
+  VowelChartPreview,
+} from "@/components";
 
 export function SettingsForm(props: SettingsFormProps) {
   const {
@@ -107,6 +109,7 @@ export function SettingsForm(props: SettingsFormProps) {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-10"
       >
+        {/* about */}
         <div className="flex flex-col gap-2">
           <h2>about</h2>
           <label>
@@ -118,6 +121,40 @@ export function SettingsForm(props: SettingsFormProps) {
           </label>
         </div>
 
+        <hr className="border-dashed border-gray/50" />
+
+        {/* files */}
+        <div className="flex flex-col gap-2">
+          <h2>files</h2>
+          <div className="flex flex-col gap-5">
+            <div className="p-3 flex flex-col gap-2 border">
+              <label htmlFor="cv-file" className="flex flex-col gap-1">
+                cv
+                <input
+                  id="cv-file"
+                  type="file"
+                  accept=".pdf,application/pdf"
+                  className="w-full file:bg-[#ddd] file:border-0 file:mr-2 file:px-2 file:py-1 file:cursor-pointer file:hover:brightness-110 file:active:brightness-90"
+                />
+              </label>
+            </div>
+            <div className="p-3 flex flex-col gap-2 border">
+              <label htmlFor="vowel-bib-file" className="flex flex-col gap-1">
+                vowelchArt bibliography
+                <input
+                  id="vowel-bib-file"
+                  type="file"
+                  accept=".pdf,application/pdf"
+                  className="w-full file:bg-[#ddd] file:border-0 file:mr-2 file:px-2 file:py-1 file:cursor-pointer file:hover:brightness-110 file:active:brightness-90"
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <hr className="border-dashed border-gray/50" />
+
+        {/* languages */}
         <div className="flex flex-col gap-2">
           <h2>languages</h2>
           {languageLevels.map((languageLevel, languageLevelIndex) => {
@@ -222,6 +259,9 @@ export function SettingsForm(props: SettingsFormProps) {
           </button>
         </div>
 
+        <hr className="border-dashed border-gray/50" />
+
+        {/* research */}
         <div className="flex flex-col gap-2">
           <h2>research</h2>
           <div className="flex flex-col gap-10">
@@ -325,6 +365,9 @@ export function SettingsForm(props: SettingsFormProps) {
           </button>
         </div>
 
+        <hr className="border-dashed border-gray/50" />
+
+        {/* unpublished */}
         <div className="flex flex-col gap-2">
           <h2>unpublished</h2>
           <div className="flex flex-col gap-10">
@@ -408,6 +451,9 @@ export function SettingsForm(props: SettingsFormProps) {
           </button>
         </div>
 
+        <hr className="border-dashed border-gray/50" />
+
+        {/* vowelchArt */}
         <div className="flex flex-col gap-2">
           <h2>vowelchArt</h2>
           <div className="flex flex-col gap-5">
@@ -465,18 +511,25 @@ export function SettingsForm(props: SettingsFormProps) {
           </button>
         </div>
       </form>
+
       <hr className="border-dashed border-gray/50" />
-      <h2>change password</h2>
-      {email ? (
-        <ResetPasswordForm
-          email={email}
-          submitLabel="Update Password"
-          className="flex flex-col items-start gap-4"
-        />
-      ) : (
-        <p>Sign in to update your password.</p>
-      )}
+
+      {/* change password */}
+      <div className="flex flex-col gap-2">
+        <h2>change password</h2>
+        {email ? (
+          <ResetPasswordForm
+            email={email}
+            submitLabel="Update Password"
+            className="flex flex-col items-start gap-4"
+          />
+        ) : (
+          <p>Sign in to update your password.</p>
+        )}
+      </div>
+
       <hr className="border-dashed border-gray/50" />
+
       <button
         type="button"
         onClick={signOut}
