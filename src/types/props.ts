@@ -29,6 +29,7 @@ export interface EmailTemplateProps {
 }
 
 export interface SettingsFormProps {
+  email?: string;
   aboutText: string;
   languageLevels: Shape<Models.public_LanguageLevel, { "+": "languages" }>[];
   research: Shape<Models.public_Research>[];

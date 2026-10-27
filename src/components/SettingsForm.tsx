@@ -7,9 +7,11 @@ import { authClient } from "@/utils/auth-client";
 import { ResearchItemPreview } from "./ResearchItemPreview";
 import { UnpublishedItemPreview } from "./UnpublishedItemPreview";
 import { VowelChartPreview } from "./VowelChartPreview";
+import { ResetPasswordForm } from "./ResetPasswordForm";
 
 export function SettingsForm(props: SettingsFormProps) {
   const {
+    email,
     aboutText: defaultAboutText,
     languageLevels: defaultLanguageLevels,
     research: defaultResearch,
@@ -465,6 +467,15 @@ export function SettingsForm(props: SettingsFormProps) {
       </form>
       <hr className="border-dashed border-gray/50" />
       <h2>change password</h2>
+      {email ? (
+        <ResetPasswordForm
+          email={email}
+          submitLabel="Update Password"
+          className="flex flex-col items-start gap-4"
+        />
+      ) : (
+        <p>Sign in to update your password.</p>
+      )}
       <hr className="border-dashed border-gray/50" />
       <button
         type="button"
