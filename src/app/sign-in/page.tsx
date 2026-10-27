@@ -86,7 +86,7 @@ export default function SignInPage() {
             </div>
           </div>
           <Link
-            href="/reset-password"
+            href="/forgot-password"
             className="text-xs opacity-75 cursor-pointer hover:brightness-110 active:brightness-90"
           >
             Forgot password?
