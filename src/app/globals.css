@@ -12,6 +12,10 @@ h2 {
   @apply text-[1.5rem];
 }
 
+input[type="file"] {
+  @apply w-full file:bg-[#ddd] file:border-0 file:mr-2 file:px-2 file:py-1 file:cursor-pointer file:hover:brightness-110 file:active:brightness-90;
+}
+
 /*
   Ensure all tick mark lines (both X and Y axes) have an opacity of 1.
   @tanstack/charts@1.0.0 doesn't allow us to do this with defineChart(),

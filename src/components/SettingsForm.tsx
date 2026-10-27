@@ -134,7 +134,6 @@ export function SettingsForm(props: SettingsFormProps) {
                   id="cv-file"
                   type="file"
                   accept=".pdf,application/pdf"
-                  className="w-full file:bg-[#ddd] file:border-0 file:mr-2 file:px-2 file:py-1 file:cursor-pointer file:hover:brightness-110 file:active:brightness-90"
                 />
               </label>
             </div>
@@ -145,7 +144,6 @@ export function SettingsForm(props: SettingsFormProps) {
                   id="vowel-bib-file"
                   type="file"
                   accept=".pdf,application/pdf"
-                  className="w-full file:bg-[#ddd] file:border-0 file:mr-2 file:px-2 file:py-1 file:cursor-pointer file:hover:brightness-110 file:active:brightness-90"
                 />
               </label>
             </div>
@@ -335,7 +333,7 @@ export function SettingsForm(props: SettingsFormProps) {
                     {...register(`research.${researchItemIndex}.file`)}
                     id={`research.${researchItemIndex}.file`}
                     type="file"
-                    className="w-full file:bg-[#ddd] file:border-0 file:mr-2 file:px-2 file:py-1 file:cursor-pointer file:hover:brightness-110 file:active:brightness-90"
+
                   />
                   {researchItem.filename && (
                     <span className="text-xs opacity-75">existing file: {researchItem.filename}</span>
@@ -423,7 +421,6 @@ export function SettingsForm(props: SettingsFormProps) {
                     {...register(`unpublished.${unpublishedItemIndex}.file`)}
                     id={`unpublished.${unpublishedItemIndex}.file`}
                     type="file"
-                    className="w-full file:bg-[#ddd] file:border-0 file:mr-2 file:px-2 file:py-1 file:cursor-pointer file:hover:brightness-110 file:active:brightness-90"
                   />
                   {unpublishedItem.filename && (
                     <span className="text-xs opacity-75">existing file: {unpublishedItem.filename}</span>
@@ -491,7 +488,6 @@ export function SettingsForm(props: SettingsFormProps) {
                         id={`vowelCharts.${index}.file`}
                         type="file"
                         accept="image/*"
-                        className="w-full file:bg-[#ddd] file:border-0 file:mr-2 file:px-2 file:py-1 file:cursor-pointer file:hover:brightness-110 file:active:brightness-90"
                       />
                       {chart.filename && (
                         <span className="text-xs opacity-75 break-all">existing file: {chart.filename}</span>
