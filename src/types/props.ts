@@ -26,6 +26,7 @@ export interface SettingsFormProps {
   languageLevels: Shape<Models.public_LanguageLevel, { "+": "languages" }>[];
   research: Shape<Models.public_Research>[];
   unpublished: Shape<Models.public_Unpublished>[];
+  vowelCharts: (Shape<Models.public_VowelChart> & { src: string })[];
 }
 
 export interface ResearchItemProps {
@@ -52,4 +53,10 @@ export interface UnpublishedItemPreviewProps {
 
 export interface VowelChartButtonProps {
   chartName: string;
+}
+
+export interface VowelChartPreviewProps {
+  control: Control<SettingsFormInputs>;
+  index: number;
+  src?: string;
 }

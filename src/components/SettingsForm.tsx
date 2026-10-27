@@ -6,6 +6,7 @@ import { Controller, useForm, useFieldArray } from "react-hook-form";
 import { authClient } from "@/utils/auth-client";
 import { ResearchItemPreview } from "./ResearchItemPreview";
 import { UnpublishedItemPreview } from "./UnpublishedItemPreview";
+import { VowelChartPreview } from "./VowelChartPreview";
 
 export function SettingsForm(props: SettingsFormProps) {
   const {
@@ -13,6 +14,7 @@ export function SettingsForm(props: SettingsFormProps) {
     languageLevels: defaultLanguageLevels,
     research: defaultResearch,
     unpublished: defaultUnpublished,
+    vowelCharts: defaultVowelCharts,
   } = props;
 
   const router = useRouter();
@@ -25,6 +27,11 @@ export function SettingsForm(props: SettingsFormProps) {
   } = useForm<SettingsFormInputs>({
     defaultValues: {
       aboutText: defaultAboutText,
+      vowelCharts: defaultVowelCharts.map((chart) => ({
+        id: chart.id,
+        name: chart.name,
+        filename: chart.filename,
+      })),
       research: defaultResearch.map((researchItem) => ({
         id: researchItem.id,
         year: researchItem.year,
@@ -71,6 +78,12 @@ export function SettingsForm(props: SettingsFormProps) {
     append: appendUnpublished,
     remove: removeUnpublished,
   } = useFieldArray({ control, name: "unpublished" });
+
+  const {
+    fields: vowelCharts,
+    append: appendVowelChart,
+    remove: removeVowelChart,
+  } = useFieldArray({ control, name: "vowelCharts", keyName: "fieldId" });
 
   async function signOut() {
     await authClient.signOut({
@@ -390,6 +403,63 @@ export function SettingsForm(props: SettingsFormProps) {
             className="bg-[#ddd] w-fit px-2 py-1 cursor-pointer hover:brightness-110 active:brightness-90"
           >
             + add unpublished
+          </button>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <h2>vowelchArt</h2>
+          <div className="flex flex-col gap-5">
+            {vowelCharts.map((chart, index) => (
+              <div key={chart.fieldId} className="group p-3 flex flex-col gap-2 border">
+                <button
+                  type="button"
+                  onClick={() => removeVowelChart(index)}
+                  className="self-end bg-red-700 px-2 py-1 w-fit text-white text-xs cursor-pointer hover:brightness-110 active:brightness-90"
+                >
+                  remove
+                </button>
+                <div className="flex items-start gap-4">
+                  <div className="w-24 sm:w-36 shrink-0">
+                    <VowelChartPreview
+                      control={control}
+                      index={index}
+                      src={defaultVowelCharts.find((item) => item.id === chart.id)?.src}
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1 flex flex-col gap-2">
+                    <label htmlFor={`vowelCharts.${index}.name`} className="flex flex-col">
+                      name
+                      <input
+                        {...register(`vowelCharts.${index}.name`)}
+                        id={`vowelCharts.${index}.name`}
+                        type="text"
+                        className="px-2 py-1 border w-full"
+                      />
+                    </label>
+                    <label htmlFor={`vowelCharts.${index}.file`} className="flex flex-col">
+                      file
+                      <input
+                        {...register(`vowelCharts.${index}.file`)}
+                        id={`vowelCharts.${index}.file`}
+                        type="file"
+                        accept="image/*"
+                        className="w-full file:bg-[#ddd] file:border-0 file:mr-2 file:px-2 file:py-1 file:cursor-pointer file:hover:brightness-110 file:active:brightness-90"
+                      />
+                      {chart.filename && (
+                        <span className="text-xs opacity-75 break-all">existing file: {chart.filename}</span>
+                      )}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => appendVowelChart({ name: "", filename: "" })}
+            className="bg-[#ddd] w-fit mt-3 px-2 py-1 cursor-pointer hover:brightness-110 active:brightness-90"
+          >
+            + add vowel chart
           </button>
         </div>
       </form>

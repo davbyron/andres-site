@@ -1,5 +1,11 @@
 export interface SettingsFormInputs {
   aboutText: string;
+  vowelCharts: {
+    id?: number;
+    name: string;
+    filename: string;
+    file?: FileList;
+  }[];
   unpublished: {
     id?: number;
     year: number;
