@@ -12,6 +12,13 @@ export interface PageTitleProps {
   title: string;
 }
 
+export interface ResetPasswordFormProps {
+  token?: string;
+  email?: string;
+  submitLabel?: string;
+  className?: string;
+}
+
 export interface EmailTemplateBaseProps {
   previewText: string;
   children: React.ReactNode;

@@ -1,3 +1,9 @@
+export interface ResetPasswordInputs {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
 export interface SettingsFormInputs {
   aboutText: string;
   vowelCharts: {
