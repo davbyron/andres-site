@@ -34,6 +34,22 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
+    sendResetPassword: async ({ user, url }) => {
+      const urlBase = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+      const params = new URLSearchParams({
+        to: user.email,
+        subject: "Reset your password",
+        template: "reset-password",
+        url,
+      });
+
+      const response = await fetch(`${urlBase}/api/send?${params.toString()}`, {
+        method: "POST",
+      });
+      if (!response.ok) {
+        throw new Error("Unable to send password reset email.");
+      }
+    },
   },
   emailVerification: {
     sendOnSignUp: true,
