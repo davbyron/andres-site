@@ -12,6 +12,8 @@ if (
 export const s3Client = new S3Client({
   endpoint: process.env.S3_ENDPOINT,
   region: "auto",
+  // Presigned PUTs contain no body while signing; do not sign an empty-body checksum.
+  requestChecksumCalculation: "WHEN_REQUIRED",
   credentials: {
     accessKeyId: process.env.S3_ACCESS_KEY_ID,
     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,

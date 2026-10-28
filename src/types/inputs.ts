@@ -6,6 +6,8 @@ export interface ResetPasswordInputs {
 
 export interface SettingsFormInputs {
   aboutText: string;
+  cvFile?: FileList;
+  vowelBibliographyFile?: FileList;
   vowelCharts: {
     id?: number;
     name: string;
