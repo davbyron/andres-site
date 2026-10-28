@@ -42,6 +42,7 @@ export function SettingsForm(props: SettingsFormProps) {
   } = useForm<SettingsFormInputs>({
     defaultValues: {
       aboutText: defaultAboutText,
+      userImageFile: undefined,
       cvFile: undefined,
       vowelBibliographyFile: undefined,
       vowelCharts: defaultVowelCharts.map((chart) => ({
@@ -111,6 +112,7 @@ export function SettingsForm(props: SettingsFormProps) {
   const currentInputs = useWatch({ control });
   const hasEditedValues = getSettingsSnapshot(currentInputs) !== savedSnapshot.current;
   const hasSelectedFiles = Boolean(
+    currentInputs.userImageFile?.length ||
     currentInputs.cvFile?.length ||
     currentInputs.vowelBibliographyFile?.length ||
     [
@@ -134,7 +136,7 @@ export function SettingsForm(props: SettingsFormProps) {
     setSaveMessage("");
     setSaveError("");
 
-    const { cvFile, vowelBibliographyFile, ...formDataWithoutFiles } = data;
+    const { userImageFile, cvFile, vowelBibliographyFile, ...formDataWithoutFiles } = data;
 
     // Only metadata goes through the server action; file bytes go to the bucket.
     const form = new FormData();
@@ -218,6 +220,17 @@ export function SettingsForm(props: SettingsFormProps) {
           <div className="flex flex-col gap-2">
             <h2>files</h2>
             <div className="flex flex-col gap-5">
+              <div className="p-3 flex flex-col gap-2 border">
+                <label htmlFor="user-image-file" className="flex flex-col gap-1">
+                  user image
+                  <input
+                    {...register("userImageFile")}
+                    id="user-image-file"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,image/gif,image/avif"
+                  />
+                </label>
+              </div>
               <div className="p-3 flex flex-col gap-2 border">
                 <label htmlFor="cv-file" className="flex flex-col gap-1">
                   cv

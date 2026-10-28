@@ -6,6 +6,7 @@ export interface ResetPasswordInputs {
 
 export interface SettingsFormInputs {
   aboutText: string;
+  userImageFile?: FileList;
   cvFile?: FileList;
   vowelBibliographyFile?: FileList;
   vowelCharts: {

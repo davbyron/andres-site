@@ -26,7 +26,14 @@ const STAGING_UPLOAD_PREFIX = "settings-uploads/";
  * Maps a supported form field to its final bucket key or directory prefix.
  * Rejects unknown fields so callers cannot choose arbitrary upload destinations.
  */
-export function settingsUploadDestination(fieldPath: string) {
+export function settingsUploadDestination(fieldPath: string, originalFilename?: string) {
+  if (fieldPath === "userImageFile") {
+    const extension = originalFilename?.split(".").pop()?.toLowerCase();
+    if (!extension || !["jpg", "jpeg", "png", "webp", "gif", "avif"].includes(extension)) {
+      throw new SettingsValidationError("The user image must be a JPG, PNG, WebP, GIF, or AVIF file.");
+    }
+    return `images/andre-schwab.${extension}`;
+  }
   if (fieldPath === "cvFile") return "cv.pdf";
   if (fieldPath === "vowelBibliographyFile") return "vowels_bib.pdf";
   if (/^research\.\d+\.file$/.test(fieldPath)) return "research/";
@@ -65,7 +72,7 @@ export async function prepareSettingsUpload(
   uploadRequest: SettingsFileUploadRequest,
   authenticatedUserId: string,
 ) {
-  settingsUploadDestination(uploadRequest?.field);
+  settingsUploadDestination(uploadRequest?.field, uploadRequest?.name);
 
   if (
     typeof uploadRequest.name !== "string" ||
@@ -92,7 +99,7 @@ export async function prepareSettingsUpload(
   }
 
   if (
-    uploadRequest.field.startsWith("vowelCharts.") &&
+    (uploadRequest.field === "userImageFile" || uploadRequest.field.startsWith("vowelCharts.")) &&
     ![
       "image/png",
       "image/jpeg",
@@ -102,8 +109,16 @@ export async function prepareSettingsUpload(
     ].includes(uploadRequest.contentType)
   ) {
     throw new SettingsValidationError(
-      "Vowel charts must be PNG, JPEG, WebP, GIF, or AVIF images.",
+      "Images must be PNG, JPEG, WebP, GIF, or AVIF files.",
     );
+  }
+
+  if (uploadRequest.field === "userImageFile") {
+    const extension = uploadRequest.name.split(".").pop()!.toLowerCase();
+    const expectedContentType = extension === "jpg" || extension === "jpeg" ? "image/jpeg" : `image/${extension}`;
+    if (uploadRequest.contentType !== expectedContentType) {
+      throw new SettingsValidationError("The user image's extension must match its image format.");
+    }
   }
 
   const uniqueFilename = createUniqueFilename(uploadRequest.name);
@@ -179,7 +194,7 @@ export function readSettingsUpload(
       throw new Error();
     }
 
-    settingsUploadDestination(uploadTokenPayload.field);
+    settingsUploadDestination(uploadTokenPayload.field, uploadTokenPayload.name);
 
     return uploadTokenPayload;
   } catch {

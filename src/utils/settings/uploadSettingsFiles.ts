@@ -11,6 +11,10 @@ export async function uploadSettingsFiles(
 
   // Add all files from the form data to the list of files to upload
 
+  if (data.userImageFile?.[0]) {
+    files.push({ field: "userImageFile", file: data.userImageFile[0] });
+  }
+
   if (data.cvFile?.[0]) {
     files.push({ field: "cvFile", file: data.cvFile[0] });
   }

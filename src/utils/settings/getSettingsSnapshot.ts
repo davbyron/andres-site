@@ -6,7 +6,7 @@
  */
 export function getSettingsSnapshot(data: object) {
   return JSON.stringify(data, (key, value) => {
-    if (["file", "cvFile", "vowelBibliographyFile"].includes(key))
+    if (["file", "userImageFile", "cvFile", "vowelBibliographyFile"].includes(key))
       return undefined;
     if (value && typeof value === "object" && !Array.isArray(value)) {
       return Object.fromEntries(

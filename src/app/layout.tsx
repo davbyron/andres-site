@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { getUserImageKey } from "@/utils/settings/getUserImageKey";
 import { Nav } from '@/components';
 import { s3Client, BUCKET_NAME } from "@/utils";
 
@@ -35,7 +36,7 @@ export default async function RootLayout({
   // Get signed URL for profile photo
   const getProfilePhotoCommand = new GetObjectCommand({
     Bucket: BUCKET_NAME,
-    Key: "images/andre-schwab.jpg",
+    Key: await getUserImageKey(),
   });
   const profilePhotoSignedUrl = await getSignedUrl(s3Client, getProfilePhotoCommand, { expiresIn: 3600 });
 

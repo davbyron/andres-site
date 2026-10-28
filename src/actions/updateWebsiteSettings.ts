@@ -6,6 +6,7 @@ import { headers } from "next/headers";
 import { db } from "@/prisma/db";
 import { auth } from "@/utils/auth";
 import { isSessionValid } from "@/utils/isSessionValid";
+import { getUserImageKeys } from "@/utils/settings/getUserImageKey";
 import {
   deleteSettingsFiles,
   readSettingsUpload,
@@ -70,7 +71,7 @@ export async function updateWebsiteSettings(form: FormData) {
       const ticket = readSettingsUpload(receipt.token, session.user.id);
       requireValue(ticket.field === receipt.field && !fields.has(ticket.field));
       fields.add(ticket.field);
-      if (!["cvFile", "vowelBibliographyFile"].includes(ticket.field)) {
+      if (!["userImageFile", "cvFile", "vowelBibliographyFile"].includes(ticket.field)) {
         const [collection, index] = ticket.field.split(".");
         requireValue(
           !!data[collection]?.[Number(index)],
@@ -81,11 +82,11 @@ export async function updateWebsiteSettings(form: FormData) {
     });
     stagingKeys.push(...uploads.map((ticket) => ticket.key));
     // Verify the staged object's metadata, then copy attachments to unique keys.
-    // Leave fixed-URL documents staged until the database transaction commits.
+    // Leave shared files staged until the database transaction commits.
     for (const ticket of uploads) {
       const etag = await verifySettingsUpload(ticket);
-      const destination = settingsUploadDestination(ticket.field);
-      if (["cvFile", "vowelBibliographyFile"].includes(ticket.field)) {
+      const destination = settingsUploadDestination(ticket.field, ticket.name);
+      if (["userImageFile", "cvFile", "vowelBibliographyFile"].includes(ticket.field)) {
         fixedFiles.push({ ticket, key: destination, etag });
       } else {
         const filename = createUniqueFilename(ticket.name);
@@ -335,12 +336,18 @@ export async function updateWebsiteSettings(form: FormData) {
     };
   }
 
-  // These public URLs have fixed keys. Upload after the transaction so a failed
+  // These public files have stable names. Upload after the transaction so a failed
   // database save never overwrites them; report failures separately for retry.
   const failedFiles: string[] = [];
   for (const { key, ticket, etag } of fixedFiles) {
     try {
+      // Capture older variants before copying. Keep them if the copy fails, and
+      // always exclude the destination key so same-extension replacements survive.
+      const previousUserImageKeys = ticket.field === "userImageFile"
+        ? (await getUserImageKeys()).filter((previousKey) => previousKey !== key)
+        : [];
       await copySettingsUpload(ticket, key, etag);
+      await deleteSettingsFiles(previousUserImageKeys);
     } catch (error) {
       console.error(`Unable to upload ${key}:`, error);
       failedFiles.push(key);
