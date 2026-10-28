@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-3xl: 120rem;
+
+  --color-gray: #707070;
+
+  --font-helvetica-neue: "Helvetica Neue", sans-serif;
+}
+
+h2 {
+  @apply text-[1.5rem];
+}
+
+input[type="file"] {
+  @apply w-full file:bg-[#ddd] file:border-0 file:mr-2 file:px-2 file:py-1 file:cursor-pointer file:hover:brightness-110 file:active:brightness-90;
+}
+
+/*
+  Ensure all tick mark lines (both X and Y axes) have an opacity of 1.
+  @tanstack/charts@1.0.0 doesn't allow us to do this with defineChart(),
+  so must be overridden here.
+*/
+line[data-ts-key*="tick-rule"] {
+  stroke-opacity: 1 !important;
+}
+
+/*
+  Hide chart outline on mouse clicks.
+*/
+svg.ts-chart:focus,
+svg.ts-chart:focus-within {
+  outline: none;
+}
+
+/*
+  Set focus outline for keyboard navigation and ensure it
+  is visible when tabbing into chart.
+*/
+:focus-visible,
+svg.ts-chart:focus-visible,
+svg.ts-chart:has(:focus-visible) {
+  outline: 2px solid mediumblue;
+  outline-offset: 3px;
+}

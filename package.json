@@ -1,6 +1,7 @@
 {
   "homepage": "https://www.andreschwab.com",
   "name": "andres_site",
+  "type": "module",
   "version": "0.1.0",
   "author": {
     "name": "David Byron",
@@ -23,22 +24,33 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^12.1.5",
-    "@testing-library/user-event": "^13.5.0",
-    "eslint-config-react-app": "^7.0.1",
-    "gh-pages": "^3.2.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "^5.0.1",
-    "react-scroll": "^1.8.9",
-    "recharts": "^2.6.2"
+    "@aws-sdk/client-s3": "^3.1150.0",
+    "@aws-sdk/s3-request-presigner": "^3.1150.0",
+    "@prisma/orm-postgres": "8.0.0-rc.17",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@tanstack/charts": "^1.0.0",
+    "better-auth": "^1.7.7",
+    "dotenv": "^17.4.2",
+    "next": "^16.3.0",
+    "postcss": "^8.5.25",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-email": "6.11.3",
+    "react-hook-form": "^7.90.0",
+    "resend": "^6.34.1",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.3",
+    "temporal-polyfill": "^1.0.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "contract:emit": "prisma contract emit",
+    "migration:plan": "read -p 'Enter migration plan name: ' plan_name && prisma migration plan --name \"$plan_name\"",
+    "migration:status": "prisma migration status",
+    "migration:migrate": "prisma db migrate --advance-ref db"
   },
   "browserslist": {
     "production": [
@@ -51,5 +63,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@prisma/cli": "8.0.0-rc.22",
+    "@prisma/cli-engine": "0.7.0",
+    "@react-email/ui": "6.11.3",
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "prisma": "8.0.0-rc.22",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
   }
 }

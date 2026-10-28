@@ -1,0 +1,41 @@
+[
+  {
+    "id": "table.pageText",
+    "label": "Create table \"pageText\"",
+    "summary": "Creates table \"pageText\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "pageText"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"pageText\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"pageText\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"pageText\"",
+        "sql": "CREATE TABLE \"public\".\"pageText\" (\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"id\" SERIAL NOT NULL,\n  \"key\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  \"value\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"pageText\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"pageText\""
+        ]
+      }
+    ]
+  }
+]

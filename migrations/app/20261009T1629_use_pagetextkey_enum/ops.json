@@ -1,0 +1,44 @@
+[
+  {
+    "id": "checkConstraint.pageText.pageText_key_check_207d044d",
+    "label": "Add check constraint \"pageText_key_check_207d044d\" on \"pageText\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "checkConstraint",
+        "name": "pageText_key_check_207d044d",
+        "table": "pageText"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"pageText_key_check_207d044d\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "pageText_key_check_207d044d",
+          "public",
+          "\"public\".\"pageText\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add check constraint \"pageText_key_check_207d044d\"",
+        "sql": "ALTER TABLE \"public\".\"pageText\" ADD CONSTRAINT \"pageText_key_check_207d044d\" CHECK (\"key\" IN ('About Page', 'Vowel Chart Page'))"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"pageText_key_check_207d044d\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "pageText_key_check_207d044d",
+          "public",
+          "\"public\".\"pageText\""
+        ]
+      }
+    ]
+  }
+]

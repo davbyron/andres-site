@@ -1,0 +1,41 @@
+[
+  {
+    "id": "table.vowelChart",
+    "label": "Create table \"vowelChart\"",
+    "summary": "Creates table \"vowelChart\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "vowelChart"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"vowelChart\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"vowelChart\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"vowelChart\"",
+        "sql": "CREATE TABLE \"public\".\"vowelChart\" (\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"filename\" text NOT NULL,\n  \"id\" SERIAL NOT NULL,\n  \"name\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"vowelChart\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"vowelChart\""
+        ]
+      }
+    ]
+  }
+]
