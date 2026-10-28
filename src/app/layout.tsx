@@ -12,6 +12,10 @@ import "temporal-polyfill/full/global";
 
 import "./globals.css";
 
+// Signed bucket URLs expire. Generate them per request rather than embedding
+// build-time URLs in cached pages that can outlive their access permissions.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: {
     template: "%s | André Batchelder-Schwab",
