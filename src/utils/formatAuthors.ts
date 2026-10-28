@@ -12,7 +12,14 @@ export function formatAuthors(authors: readonly string[]): ReactNode {
         ? createElement("b", null, author)
         : author;
 
-    const separator = index === 0 ? null : index === authors.length - 1 ? ", & " : ", ";
+    const separator =
+      index === 0
+        ? null
+        : authors.length === 2
+          ? " & "
+          : index === authors.length - 1
+            ? ", & "
+            : ", ";
 
     return createElement(
       Fragment,
