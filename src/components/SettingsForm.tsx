@@ -723,33 +723,38 @@ export function SettingsForm(props: SettingsFormProps) {
         )}
       </div>
 
-      <hr className="border-dashed border-gray/50" />
+      <div className="sticky bottom-0 z-10 items-end flex flex-col gap-5 bg-white pt-5 pb-[max(3rem,env(safe-area-inset-bottom))]">
+        <div className="self-stretch flex flex-col gap-0.5">
+          <hr className="border border-gray/50" />
+          <hr className="border border-gray/50" />
+        </div>
 
-      <div aria-live="polite">
-        {saveError && (
-          <p role="alert" className="text-red-700">
-            {saveError}
-          </p>
-        )}
-        {saveMessage && <p>{saveMessage}</p>}
-      </div>
-      <div className="flex items-center gap-3">
-        <button
-          type="submit"
-          form="website-settings"
-          disabled={isSubmitting || (!hasEditedValues && !hasSelectedFiles)}
-          className="bg-[#ddd] w-fit px-2 py-1 cursor-pointer hover:brightness-110 active:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isSubmitting ? "Saving…" : "Save"}
-        </button>
-        <button
-          type="button"
-          disabled={isSubmitting}
-          onClick={signOut}
-          className="bg-[#ddd] w-fit px-2 py-1 cursor-pointer hover:brightness-110 active:brightness-90"
-        >
-          Sign Out
-        </button>
+        <div aria-live="polite">
+          {saveError && (
+            <p role="alert" className="text-red-700">
+              {saveError}
+            </p>
+          )}
+          {saveMessage && <p>{saveMessage}</p>}
+        </div>
+        <div className="flex items-center gap-3">
+          <button
+            type="submit"
+            form="website-settings"
+            disabled={isSubmitting || (!hasEditedValues && !hasSelectedFiles)}
+            className="bg-[#ddd] w-fit px-2 py-1 cursor-pointer hover:brightness-110 active:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? "Saving…" : "Save"}
+          </button>
+          <button
+            type="button"
+            disabled={isSubmitting}
+            onClick={signOut}
+            className="bg-[#ddd] w-fit px-2 py-1 cursor-pointer hover:brightness-110 active:brightness-90"
+          >
+            Sign Out
+          </button>
+        </div>
       </div>
     </div>
   );
