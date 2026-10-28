@@ -209,7 +209,7 @@ export function SettingsForm(props: SettingsFormProps) {
               home page text
               <textarea
                 {...register("aboutText")}
-                className="field-sizing-content px-2 py-1 border w-full"
+                className="field-sizing-content min-h-40 px-2 py-1 border w-full"
               />
             </label>
           </div>
