@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import Link from "next/link";
 import Image from "next/image";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
@@ -30,13 +29,6 @@ export default async function RootLayout({
 }) {
   const year = Temporal.Now.plainDateISO().year;
 
-  // Get CV signed URL
-  const getCvCommand = new GetObjectCommand({
-    Bucket: BUCKET_NAME,
-    Key: "cv.pdf",
-  });
-  const cvSignedUrl = await getSignedUrl(s3Client, getCvCommand, { expiresIn: 3600 });
-
   // Get signed URL for profile photo
   const getProfilePhotoCommand = new GetObjectCommand({
     Bucket: BUCKET_NAME,
@@ -56,7 +48,7 @@ export default async function RootLayout({
         <header className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-24">
           <h1 className="text-4xl lg:text-6xl 2xl:text-[5.25rem] font-normal text-center">André Batchelder&#8209;Schwab</h1>
           <Nav />
-          <Link href={cvSignedUrl} target="_blank" className="hover:brightness-150 duration-200">
+          <a href="/api/cv" target="_blank" rel="noopener noreferrer" className="hover:brightness-150 duration-200">
             <Image
               height={50}
               width={50}
@@ -64,7 +56,7 @@ export default async function RootLayout({
               alt="CV icon"
               className="h-auto w-10 lg:w-12"
             />
-          </Link>
+          </a>
         </header>
         <main className="relative w-full flex">
           <div className="hidden lg:block w-1/3 max-w-150 shrink-0">
