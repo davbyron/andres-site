@@ -18,7 +18,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'02d401673a37ac2dd48d829d28a9c5cb8622715b3c36c20c38dc2ad852a050af'>;
+  StorageHashBase<'89c9c313384a8fa854ba3dd59101e1ceddab9ce74c219dca3309083477678015'>;
 export type ExecutionHash =
   ExecutionHashBase<'cf3dfeb006ecf628670974c8598ce524e5ebd3d45b3d00df771de1b3be34195e'>;
 export type ProfileHash =
@@ -279,7 +279,7 @@ export type FieldOutputTypes = {
       readonly publication: CodecTypes['pg/text@1']['output'];
       readonly title: CodecTypes['pg/text@1']['output'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
-      readonly year: CodecTypes['pg/int4@1']['output'];
+      readonly year: CodecTypes['pg/timestamptz-temporal@1']['output'];
     };
     readonly Session: {
       readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
@@ -298,7 +298,7 @@ export type FieldOutputTypes = {
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly title: CodecTypes['pg/text@1']['output'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
-      readonly year: CodecTypes['pg/int4@1']['output'];
+      readonly year: CodecTypes['pg/timestamptz-temporal@1']['output'];
     };
     readonly User: {
       readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
@@ -373,7 +373,7 @@ export type FieldInputTypes = {
       readonly publication: CodecTypes['pg/text@1']['input'];
       readonly title: CodecTypes['pg/text@1']['input'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
-      readonly year: CodecTypes['pg/int4@1']['input'];
+      readonly year: CodecTypes['pg/timestamptz-temporal@1']['input'];
     };
     readonly Session: {
       readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
@@ -392,7 +392,7 @@ export type FieldInputTypes = {
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly title: CodecTypes['pg/text@1']['input'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
-      readonly year: CodecTypes['pg/int4@1']['input'];
+      readonly year: CodecTypes['pg/timestamptz-temporal@1']['input'];
     };
     readonly User: {
       readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
@@ -467,7 +467,7 @@ export type StorageColumnTypes = {
       readonly publication: CodecTypes['pg/text@1']['output'];
       readonly title: CodecTypes['pg/text@1']['output'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
-      readonly year: CodecTypes['pg/int4@1']['output'];
+      readonly year: CodecTypes['pg/timestamptz-temporal@1']['output'];
     };
     readonly session: {
       readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
@@ -486,7 +486,7 @@ export type StorageColumnTypes = {
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly title: CodecTypes['pg/text@1']['output'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
-      readonly year: CodecTypes['pg/int4@1']['output'];
+      readonly year: CodecTypes['pg/timestamptz-temporal@1']['output'];
     };
     readonly user: {
       readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
@@ -561,7 +561,7 @@ export type StorageColumnInputTypes = {
       readonly publication: CodecTypes['pg/text@1']['input'];
       readonly title: CodecTypes['pg/text@1']['input'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
-      readonly year: CodecTypes['pg/int4@1']['input'];
+      readonly year: CodecTypes['pg/timestamptz-temporal@1']['input'];
     };
     readonly session: {
       readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
@@ -580,7 +580,7 @@ export type StorageColumnInputTypes = {
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly title: CodecTypes['pg/text@1']['input'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
-      readonly year: CodecTypes['pg/int4@1']['input'];
+      readonly year: CodecTypes['pg/timestamptz-temporal@1']['input'];
     };
     readonly user: {
       readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
@@ -662,7 +662,7 @@ export namespace Models {
     publication: CodecTypes['pg/text@1']['output'];
     title: CodecTypes['pg/text@1']['output'];
     updatedAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
-    year: CodecTypes['pg/int4@1']['output'];
+    year: CodecTypes['pg/timestamptz-temporal@1']['output'];
     readonly [RelationKeys]?: never;
   };
   export type public_Session = {
@@ -684,7 +684,7 @@ export namespace Models {
     id: CodecTypes['pg/int4@1']['output'];
     title: CodecTypes['pg/text@1']['output'];
     updatedAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
-    year: CodecTypes['pg/int4@1']['output'];
+    year: CodecTypes['pg/timestamptz-temporal@1']['output'];
     readonly [RelationKeys]?: never;
   };
   export type public_User = {
@@ -1062,8 +1062,8 @@ type ContractBase = Omit<
                   readonly many: false;
                 };
                 readonly year: {
-                  readonly dataType: 'pg/int4';
-                  readonly codecId: 'pg/int4@1';
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-temporal@1';
                   readonly nullable: false;
                   readonly many: false;
                 };
@@ -1194,8 +1194,8 @@ type ContractBase = Omit<
                   readonly many: false;
                 };
                 readonly year: {
-                  readonly dataType: 'pg/int4';
-                  readonly codecId: 'pg/int4@1';
+                  readonly dataType: 'pg/timestamptz';
+                  readonly codecId: 'pg/timestamptz-temporal@1';
                   readonly nullable: false;
                   readonly many: false;
                 };
@@ -1693,7 +1693,10 @@ type ContractBase = Omit<
               };
               readonly year: {
                 readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-temporal@1';
+                };
               };
             };
             readonly relations: Record<string, never>;
@@ -1819,7 +1822,10 @@ type ContractBase = Omit<
               };
               readonly year: {
                 readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-temporal@1';
+                };
               };
             };
             readonly relations: Record<string, never>;

@@ -514,7 +514,7 @@
               "year": {
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/int4@1",
+                  "codecId": "pg/timestamptz-temporal@1",
                   "kind": "scalar"
                 }
               }
@@ -715,7 +715,7 @@
               "year": {
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/int4@1",
+                  "codecId": "pg/timestamptz-temporal@1",
                   "kind": "scalar"
                 }
               }
@@ -1327,8 +1327,8 @@
                   "nullable": false
                 },
                 "year": {
-                  "codecId": "pg/int4@1",
-                  "dataType": "pg/int4",
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "dataType": "pg/timestamptz",
                   "nullable": false
                 }
               },
@@ -1485,8 +1485,8 @@
                   "nullable": false
                 },
                 "year": {
-                  "codecId": "pg/int4@1",
-                  "dataType": "pg/int4",
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "dataType": "pg/timestamptz",
                   "nullable": false
                 }
               },
@@ -1677,7 +1677,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "02d401673a37ac2dd48d829d28a9c5cb8622715b3c36c20c38dc2ad852a050af"
+    "storageHash": "89c9c313384a8fa854ba3dd59101e1ceddab9ce74c219dca3309083477678015"
   },
   "execution": {
     "executionHash": "cf3dfeb006ecf628670974c8598ce524e5ebd3d45b3d00df771de1b3be34195e",

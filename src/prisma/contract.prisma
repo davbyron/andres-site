@@ -65,7 +65,7 @@ model PageText {
 
 model Research {
   id          Int      @id @default(autoincrement())
-  year        Int
+  year        DateTime
   authors     String[]
   title       String
   publication String
@@ -96,7 +96,7 @@ model Session {
 
 model Unpublished {
   id       Int      @id @default(autoincrement())
-  year     Int
+  year     DateTime
   authors  String[]
   title    String
   filename String?
