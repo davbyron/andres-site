@@ -35,6 +35,7 @@ export interface SettingsFormInputs {
   }[];
   languageLevels: {
     id?: number;
+    order: number;
     name: string;
     color: string;
     languages: {

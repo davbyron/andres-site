@@ -1,7 +1,11 @@
 "use client";
 
 import { SettingsFormInputs, SettingsFormProps } from "@/types";
-import { getPublicationDate, getTodayPublicationDate } from "@/utils/publication-date-helpers";
+import {
+  getPublicationDate,
+  getTodayPublicationDate,
+} from "@/utils/publication-date-helpers";
+import { getNextLanguageLevelOrder } from "@/utils/settings/language-level-order-helpers";
 import { useRef, useState } from "react";
 import { updateWebsiteSettings } from "@/actions";
 import { uploadSettingsFiles } from "@/utils/settings/uploadSettingsFiles";
@@ -71,6 +75,7 @@ export function SettingsForm(props: SettingsFormProps) {
         id: languageLevel.id,
         name: languageLevel.name,
         color: languageLevel.color,
+        order: languageLevel.order,
         languages: languageLevel.languages.map((language) => ({
           id: language.id,
           name: language.name,
@@ -227,7 +232,10 @@ export function SettingsForm(props: SettingsFormProps) {
             <h2>files</h2>
             <div className="flex flex-col gap-5">
               <div className="p-3 flex flex-col gap-2 border">
-                <label htmlFor="user-image-file" className="flex flex-col gap-1">
+                <label
+                  htmlFor="user-image-file"
+                  className="flex flex-col gap-1"
+                >
                   user image
                   <input
                     {...register("userImageFile")}
@@ -274,6 +282,26 @@ export function SettingsForm(props: SettingsFormProps) {
                   <div className="group px-2 py-1 flex items-center justify-between gap-10 border hover:bg-gray-100">
                     <div className="w-full flex items-center gap-2">
                       <label
+                        htmlFor={`languageLevels.${languageLevelIndex}.order`}
+                        className="flex shrink-0 flex-col"
+                      >
+                        <span className="sr-only">Order</span>
+                        <input
+                          {...register(
+                            `languageLevels.${languageLevelIndex}.order`,
+                            { valueAsNumber: true },
+                          )}
+                          id={`languageLevels.${languageLevelIndex}.order`}
+                          type="number"
+                          min="1"
+                          max="20"
+                          step="1"
+                          required
+                          title="Order (lowest first)"
+                          className="w-fit p-1"
+                        />
+                      </label>
+                      <label
                         htmlFor={`languageLevels.${languageLevelIndex}.color`}
                         className="flex flex-col"
                       >
@@ -315,7 +343,7 @@ export function SettingsForm(props: SettingsFormProps) {
                   </div>
 
                   {/* Languages in language level */}
-                  <div className="pl-14 flex flex-col">
+                  <div className="pl-27 flex flex-col">
                     {languageLevel.languages.map((language, languageIndex) => {
                       return (
                         <div
@@ -383,6 +411,7 @@ export function SettingsForm(props: SettingsFormProps) {
               onClick={() =>
                 appendLanguageLevel({
                   name: "New Language Level",
+                  order: getNextLanguageLevelOrder(getValues("languageLevels")),
                   color: "#000000",
                   languages: [],
                 })

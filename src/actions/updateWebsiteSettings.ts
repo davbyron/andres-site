@@ -8,6 +8,7 @@ import { headers } from "next/headers";
 import { db } from "@/prisma/db";
 import { auth } from "@/utils/auth";
 import { isSessionValid } from "@/utils/isSessionValid";
+import { getTemporaryLanguageLevelOrders } from "@/utils/settings/language-level-order-helpers";
 import { getUserImageKeys } from "@/utils/settings/getUserImageKey";
 import {
   deleteSettingsFiles,
@@ -136,8 +137,23 @@ export async function updateWebsiteSettings(form: FormData) {
 
       // Save parents first so new languages can reference their generated level IDs.
       const savedLevels: SettingsFormInputs["languageLevels"] = [];
+      // Park current values first so swapping two orders, or reusing a removed
+      // level's order, cannot conflict with the unique constraint during saving.
+      const temporaryOrders = getTemporaryLanguageLevelOrders(
+        levels,
+        data.languageLevels,
+      );
+      for (const [index, level] of levels.entries()) {
+        await tx.orm.public.LanguageLevel.where({ id: level.id }).update({
+          order: temporaryOrders[index],
+        });
+      }
       for (const level of data.languageLevels) {
-        const languageLevelValues = { name: level.name, color: level.color };
+        const languageLevelValues = {
+          name: level.name,
+          color: level.color,
+          order: level.order,
+        };
         const row =
           level.id === undefined
             ? await tx.orm.public.LanguageLevel.create(languageLevelValues)
@@ -328,7 +344,9 @@ export async function updateWebsiteSettings(form: FormData) {
       );
       return {
         aboutText: data.aboutText,
-        languageLevels: savedLevels,
+        languageLevels: savedLevels.sort(
+          (first, second) => first.order - second.order,
+        ),
         // ISO date strings sort chronologically. Reset the editor in the same
         // newest-first order used by the public database queries.
         research: savedResearch.sort((first, second) =>
