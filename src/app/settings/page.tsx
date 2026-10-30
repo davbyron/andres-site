@@ -11,14 +11,23 @@ import { auth } from "@/utils/auth";
 
 export default async function SettingsPage() {
   const session = await auth.api.getSession({ headers: await headers() });
+
   const aboutPageText = await db.orm.public.PageText.where({ key: "About Page" }).first();
+
   //@ts-ignore
   const languageLevels = await db.orm.public.LanguageLevel.include("languages").orderBy((l) => l.id.desc()).all();
   const serializedLanguageLevels: Shape<Models.public_LanguageLevel, { "+": "languages" }>[] = JSON.parse(JSON.stringify(languageLevels));
+  // Sort the languages within each level alphabetically by name
+  for (const level of serializedLanguageLevels) {
+    level.languages.sort((first, second) => first.name.localeCompare(second.name));
+  }
+
   const research = await db.orm.public.Research.orderBy((r) => r.date.desc()).all();
   const serializedResearch: Shape<Models.public_Research>[] = JSON.parse(JSON.stringify(research));
+
   const unpublished = await db.orm.public.Unpublished.orderBy((item) => item.date.desc(),).all();
   const serializedUnpublished: Shape<Models.public_Unpublished>[] = JSON.parse(JSON.stringify(unpublished));
+
   const vowelCharts = await db.orm.public.VowelChart.orderBy((chart) => chart.name.asc()).all();
   const serializedVowelCharts: Shape<Models.public_VowelChart>[] = JSON.parse(JSON.stringify(vowelCharts));
   const resolvedVowelCharts = await Promise.all(
