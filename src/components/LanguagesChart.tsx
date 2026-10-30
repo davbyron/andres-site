@@ -27,10 +27,10 @@ export function LanguagesChart(props: LanguagesChartProps) {
       (first, second) => first.order - second.order,
     );
 
-    // Orders control rank, not bar magnitude: gaps in saved orders should not
-    // create gaps on the chart, and database IDs should not determine proficiency.
+    // Lower orders mean higher proficiency. Use consecutive chart positions so
+    // gaps in saved orders and database IDs do not affect bar magnitude.
     orderedLevels.forEach((level, index) => {
-      const position = index + 1;
+      const position = orderedLevels.length - index;
       levelMap[position] = level.name;
       levelPositions[level.id] = position;
     });

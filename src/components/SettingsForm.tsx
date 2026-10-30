@@ -297,7 +297,7 @@ export function SettingsForm(props: SettingsFormProps) {
                           max="20"
                           step="1"
                           required
-                          title="Order (lowest first)"
+                          title="Order (1 = highest proficiency)"
                           className="w-fit p-1"
                         />
                       </label>
