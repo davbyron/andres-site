@@ -32,8 +32,8 @@ export interface SettingsFormProps {
   email?: string;
   aboutText: string;
   languageLevels: Shape<Models.public_LanguageLevel, { "+": "languages" }>[];
-  research: SettingsFormInputs["research"];
-  unpublished: SettingsFormInputs["unpublished"];
+  research: Shape<Models.public_Research>[];
+  unpublished: Shape<Models.public_Unpublished>[];
   vowelCharts: (Shape<Models.public_VowelChart> & { src: string })[];
 }
 

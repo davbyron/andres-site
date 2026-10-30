@@ -1,6 +1,6 @@
 import type { UnpublishedItemProps } from "@/types";
 import Link from "next/link";
-import { formatAuthors } from "@/utils";
+import { formatAuthors } from "@/utils/formatAuthors";
 import { getPublicationYear } from "@/utils/publication-date-helpers";
 
 export function UnpublishedItem({ unpublishedItem }: UnpublishedItemProps) {

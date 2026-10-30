@@ -1,7 +1,7 @@
 "use client";
 
 import { SettingsFormInputs, SettingsFormProps } from "@/types";
-import { getTodayPublicationDate } from "@/utils/publication-date-helpers";
+import { getPublicationDate, getTodayPublicationDate } from "@/utils/publication-date-helpers";
 import { useRef, useState } from "react";
 import { updateWebsiteSettings } from "@/actions";
 import { uploadSettingsFiles } from "@/utils/settings/uploadSettingsFiles";
@@ -53,7 +53,7 @@ export function SettingsForm(props: SettingsFormProps) {
       })),
       research: defaultResearch.map((researchItem) => ({
         id: researchItem.id,
-        date: researchItem.date,
+        date: getPublicationDate(researchItem.date),
         authors: [...researchItem.authors],
         title: researchItem.title,
         publication: researchItem.publication,
@@ -62,7 +62,7 @@ export function SettingsForm(props: SettingsFormProps) {
       })),
       unpublished: defaultUnpublished.map((item) => ({
         id: item.id,
-        date: item.date,
+        date: getPublicationDate(item.date),
         authors: [...item.authors],
         title: item.title,
         filename: item.filename ?? "",

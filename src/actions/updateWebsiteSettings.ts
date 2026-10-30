@@ -193,8 +193,8 @@ export async function updateWebsiteSettings(form: FormData) {
           old,
         );
         const values = {
-          // The schema column is still named year; store the selected day at UTC midnight.
-          year: Temporal.Instant.from(`${researchItem.date}T00:00:00Z`),
+          // Store the selected calendar day at UTC midnight to avoid timezone shifts.
+          date: Temporal.Instant.from(`${researchItem.date}T00:00:00Z`),
           authors: researchItem.authors,
           title: researchItem.title,
           publication: researchItem.publication,
@@ -213,7 +213,7 @@ export async function updateWebsiteSettings(form: FormData) {
           old?.filename,
           filename,
         );
-        const { year: _storedDate, ...savedValues } = values;
+        const { date: _storedDate, ...savedValues } = values;
         savedResearch.push({
           id: row.id,
           ...savedValues,
@@ -238,7 +238,7 @@ export async function updateWebsiteSettings(form: FormData) {
           old,
         );
         const values = {
-          year: Temporal.Instant.from(`${item.date}T00:00:00Z`),
+          date: Temporal.Instant.from(`${item.date}T00:00:00Z`),
           authors: item.authors,
           title: item.title,
           filename: filename || null,
@@ -255,7 +255,7 @@ export async function updateWebsiteSettings(form: FormData) {
           old?.filename,
           filename,
         );
-        const { year: _storedDate, ...savedValues } = values;
+        const { date: _storedDate, ...savedValues } = values;
         savedUnpublished.push({
           id: row.id,
           ...savedValues,

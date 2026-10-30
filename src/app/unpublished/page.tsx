@@ -7,7 +7,7 @@ import { PageTitle, UnpublishedItem } from "@/components";
 
 export default async function UnpublishedPage() {
   // Sort by the complete stored date, newest first, before displaying only its year.
-  const unpublished = await db.orm.public.Unpublished.orderBy((r) => r.year.desc()).all();
+  const unpublished = await db.orm.public.Unpublished.orderBy((r) => r.date.desc()).all();
 
   // Get signed URLs for each unpublished item's document if it has a filename
   const resolvedUnpublished = await Promise.all(
@@ -22,14 +22,14 @@ export default async function UnpublishedPage() {
 
         return {
           ...unpublishedItem,
-          date: getPublicationDate(unpublishedItem.year),
+          date: getPublicationDate(unpublishedItem.date),
           href: signedUrl,
         };
       }
 
       return {
         ...unpublishedItem,
-        date: getPublicationDate(unpublishedItem.year),
+        date: getPublicationDate(unpublishedItem.date),
         href: undefined,
       };
     }),

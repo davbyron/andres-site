@@ -7,7 +7,7 @@ import { PageTitle, ResearchItem } from "@/components";
 
 export default async function ResearchPage() {
   // Sort by the complete stored date, newest first, before displaying only its year.
-  const research = await db.orm.public.Research.orderBy((r) => r.year.desc()).all();
+  const research = await db.orm.public.Research.orderBy((r) => r.date.desc()).all();
 
   // Get signed URLs for each research item's document if it has a filename
   const resolvedResearch = await Promise.all(
@@ -22,14 +22,14 @@ export default async function ResearchPage() {
 
         return {
           ...researchItem,
-          date: getPublicationDate(researchItem.year),
+          date: getPublicationDate(researchItem.date),
           href: signedUrl,
         };
       }
 
       return {
         ...researchItem,
-        date: getPublicationDate(researchItem.year),
+        date: getPublicationDate(researchItem.date),
         href: undefined,
       };
     }),
