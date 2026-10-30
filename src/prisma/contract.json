@@ -469,6 +469,13 @@
                   "kind": "scalar"
                 }
               },
+              "date": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              },
               "filename": {
                 "nullable": true,
                 "type": {
@@ -510,13 +517,6 @@
                   "codecId": "pg/timestamptz-temporal@1",
                   "kind": "scalar"
                 }
-              },
-              "year": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-temporal@1",
-                  "kind": "scalar"
-                }
               }
             },
             "relations": {},
@@ -527,6 +527,9 @@
                 },
                 "createdAt": {
                   "column": "createdAt"
+                },
+                "date": {
+                  "column": "date"
                 },
                 "filename": {
                   "column": "filename"
@@ -545,9 +548,6 @@
                 },
                 "updatedAt": {
                   "column": "updatedAt"
-                },
-                "year": {
-                  "column": "year"
                 }
               },
               "namespaceId": "public",
@@ -684,6 +684,13 @@
                   "kind": "scalar"
                 }
               },
+              "date": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              },
               "filename": {
                 "nullable": true,
                 "type": {
@@ -711,13 +718,6 @@
                   "codecId": "pg/timestamptz-temporal@1",
                   "kind": "scalar"
                 }
-              },
-              "year": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-temporal@1",
-                  "kind": "scalar"
-                }
               }
             },
             "relations": {},
@@ -728,6 +728,9 @@
                 },
                 "createdAt": {
                   "column": "createdAt"
+                },
+                "date": {
+                  "column": "date"
                 },
                 "filename": {
                   "column": "filename"
@@ -740,9 +743,6 @@
                 },
                 "updatedAt": {
                   "column": "updatedAt"
-                },
-                "year": {
-                  "column": "year"
                 }
               },
               "namespaceId": "public",
@@ -1292,6 +1292,11 @@
                   },
                   "nullable": false
                 },
+                "date": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "dataType": "pg/timestamptz",
+                  "nullable": false
+                },
                 "filename": {
                   "codecId": "pg/text@1",
                   "dataType": "pg/text",
@@ -1322,11 +1327,6 @@
                   "nullable": false
                 },
                 "updatedAt": {
-                  "codecId": "pg/timestamptz-temporal@1",
-                  "dataType": "pg/timestamptz",
-                  "nullable": false
-                },
-                "year": {
                   "codecId": "pg/timestamptz-temporal@1",
                   "dataType": "pg/timestamptz",
                   "nullable": false
@@ -1460,6 +1460,11 @@
                   },
                   "nullable": false
                 },
+                "date": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "dataType": "pg/timestamptz",
+                  "nullable": false
+                },
                 "filename": {
                   "codecId": "pg/text@1",
                   "dataType": "pg/text",
@@ -1480,11 +1485,6 @@
                   "nullable": false
                 },
                 "updatedAt": {
-                  "codecId": "pg/timestamptz-temporal@1",
-                  "dataType": "pg/timestamptz",
-                  "nullable": false
-                },
-                "year": {
                   "codecId": "pg/timestamptz-temporal@1",
                   "dataType": "pg/timestamptz",
                   "nullable": false
@@ -1677,7 +1677,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "89c9c313384a8fa854ba3dd59101e1ceddab9ce74c219dca3309083477678015"
+    "storageHash": "0899a12882e3284dead38c7bebb359302a5c1ec9f82685cc095deaada9ff4116"
   },
   "execution": {
     "executionHash": "cf3dfeb006ecf628670974c8598ce524e5ebd3d45b3d00df771de1b3be34195e",

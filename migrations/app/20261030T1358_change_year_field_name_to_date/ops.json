@@ -1,0 +1,122 @@
+[
+  {
+    "id": "renameColumn.research.year",
+    "label": "Rename column \"research\".\"year\" to \"date\"",
+    "operationClass": "widening",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "date",
+        "table": "research"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"year\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "research",
+          "year"
+        ]
+      },
+      {
+        "description": "ensure column \"date\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "research",
+          "date"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "rename column \"year\" to \"date\"",
+        "sql": "ALTER TABLE \"public\".\"research\" RENAME COLUMN \"year\" TO \"date\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"date\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "research",
+          "date"
+        ]
+      },
+      {
+        "description": "verify column \"year\" no longer exists",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "research",
+          "year"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "renameColumn.unpublished.year",
+    "label": "Rename column \"unpublished\".\"year\" to \"date\"",
+    "operationClass": "widening",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "date",
+        "table": "unpublished"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"year\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "unpublished",
+          "year"
+        ]
+      },
+      {
+        "description": "ensure column \"date\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "unpublished",
+          "date"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "rename column \"year\" to \"date\"",
+        "sql": "ALTER TABLE \"public\".\"unpublished\" RENAME COLUMN \"year\" TO \"date\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"date\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "unpublished",
+          "date"
+        ]
+      },
+      {
+        "description": "verify column \"year\" no longer exists",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "unpublished",
+          "year"
+        ]
+      }
+    ]
+  }
+]
