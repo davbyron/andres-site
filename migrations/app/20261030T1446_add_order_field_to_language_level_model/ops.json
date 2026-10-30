@@ -1,0 +1,163 @@
+[
+  {
+    "id": "column.public.languageLevel.order",
+    "label": "Add column \"order\" to \"languageLevel\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "order",
+        "table": "languageLevel"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"order\" is missing",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "languageLevel",
+          "order"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add column \"order\"",
+        "sql": "ALTER TABLE \"public\".\"languageLevel\" ADD COLUMN \"order\" int4"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"order\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "languageLevel",
+          "order"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "data_migration.backfill-languageLevel-order",
+    "label": "Data transform: backfill-languageLevel-order",
+    "operationClass": "data",
+    "target": {
+      "id": "postgres"
+    },
+    "precheck": [
+      {
+        "description": "Check backfill-languageLevel-order has work to do",
+        "sql": "SELECT EXISTS (SELECT \"id\" AS \"id\" FROM \"public\".\"languageLevel\" WHERE \"order\" IS NULL LIMIT 1) AS ok",
+        "params": []
+      }
+    ],
+    "execute": [
+      {
+        "description": "Run backfill-languageLevel-order",
+        "sql": "UPDATE \"public\".\"languageLevel\" SET \"order\" = \"id\", \"updatedAt\" = \"updatedAt\" WHERE \"order\" IS NULL",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "Verify backfill-languageLevel-order resolved all violations",
+        "sql": "SELECT NOT EXISTS (SELECT \"id\" AS \"id\" FROM \"public\".\"languageLevel\" WHERE \"order\" IS NULL LIMIT 1) AS ok",
+        "params": []
+      }
+    ]
+  },
+  {
+    "id": "alterNullability.setNotNull.languageLevel.order",
+    "label": "Set NOT NULL on \"languageLevel\".\"order\"",
+    "operationClass": "widening",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "order",
+        "table": "languageLevel"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"order\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "languageLevel",
+          "order"
+        ]
+      },
+      {
+        "description": "ensure no NULL values in \"order\"",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"public\".\"languageLevel\" WHERE \"order\" IS NULL) AS \"result\"",
+        "params": []
+      }
+    ],
+    "execute": [
+      {
+        "description": "set NOT NULL on \"order\"",
+        "sql": "ALTER TABLE \"public\".\"languageLevel\" ALTER COLUMN \"order\" SET NOT NULL"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"order\" is NOT NULL",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3 AND \"is_nullable\" = $4)) AS \"result\"",
+        "params": [
+          "public",
+          "languageLevel",
+          "order",
+          "NO"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unique.languageLevel.languageLevel_order_key",
+    "label": "Add unique constraint on \"languageLevel\" (order)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "unique",
+        "name": "languageLevel_order_key",
+        "table": "languageLevel"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"languageLevel_order_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "languageLevel_order_key",
+          "public",
+          "\"public\".\"languageLevel\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"languageLevel_order_key\"",
+        "sql": "ALTER TABLE \"public\".\"languageLevel\" ADD CONSTRAINT \"languageLevel_order_key\" UNIQUE (\"order\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"languageLevel_order_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "languageLevel_order_key",
+          "public",
+          "\"public\".\"languageLevel\""
+        ]
+      }
+    ]
+  }
+]

@@ -32,6 +32,7 @@ model LanguageLevel {
   id          Int      @id @default(autoincrement())
   name        String
   color       String
+  order       Int @unique
   languages   Language[]
 
   createdAt   DateTime @default(now())

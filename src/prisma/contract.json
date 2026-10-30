@@ -336,6 +336,13 @@
                   "kind": "scalar"
                 }
               },
+              "order": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
               "updatedAt": {
                 "nullable": false,
                 "type": {
@@ -374,6 +381,9 @@
                 },
                 "name": {
                   "column": "name"
+                },
+                "order": {
+                  "column": "order"
                 },
                 "updatedAt": {
                   "column": "updatedAt"
@@ -1193,6 +1203,11 @@
                   "dataType": "pg/text",
                   "nullable": false
                 },
+                "order": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                },
                 "updatedAt": {
                   "codecId": "pg/timestamptz-temporal@1",
                   "dataType": "pg/timestamptz",
@@ -1206,7 +1221,13 @@
                   "id"
                 ]
               },
-              "uniques": []
+              "uniques": [
+                {
+                  "columns": [
+                    "order"
+                  ]
+                }
+              ]
             },
             "pageText": {
               "checks": [
@@ -1677,7 +1698,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "0899a12882e3284dead38c7bebb359302a5c1ec9f82685cc095deaada9ff4116"
+    "storageHash": "98f30937bba8069dfd50284484f07fbdd7d99c522993a6b80ad9a0c0e1085691"
   },
   "execution": {
     "executionHash": "cf3dfeb006ecf628670974c8598ce524e5ebd3d45b3d00df771de1b3be34195e",
