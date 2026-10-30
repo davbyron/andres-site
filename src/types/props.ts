@@ -32,13 +32,17 @@ export interface SettingsFormProps {
   email?: string;
   aboutText: string;
   languageLevels: Shape<Models.public_LanguageLevel, { "+": "languages" }>[];
-  research: Shape<Models.public_Research>[];
-  unpublished: Shape<Models.public_Unpublished>[];
+  research: SettingsFormInputs["research"];
+  unpublished: SettingsFormInputs["unpublished"];
   vowelCharts: (Shape<Models.public_VowelChart> & { src: string })[];
 }
 
 export interface ResearchItemProps {
-  researchItem: Pick<Shape<Models.public_Research>, "year" | "authors" | "title" | "publication" | "pageNumbers"> & {
+  researchItem: Pick<
+    Shape<Models.public_Research>,
+    "authors" | "title" | "publication" | "pageNumbers"
+  > & {
+    date: string;
     href?: string;
   };
 }
@@ -49,7 +53,11 @@ export interface ResearchItemPreviewProps {
 }
 
 export interface UnpublishedItemProps {
-  unpublishedItem: Pick<Shape<Models.public_Unpublished>, "year" | "authors" | "title"> & {
+  unpublishedItem: Pick<
+    Shape<Models.public_Unpublished>,
+    "authors" | "title"
+  > & {
+    date: string;
     href?: string;
   };
 }

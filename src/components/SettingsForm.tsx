@@ -1,6 +1,7 @@
 "use client";
 
 import { SettingsFormInputs, SettingsFormProps } from "@/types";
+import { getTodayPublicationDate } from "@/utils/publication-date-helpers";
 import { useRef, useState } from "react";
 import { updateWebsiteSettings } from "@/actions";
 import { uploadSettingsFiles } from "@/utils/settings/uploadSettingsFiles";
@@ -52,7 +53,7 @@ export function SettingsForm(props: SettingsFormProps) {
       })),
       research: defaultResearch.map((researchItem) => ({
         id: researchItem.id,
-        year: researchItem.year,
+        date: researchItem.date,
         authors: [...researchItem.authors],
         title: researchItem.title,
         publication: researchItem.publication,
@@ -61,7 +62,7 @@ export function SettingsForm(props: SettingsFormProps) {
       })),
       unpublished: defaultUnpublished.map((item) => ({
         id: item.id,
-        year: item.year,
+        date: item.date,
         authors: [...item.authors],
         title: item.title,
         filename: item.filename ?? "",
@@ -136,7 +137,12 @@ export function SettingsForm(props: SettingsFormProps) {
     setSaveMessage("");
     setSaveError("");
 
-    const { userImageFile, cvFile, vowelBibliographyFile, ...formDataWithoutFiles } = data;
+    const {
+      userImageFile,
+      cvFile,
+      vowelBibliographyFile,
+      ...formDataWithoutFiles
+    } = data;
 
     // Only metadata goes through the server action; file bytes go to the bucket.
     const form = new FormData();
@@ -420,17 +426,19 @@ export function SettingsForm(props: SettingsFormProps) {
                     </label>
                   </div>
                   <label
-                    htmlFor={`research.${researchItemIndex}.year`}
+                    htmlFor={`research.${researchItemIndex}.date`}
                     className="flex flex-col"
                   >
-                    year
+                    date
                     <input
-                      {...register(`research.${researchItemIndex}.year`, {
-                        valueAsNumber: true,
+                      {...register(`research.${researchItemIndex}.date`, {
+                        required: true,
                       })}
-                      id={`research.${researchItemIndex}.year`}
-                      type="number"
-                      step="1"
+                      id={`research.${researchItemIndex}.date`}
+                      type="date"
+                      required
+                      min="0001-01-01"
+                      max="9999-12-31"
                       className="px-2 py-1 border w-full"
                     />
                   </label>
@@ -507,7 +515,7 @@ export function SettingsForm(props: SettingsFormProps) {
               type="button"
               onClick={() =>
                 appendResearch({
-                  year: new Date().getFullYear(),
+                  date: getTodayPublicationDate(),
                   authors: [],
                   title: "",
                   publication: "",
@@ -556,17 +564,19 @@ export function SettingsForm(props: SettingsFormProps) {
                     </label>
                   </div>
                   <label
-                    htmlFor={`unpublished.${unpublishedItemIndex}.year`}
+                    htmlFor={`unpublished.${unpublishedItemIndex}.date`}
                     className="flex flex-col"
                   >
-                    year
+                    date
                     <input
-                      {...register(`unpublished.${unpublishedItemIndex}.year`, {
-                        valueAsNumber: true,
+                      {...register(`unpublished.${unpublishedItemIndex}.date`, {
+                        required: true,
                       })}
-                      id={`unpublished.${unpublishedItemIndex}.year`}
-                      type="number"
-                      step="1"
+                      id={`unpublished.${unpublishedItemIndex}.date`}
+                      type="date"
+                      required
+                      min="0001-01-01"
+                      max="9999-12-31"
                       className="px-2 py-1 border w-full"
                     />
                   </label>
@@ -619,7 +629,7 @@ export function SettingsForm(props: SettingsFormProps) {
               type="button"
               onClick={() =>
                 appendUnpublished({
-                  year: new Date().getFullYear(),
+                  date: getTodayPublicationDate(),
                   authors: [],
                   title: "",
                   filename: "",

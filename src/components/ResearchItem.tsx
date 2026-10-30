@@ -1,13 +1,14 @@
-import Link from "next/link";
 import type { ResearchItemProps } from "@/types";
-import { formatAuthors } from "@/utils/formatAuthors";
+import Link from "next/link";
+import { formatAuthors } from "@/utils";
+import { getPublicationYear } from "@/utils/publication-date-helpers";
 
 export function ResearchItem(props: ResearchItemProps) {
   const { researchItem } = props;
 
   return (
     <li className="grid grid-cols-12 gap-5 lg:gap-10">
-      <div className="col-span-2 text-center">{researchItem.year.toString()}</div>
+      <div className="col-span-2 text-center">{getPublicationYear(researchItem.date)}</div>
       <div className="col-span-5 lg:col-span-3">{formatAuthors(researchItem.authors)}</div>
       <div className="col-span-5 lg:col-span-7">
         {researchItem.href ? (

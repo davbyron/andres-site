@@ -1,5 +1,7 @@
 "use server";
 
+import "temporal-polyfill/full/global";
+
 import type { SettingsFormInputs, SettingsUploadReceipt } from "@/types";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
@@ -191,7 +193,8 @@ export async function updateWebsiteSettings(form: FormData) {
           old,
         );
         const values = {
-          year: researchItem.year,
+          // The schema column is still named year; store the selected day at UTC midnight.
+          year: Temporal.Instant.from(`${researchItem.date}T00:00:00Z`),
           authors: researchItem.authors,
           title: researchItem.title,
           publication: researchItem.publication,
@@ -210,9 +213,11 @@ export async function updateWebsiteSettings(form: FormData) {
           old?.filename,
           filename,
         );
+        const { year: _storedDate, ...savedValues } = values;
         savedResearch.push({
           id: row.id,
-          ...values,
+          ...savedValues,
+          date: researchItem.date,
           pageNumbers: researchItem.pageNumbers,
           filename,
         });
@@ -233,7 +238,7 @@ export async function updateWebsiteSettings(form: FormData) {
           old,
         );
         const values = {
-          year: item.year,
+          year: Temporal.Instant.from(`${item.date}T00:00:00Z`),
           authors: item.authors,
           title: item.title,
           filename: filename || null,
@@ -250,7 +255,13 @@ export async function updateWebsiteSettings(form: FormData) {
           old?.filename,
           filename,
         );
-        savedUnpublished.push({ id: row.id, ...values, filename });
+        const { year: _storedDate, ...savedValues } = values;
+        savedUnpublished.push({
+          id: row.id,
+          ...savedValues,
+          date: item.date,
+          filename,
+        });
       }
       for (const item of unpublished) {
         if (savedUnpublished.some((row) => row.id === item.id)) continue;
@@ -318,8 +329,14 @@ export async function updateWebsiteSettings(form: FormData) {
       return {
         aboutText: data.aboutText,
         languageLevels: savedLevels,
-        research: savedResearch,
-        unpublished: savedUnpublished,
+        // ISO date strings sort chronologically. Reset the editor in the same
+        // newest-first order used by the public database queries.
+        research: savedResearch.sort((first, second) =>
+          second.date.localeCompare(first.date),
+        ),
+        unpublished: savedUnpublished.sort((first, second) =>
+          second.date.localeCompare(first.date),
+        ),
         vowelCharts: savedCharts,
       };
     });
@@ -343,9 +360,12 @@ export async function updateWebsiteSettings(form: FormData) {
     try {
       // Capture older variants before copying. Keep them if the copy fails, and
       // always exclude the destination key so same-extension replacements survive.
-      const previousUserImageKeys = ticket.field === "userImageFile"
-        ? (await getUserImageKeys()).filter((previousKey) => previousKey !== key)
-        : [];
+      const previousUserImageKeys =
+        ticket.field === "userImageFile"
+          ? (await getUserImageKeys()).filter(
+              (previousKey) => previousKey !== key,
+            )
+          : [];
       await copySettingsUpload(ticket, key, etag);
       await deleteSettingsFiles(previousUserImageKeys);
     } catch (error) {

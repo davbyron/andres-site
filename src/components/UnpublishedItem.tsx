@@ -1,12 +1,17 @@
-import Link from "next/link";
 import type { UnpublishedItemProps } from "@/types";
-import { formatAuthors } from "@/utils/formatAuthors";
+import Link from "next/link";
+import { formatAuthors } from "@/utils";
+import { getPublicationYear } from "@/utils/publication-date-helpers";
 
 export function UnpublishedItem({ unpublishedItem }: UnpublishedItemProps) {
   return (
     <li className="grid grid-cols-12 gap-5 lg:gap-10">
-      <div className="col-span-2 text-center">{unpublishedItem.year.toString()}</div>
-      <div className="col-span-5 lg:col-span-3">{formatAuthors(unpublishedItem.authors)}</div>
+      <div className="col-span-2 text-center">
+        {getPublicationYear(unpublishedItem.date)}
+      </div>
+      <div className="col-span-5 lg:col-span-3">
+        {formatAuthors(unpublishedItem.authors)}
+      </div>
       <div className="col-span-5 lg:col-span-7">
         {unpublishedItem.href ? (
           <Link
