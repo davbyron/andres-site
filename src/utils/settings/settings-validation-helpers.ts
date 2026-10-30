@@ -1,6 +1,7 @@
 import "server-only";
 
 import type { SettingsFormInputs } from "@/types";
+import { isPublicationDate } from "@/utils/publication-date-helpers";
 
 export class SettingsValidationError extends Error {}
 
@@ -48,13 +49,12 @@ export function parseSettings(form: FormData): SettingsFormInputs {
       }
     }
   }
-  // Both publication collections share titles, years, and ordered author lists.
+  // Both publication collections share titles, calendar dates, and ordered author lists.
   for (const row of [...data.research, ...data.unpublished]) {
+    requireValue(isString(row.title));
     requireValue(
-      isString(row.title) &&
-        Number.isInteger(row.year) &&
-        row.year >= 0 &&
-        row.year <= 9999,
+      isPublicationDate(row.date),
+      "Each research and unpublished item must have a valid date.",
     );
     requireValue(Array.isArray(row.authors) && row.authors.every(isString));
   }
@@ -63,7 +63,19 @@ export function parseSettings(form: FormData): SettingsFormInputs {
   for (const row of data.vowelCharts) requireValue(isString(row.name));
   // Language IDs must be unique across all levels, not just within each level.
   const languageIds = new Set<number>();
+  const levelOrders = new Set<number>();
   for (const level of data.languageLevels) {
+    requireValue(
+      Number.isInteger(level.order) &&
+        level.order >= 1 &&
+        level.order <= 2_147_483_647,
+      "Each language level must have a positive whole-number order.",
+    );
+    requireValue(
+      !levelOrders.has(level.order),
+      "Each language level must have a different order.",
+    );
+    levelOrders.add(level.order);
     requireValue(
       isString(level.name) &&
         isString(level.color) &&

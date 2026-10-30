@@ -336,6 +336,13 @@
                   "kind": "scalar"
                 }
               },
+              "order": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
               "updatedAt": {
                 "nullable": false,
                 "type": {
@@ -374,6 +381,9 @@
                 },
                 "name": {
                   "column": "name"
+                },
+                "order": {
+                  "column": "order"
                 },
                 "updatedAt": {
                   "column": "updatedAt"
@@ -469,6 +479,13 @@
                   "kind": "scalar"
                 }
               },
+              "date": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              },
               "filename": {
                 "nullable": true,
                 "type": {
@@ -510,13 +527,6 @@
                   "codecId": "pg/timestamptz-temporal@1",
                   "kind": "scalar"
                 }
-              },
-              "year": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/int4@1",
-                  "kind": "scalar"
-                }
               }
             },
             "relations": {},
@@ -527,6 +537,9 @@
                 },
                 "createdAt": {
                   "column": "createdAt"
+                },
+                "date": {
+                  "column": "date"
                 },
                 "filename": {
                   "column": "filename"
@@ -545,9 +558,6 @@
                 },
                 "updatedAt": {
                   "column": "updatedAt"
-                },
-                "year": {
-                  "column": "year"
                 }
               },
               "namespaceId": "public",
@@ -684,6 +694,13 @@
                   "kind": "scalar"
                 }
               },
+              "date": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "kind": "scalar"
+                }
+              },
               "filename": {
                 "nullable": true,
                 "type": {
@@ -711,13 +728,6 @@
                   "codecId": "pg/timestamptz-temporal@1",
                   "kind": "scalar"
                 }
-              },
-              "year": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/int4@1",
-                  "kind": "scalar"
-                }
               }
             },
             "relations": {},
@@ -728,6 +738,9 @@
                 },
                 "createdAt": {
                   "column": "createdAt"
+                },
+                "date": {
+                  "column": "date"
                 },
                 "filename": {
                   "column": "filename"
@@ -740,9 +753,6 @@
                 },
                 "updatedAt": {
                   "column": "updatedAt"
-                },
-                "year": {
-                  "column": "year"
                 }
               },
               "namespaceId": "public",
@@ -1193,6 +1203,11 @@
                   "dataType": "pg/text",
                   "nullable": false
                 },
+                "order": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                },
                 "updatedAt": {
                   "codecId": "pg/timestamptz-temporal@1",
                   "dataType": "pg/timestamptz",
@@ -1206,7 +1221,13 @@
                   "id"
                 ]
               },
-              "uniques": []
+              "uniques": [
+                {
+                  "columns": [
+                    "order"
+                  ]
+                }
+              ]
             },
             "pageText": {
               "checks": [
@@ -1292,6 +1313,11 @@
                   },
                   "nullable": false
                 },
+                "date": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "dataType": "pg/timestamptz",
+                  "nullable": false
+                },
                 "filename": {
                   "codecId": "pg/text@1",
                   "dataType": "pg/text",
@@ -1324,11 +1350,6 @@
                 "updatedAt": {
                   "codecId": "pg/timestamptz-temporal@1",
                   "dataType": "pg/timestamptz",
-                  "nullable": false
-                },
-                "year": {
-                  "codecId": "pg/int4@1",
-                  "dataType": "pg/int4",
                   "nullable": false
                 }
               },
@@ -1460,6 +1481,11 @@
                   },
                   "nullable": false
                 },
+                "date": {
+                  "codecId": "pg/timestamptz-temporal@1",
+                  "dataType": "pg/timestamptz",
+                  "nullable": false
+                },
                 "filename": {
                   "codecId": "pg/text@1",
                   "dataType": "pg/text",
@@ -1482,11 +1508,6 @@
                 "updatedAt": {
                   "codecId": "pg/timestamptz-temporal@1",
                   "dataType": "pg/timestamptz",
-                  "nullable": false
-                },
-                "year": {
-                  "codecId": "pg/int4@1",
-                  "dataType": "pg/int4",
                   "nullable": false
                 }
               },
@@ -1677,7 +1698,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "02d401673a37ac2dd48d829d28a9c5cb8622715b3c36c20c38dc2ad852a050af"
+    "storageHash": "98f30937bba8069dfd50284484f07fbdd7d99c522993a6b80ad9a0c0e1085691"
   },
   "execution": {
     "executionHash": "cf3dfeb006ecf628670974c8598ce524e5ebd3d45b3d00df771de1b3be34195e",

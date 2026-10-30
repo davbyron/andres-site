@@ -1,0 +1,94 @@
+[
+  {
+    "id": "alterType.research.year",
+    "label": "Alter type of \"research\".\"year\" to timestamptz",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "year",
+        "table": "research"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"year\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "research",
+          "year"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "alter type of \"year\"",
+        "sql": "ALTER TABLE \"public\".\"research\" ALTER COLUMN \"year\" TYPE timestamptz USING make_timestamptz(\"year\", 1, 1, 0, 0, 0, 'UTC')"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"year\" has type \"timestamp with time zone\"",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_attribute\" AS \"a\" INNER JOIN \"pg_class\" AS \"c\" ON \"c\".\"oid\" = \"a\".\"attrelid\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"relnamespace\" WHERE (\"n\".\"nspname\" = $1 AND \"c\".\"relname\" = $2 AND \"a\".\"attname\" = $3 AND (format_type(\"a\".\"atttypid\", \"a\".\"atttypmod\")) = $4 AND NOT (\"a\".\"attisdropped\"))) AS \"result\"",
+        "params": [
+          "public",
+          "research",
+          "year",
+          "timestamp with time zone"
+        ]
+      }
+    ],
+    "meta": {
+      "warning": "TABLE_REWRITE"
+    }
+  },
+  {
+    "id": "alterType.unpublished.year",
+    "label": "Alter type of \"unpublished\".\"year\" to timestamptz",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "column",
+        "name": "year",
+        "table": "unpublished"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure column \"year\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"information_schema\".\"columns\" WHERE (\"table_schema\" = $1 AND \"table_name\" = $2 AND \"column_name\" = $3)) AS \"result\"",
+        "params": [
+          "public",
+          "unpublished",
+          "year"
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "alter type of \"year\"",
+        "sql": "ALTER TABLE \"public\".\"unpublished\" ALTER COLUMN \"year\" TYPE timestamptz USING make_timestamptz(\"year\", 1, 1, 0, 0, 0, 'UTC')"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify column \"year\" has type \"timestamp with time zone\"",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_attribute\" AS \"a\" INNER JOIN \"pg_class\" AS \"c\" ON \"c\".\"oid\" = \"a\".\"attrelid\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"relnamespace\" WHERE (\"n\".\"nspname\" = $1 AND \"c\".\"relname\" = $2 AND \"a\".\"attname\" = $3 AND (format_type(\"a\".\"atttypid\", \"a\".\"atttypmod\")) = $4 AND NOT (\"a\".\"attisdropped\"))) AS \"result\"",
+        "params": [
+          "public",
+          "unpublished",
+          "year",
+          "timestamp with time zone"
+        ]
+      }
+    ],
+    "meta": {
+      "warning": "TABLE_REWRITE"
+    }
+  }
+]

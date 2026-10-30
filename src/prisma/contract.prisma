@@ -32,6 +32,7 @@ model LanguageLevel {
   id          Int      @id @default(autoincrement())
   name        String
   color       String
+  order       Int @unique
   languages   Language[]
 
   createdAt   DateTime @default(now())
@@ -65,7 +66,7 @@ model PageText {
 
 model Research {
   id          Int      @id @default(autoincrement())
-  year        Int
+  date        DateTime
   authors     String[]
   title       String
   publication String
@@ -96,7 +97,7 @@ model Session {
 
 model Unpublished {
   id       Int      @id @default(autoincrement())
-  year     Int
+  date     DateTime
   authors  String[]
   title    String
   filename String?

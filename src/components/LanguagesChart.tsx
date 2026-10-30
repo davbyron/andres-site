@@ -2,7 +2,14 @@
 
 import type { LanguagesChartProps } from "@/types/props";
 import { useMemo } from "react";
-import { defineChart, barY, barX, bandX, bandY, whenFocused } from "@tanstack/charts";
+import {
+  defineChart,
+  barY,
+  barX,
+  bandX,
+  bandY,
+  whenFocused,
+} from "@tanstack/charts";
 import { scaleBand } from "@tanstack/charts/scales/band";
 import { scaleLinear } from "@tanstack/charts/scales/linear";
 import { tooltip } from "@tanstack/charts/tooltip";
@@ -13,18 +20,27 @@ export function LanguagesChart(props: LanguagesChartProps) {
   const { languageLevels, languages } = props;
   const isMobile = useIsMobile();
 
-  const { levelMap, tickValues, maxLevel } = useMemo(() => {
-    const map: Record<number, string> = {};
-    const ticks: number[] = [];
-    let max = 0;
+  const { levelMap, tickValues, maxLevel, levelPositions } = useMemo(() => {
+    const levelMap: Record<number, string> = {};
+    const levelPositions: Record<number, number> = {};
+    const orderedLevels = [...languageLevels].sort(
+      (first, second) => first.order - second.order,
+    );
 
-    languageLevels.forEach((level) => {
-      map[level.id] = level.name;
-      ticks.push(level.id);
-      if (level.id > max) max = level.id;
+    // Orders control rank, not bar magnitude: gaps in saved orders should not
+    // create gaps on the chart, and database IDs should not determine proficiency.
+    orderedLevels.forEach((level, index) => {
+      const position = index + 1;
+      levelMap[position] = level.name;
+      levelPositions[level.id] = position;
     });
 
-    return { levelMap: map, tickValues: ticks, maxLevel: max };
+    return {
+      levelMap,
+      levelPositions,
+      tickValues: orderedLevels.map((_, index) => index + 1),
+      maxLevel: orderedLevels.length,
+    };
   }, [languageLevels]);
 
   const mobileLanguagesChart = useMemo(
@@ -37,11 +53,11 @@ export function LanguagesChart(props: LanguagesChartProps) {
                 y: "name",
                 fill: "#eee",
               }),
-              { match: "y" }
+              { match: "y" },
             ),
             barX(languages, {
               y: "name",
-              x: (language) => language.level.id,
+              x: (language) => levelPositions[language.level.id],
               fill: (language) => language.level.color,
               inset: 3,
             }),
@@ -56,7 +72,7 @@ export function LanguagesChart(props: LanguagesChartProps) {
                 tickLabels: {
                   opacity: 1,
                   fontSize: 12,
-                  fontWeight: 400
+                  fontWeight: 400,
                 },
               },
             },
@@ -77,7 +93,7 @@ export function LanguagesChart(props: LanguagesChartProps) {
                   anchor: "end",
                   thin: false,
                   fontSize: 12,
-                  fontWeight: 400
+                  fontWeight: 400,
                 },
               },
             },
@@ -86,9 +102,9 @@ export function LanguagesChart(props: LanguagesChartProps) {
         },
         {
           tooltip: { use: tooltip, anchor: "pointer" },
-        }
+        },
       ),
-    [languages, levelMap, maxLevel, tickValues]
+    [languages, levelMap, maxLevel, tickValues, levelPositions],
   );
 
   const desktopLanguagesChart = useMemo(
@@ -101,11 +117,11 @@ export function LanguagesChart(props: LanguagesChartProps) {
                 x: "name",
                 fill: "#eee",
               }),
-              { match: "x" }
+              { match: "x" },
             ),
             barY(languages, {
               x: "name",
-              y: (language) => language.level.id,
+              y: (language) => levelPositions[language.level.id],
               fill: (language) => language.level.color,
               inset: 4,
             }),
@@ -138,7 +154,7 @@ export function LanguagesChart(props: LanguagesChartProps) {
                 tickLabels: {
                   opacity: 1,
                   fontSize: 14,
-                  fontWeight: 400
+                  fontWeight: 400,
                 },
               },
             },
@@ -147,9 +163,9 @@ export function LanguagesChart(props: LanguagesChartProps) {
         },
         {
           tooltip: { use: tooltip, anchor: "pointer" },
-        }
+        },
       ),
-    [languages, levelMap, maxLevel, tickValues]
+    [languages, levelMap, maxLevel, tickValues, levelPositions],
   );
 
   return (
@@ -162,7 +178,9 @@ export function LanguagesChart(props: LanguagesChartProps) {
           renderTooltipBody={({ primaryPoint }) => (
             <p className="w-fit flex flex-col gap-1">
               <span className="text-gray">{primaryPoint.datum.name}</span>
-              <span className="pl-5">level: {primaryPoint.datum.level.name}</span>
+              <span className="pl-5">
+                level: {primaryPoint.datum.level.name}
+              </span>
             </p>
           )}
         />
@@ -174,7 +192,9 @@ export function LanguagesChart(props: LanguagesChartProps) {
           renderTooltipBody={({ primaryPoint }) => (
             <p className="w-fit flex flex-col gap-1">
               <span className="text-gray">{primaryPoint.datum.name}</span>
-              <span className="pl-5">level: {primaryPoint.datum.level.name}</span>
+              <span className="pl-5">
+                level: {primaryPoint.datum.level.name}
+              </span>
             </p>
           )}
         />

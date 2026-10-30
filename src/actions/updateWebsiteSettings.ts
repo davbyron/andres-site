@@ -1,11 +1,14 @@
 "use server";
 
+import "temporal-polyfill/full/global";
+
 import type { SettingsFormInputs, SettingsUploadReceipt } from "@/types";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { db } from "@/prisma/db";
 import { auth } from "@/utils/auth";
 import { isSessionValid } from "@/utils/isSessionValid";
+import { getTemporaryLanguageLevelOrders } from "@/utils/settings/language-level-order-helpers";
 import { getUserImageKeys } from "@/utils/settings/getUserImageKey";
 import {
   deleteSettingsFiles,
@@ -134,8 +137,23 @@ export async function updateWebsiteSettings(form: FormData) {
 
       // Save parents first so new languages can reference their generated level IDs.
       const savedLevels: SettingsFormInputs["languageLevels"] = [];
+      // Park current values first so swapping two orders, or reusing a removed
+      // level's order, cannot conflict with the unique constraint during saving.
+      const temporaryOrders = getTemporaryLanguageLevelOrders(
+        levels,
+        data.languageLevels,
+      );
+      for (const [index, level] of levels.entries()) {
+        await tx.orm.public.LanguageLevel.where({ id: level.id }).update({
+          order: temporaryOrders[index],
+        });
+      }
       for (const level of data.languageLevels) {
-        const languageLevelValues = { name: level.name, color: level.color };
+        const languageLevelValues = {
+          name: level.name,
+          color: level.color,
+          order: level.order,
+        };
         const row =
           level.id === undefined
             ? await tx.orm.public.LanguageLevel.create(languageLevelValues)
@@ -191,7 +209,8 @@ export async function updateWebsiteSettings(form: FormData) {
           old,
         );
         const values = {
-          year: researchItem.year,
+          // Store the selected calendar day at UTC midnight to avoid timezone shifts.
+          date: Temporal.Instant.from(`${researchItem.date}T00:00:00Z`),
           authors: researchItem.authors,
           title: researchItem.title,
           publication: researchItem.publication,
@@ -210,9 +229,11 @@ export async function updateWebsiteSettings(form: FormData) {
           old?.filename,
           filename,
         );
+        const { date: _storedDate, ...savedValues } = values;
         savedResearch.push({
           id: row.id,
-          ...values,
+          ...savedValues,
+          date: researchItem.date,
           pageNumbers: researchItem.pageNumbers,
           filename,
         });
@@ -233,7 +254,7 @@ export async function updateWebsiteSettings(form: FormData) {
           old,
         );
         const values = {
-          year: item.year,
+          date: Temporal.Instant.from(`${item.date}T00:00:00Z`),
           authors: item.authors,
           title: item.title,
           filename: filename || null,
@@ -250,7 +271,13 @@ export async function updateWebsiteSettings(form: FormData) {
           old?.filename,
           filename,
         );
-        savedUnpublished.push({ id: row.id, ...values, filename });
+        const { date: _storedDate, ...savedValues } = values;
+        savedUnpublished.push({
+          id: row.id,
+          ...savedValues,
+          date: item.date,
+          filename,
+        });
       }
       for (const item of unpublished) {
         if (savedUnpublished.some((row) => row.id === item.id)) continue;
@@ -317,9 +344,17 @@ export async function updateWebsiteSettings(form: FormData) {
       );
       return {
         aboutText: data.aboutText,
-        languageLevels: savedLevels,
-        research: savedResearch,
-        unpublished: savedUnpublished,
+        languageLevels: savedLevels.sort(
+          (first, second) => first.order - second.order,
+        ),
+        // ISO date strings sort chronologically. Reset the editor in the same
+        // newest-first order used by the public database queries.
+        research: savedResearch.sort((first, second) =>
+          second.date.localeCompare(first.date),
+        ),
+        unpublished: savedUnpublished.sort((first, second) =>
+          second.date.localeCompare(first.date),
+        ),
         vowelCharts: savedCharts,
       };
     });
@@ -343,9 +378,12 @@ export async function updateWebsiteSettings(form: FormData) {
     try {
       // Capture older variants before copying. Keep them if the copy fails, and
       // always exclude the destination key so same-extension replacements survive.
-      const previousUserImageKeys = ticket.field === "userImageFile"
-        ? (await getUserImageKeys()).filter((previousKey) => previousKey !== key)
-        : [];
+      const previousUserImageKeys =
+        ticket.field === "userImageFile"
+          ? (await getUserImageKeys()).filter(
+              (previousKey) => previousKey !== key,
+            )
+          : [];
       await copySettingsUpload(ticket, key, etag);
       await deleteSettingsFiles(previousUserImageKeys);
     } catch (error) {

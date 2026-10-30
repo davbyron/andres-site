@@ -2,7 +2,7 @@ export interface ResetPasswordInputs {
   email: string;
   password: string;
   confirmPassword: string;
-};
+}
 
 export interface SettingsFormInputs {
   aboutText: string;
@@ -17,7 +17,7 @@ export interface SettingsFormInputs {
   }[];
   unpublished: {
     id?: number;
-    year: number;
+    date: string;
     authors: string[];
     title: string;
     filename: string;
@@ -25,7 +25,7 @@ export interface SettingsFormInputs {
   }[];
   research: {
     id?: number;
-    year: number;
+    date: string;
     authors: string[];
     title: string;
     publication: string;
@@ -35,6 +35,7 @@ export interface SettingsFormInputs {
   }[];
   languageLevels: {
     id?: number;
+    order: number;
     name: string;
     color: string;
     languages: {
